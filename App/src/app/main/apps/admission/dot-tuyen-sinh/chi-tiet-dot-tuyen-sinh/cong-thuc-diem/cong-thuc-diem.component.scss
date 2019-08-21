@@ -1,0 +1,50 @@
+.left-grid{
+    width: 48% !important;
+    //width: 50% !important;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 15px;
+    float: left;
+}
+
+.right-grid{
+    width: 48% !important;
+    //width: 50% !important;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px;
+    margin-left: 2%;
+    padding: 15px;
+    float: right;
+}
+
+.calculatorCus{
+    width: 100%;
+}
+.left-grid-content{
+    width: 100% !important;
+}
+.cal-content{
+    border: #CCCCCC 1px solid;
+    border-radius: 4px;
+}
+.btnCal{
+    width: 25%;
+    text-align: center;
+    border-radius: 0px;
+    border: #EEEDDD 0.1px solid;
+}
+.btnCal:hover{
+    background-color: #CCCCCC;
+}
+.divConfirmCongThuc{
+    padding-top: 28px;
+    padding-bottom: 23px;
+    text-align: center;
+}
+.btnConfirmCongThuc{
+    margin: auto;
+    width: 140px;
+    text-align: center;
+    border-radius: 4px;
+}

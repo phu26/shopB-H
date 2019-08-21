@@ -1,0 +1,9 @@
+<div style="padding-left: 10px;padding-right:10px;width: 40%">
+  <div *ngIf="processList.length>0">
+    <span style="font-size: 12pt;
+    font-weight: 300;">{{processList[0].processName}}</span>
+    <mat-progress-bar mode="determinate" [value]="processList[0].completedValue"></mat-progress-bar>
+  </div>
+  <span *ngIf="processList.length>1" style="font-size: 8pt;background-color: lightblue;padding: 2px;
+  font-weight: 100;" (click)="expandProcess()" >more {{processList.length-1}} processes</span>
+</div>

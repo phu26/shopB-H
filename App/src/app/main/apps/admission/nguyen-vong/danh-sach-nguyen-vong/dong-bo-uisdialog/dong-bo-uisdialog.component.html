@@ -1,0 +1,36 @@
+<mat-vertical-stepper #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Kiểm tra danh mục</ng-template>
+    <!-- <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field> -->
+    <div>
+      <mat-list>
+        <mat-list-item>
+          <mat-spinner  *ngIf="checkNganhDaoTao==null" style="zoom:0.15"></mat-spinner>
+          <mat-icon *ngIf="checkNganhDaoTao==true" class="active-icon green-600 s-16">check</mat-icon>
+          <mat-icon *ngIf="checkNganhDaoTao==false" class="active-icon red-500 s-16">close</mat-icon>
+
+          <span class="marginleftItem">Ngành đào tạo</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-spinner  *ngIf="checkDoiTuongUuTien==null" style="zoom:0.15"></mat-spinner>
+          <mat-icon *ngIf="checkDoiTuongUuTien==true" class="active-icon green-600 s-16">check</mat-icon>
+          <mat-icon *ngIf="checkDoiTuongUuTien==false" class="active-icon red-500 s-16">close</mat-icon>
+
+          <span class="marginleftItem">Đối tượng ưu tiên</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-spinner  *ngIf="checkKhuVucUuTien==null" style="zoom:0.15"></mat-spinner>
+          <mat-icon *ngIf="checkKhuVucUuTien==true" class="active-icon green-600 s-16">check</mat-icon>
+          <mat-icon *ngIf="checkKhuVucUuTien==false" class="active-icon red-500 s-16">close</mat-icon>
+
+          <span class="marginleftItem">Khu vực ưu tiên</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Đồng bộ dữ liệu với UIS </ng-template>
+  </mat-step>
+</mat-vertical-stepper>

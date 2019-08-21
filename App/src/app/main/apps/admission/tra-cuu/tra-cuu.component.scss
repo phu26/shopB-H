@@ -1,0 +1,291 @@
+@import "src/@fuse/scss/fuse";
+app-tra-cuu {
+
+  #khuvucuutiens {
+
+    .top-bg {
+
+        @include media-breakpoint('lt-md') {
+            height: 256px;
+        }
+    }
+
+    > .center {
+
+        > .header {
+
+            .search-wrapper {
+                width: 100%;
+                max-width: 480px;
+                border-radius: 28px;
+                overflow: hidden;
+                @include mat-elevation(1);
+
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+
+                .search {
+                    width: 100%;
+                    height: 48px;
+                    line-height: 48px;
+                    padding: 0 18px;
+
+                    input {
+                        width: 100%;
+                        height: 48px;
+                        min-height: 48px;
+                        max-height: 48px;
+                        padding: 0 16px;
+                        border: none;
+                        outline: none;
+                    }
+                }
+            }
+
+            @include media-breakpoint('lt-md') {
+                padding: 8px 0;
+                height: 192px !important;
+                min-height: 192px !important;
+                max-height: 192px !important;
+            }
+        }
+    }
+}
+
+  .nganhdaotaos-table {
+    flex: 1 1 auto;
+    // border-bottom: 1px solid rgba(0, 0, 0, .12);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 315px;
+    min-height: 315px;
+    position: relative;
+
+    .mat-header-row {
+      min-height: 64px;
+      text-align: center;
+    }
+
+    .nganhdaotao {
+      position: relative;
+      cursor: pointer;
+      height: 50px;
+    }
+
+    .mat-cell {
+      min-width: 0;
+      display: flex;
+      width: 250px;
+    }
+  }
+  .matruong {
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 18px;
+  }
+  .page-layout.carded.fullwidth > .center > .header {
+    height: 50px !important;
+    min-height: 75px !important;
+    max-height: 55px !important;
+  }
+  .content-card {
+    border: solid #e4e2e2 1px;
+  }
+  .mat-header-row {
+    background: #f2dedf;
+    border-bottom-width: inherit;
+  }
+  .nganhdaotao {
+    border-color: #e4e4e4;
+    border-width: 0;
+    border-bottom-width: 0.1px;
+  }
+}
+
+app-layout-thi-sinh-sona {
+  app-tra-cuu .page-layout.carded.fullwidth > .center > .header,
+  .page-layout.carded > .accent {
+    background-color: #003767 !important;
+    color: white !important;
+  }
+}
+
+app-layout-thi-sinh-yersin {
+  app-tra-cuu .page-layout.carded.fullwidth > .center > .header,
+  .page-layout.carded > .accent {
+    background-color: #003767 !important;
+    color: white !important;
+  }
+}
+app-layout-thi-sinh-neu {
+  app-tra-cuu .page-layout.carded.fullwidth > .center > .header,
+  .page-layout.carded > .accent {
+    background-color: #0065ca !important;
+    color: white !important;
+  }
+}
+
+app-layout-thi-sinh-qnu {
+  app-tra-cuu .page-layout.carded.fullwidth > .center > .header,
+  .page-layout.carded > .accent {
+    background-color: #37497e !important;
+    color: white !important;
+  }
+}
+
+app-layout-thi-sinh-dnu {
+  app-tra-cuu .page-layout.carded.fullwidth > .center > .header,
+  .page-layout.carded > .accent {
+    background-color: #0072bc !important;
+    color: white !important;
+  }
+}
+
+app-layout-thi-sinh-hiu {
+  app-tra-cuu .page-layout.carded.fullwidth > .center > .header,
+  .page-layout.carded > .accent {
+    background-color: #2e9028 !important;
+    color: white !important;
+  }
+}
+
+.trungtuyen{
+  display: flex;
+ justify-content: center;
+}
+
+.active-icon{
+  border-radius: 50%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+mat-header-cell {
+  text-align: center !important;
+  font-weight: bold !important;
+}
+.page-layout.carded.fullwidth .center .header {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  max-height: 100%;
+  place-content: center space-between;
+  align-items: center;
+}
+.center .header .search-wrapper .search {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  place-content: center flex-start;
+  align-items: center;
+  flex: 1 1 0%;
+}
+.mat-row {
+  min-height: 65px;
+}
+.mat-column-select {
+  overflow: initial;
+}
+
+body.theme-default .checkboxunboder {
+  border: unset;
+}
+
+@media screen and (max-width: 960px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+  
+  /*  Enable this to hide header
+  .mat-table .mat-header-cell {
+    
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  */
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+  /*
+  .mat-table .mat-row:nth-child(even) {background: #CCC}
+  .mat-table .mat-row:nth-child(odd) {background: #FFF}
+  */
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 12px;
+    margin-bottom: 4%;
+  }
+  .mat-table .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+    
+    font-size: .85em;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+    .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+  app-tra-cuu .mat-header-row{
+    display: none;
+  }
+  #yt_header[_ngcontent-c6] #top2[_ngcontent-c6]{
+    margin: unset;
+    top:2%;
+    right: 2%;
+  }
+  app-tra-cuu #khuvucuutiens > .center > .header{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    max-height: 100%;
+    place-content: center;
+    align-items: center;
+  }
+  .mb-24{
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    max-height: 100%;
+    place-content: center flex-start;
+    align-items: center;
+  }
+  app-tra-cuu #khuvucuutiens > .center > .header .search-wrapper{
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+  }
+}

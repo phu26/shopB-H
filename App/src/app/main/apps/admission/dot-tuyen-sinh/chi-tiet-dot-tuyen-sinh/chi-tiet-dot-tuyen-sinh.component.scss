@@ -1,0 +1,240 @@
+app-chi-tiet-dot-tuyen-sinh{
+    $main-color:limegreen;
+    .col-md-4{
+        width: 33%!important;
+        float: left;
+        margin: 1px;
+        border: 0.1px solid #ddd;
+        max-height: 300px;
+        height: 300px;
+    }
+    .col-md-6.l{
+        width: 49%!important;
+        float: left;
+        margin: 1px;
+        min-height: 60px;
+    }
+    .col-md-6.r{
+        width: 49%!important;
+        float: right;
+        margin: 1px;
+        min-height: 60px;
+    }
+    .thuongtrutamtru{
+        float: left;
+        height: 50px!important;
+    }
+    .kichhoatguimail{
+        float: left;
+        height: 50px!important;
+    }
+    .col-md-8{
+        width: 66%!important;
+        margin: 1px;
+        border: 0.1px solid #ddd;
+        max-height: 400px;
+        height: 400px;
+        float:right;
+    }
+    .col-md-6.le{
+        width: 50%!important;
+        float: left;
+        border:1px solid #ddd; 
+        border-right: 0;
+    }
+    .col-md-6.ri{
+        width: 50%!important;
+        float: right; 
+        border:1px solid #ddd;  
+         
+           }
+    .col-md-6.ri  .mat-tab-label{
+        height: 30px;
+        padding-left:15px;
+        padding-right: 15px;
+        min-width: 90px;
+        &[aria-selected="true"]{
+            opacity: 1;
+        }
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+        margin: 15px 15px 10px 20px;
+    }
+    .example-full-width{
+        font-size: 14px;
+        width: 100%;
+        height: 70px;
+    }
+    //button save under
+    .btn-save-under{
+        text-align: center !important;
+        background-color: limegreen!important;
+        color: white!important;
+        /*min-width: 120px;*/
+    }
+    .div-save-under{
+        text-align: center !important;
+    }
+    .example-headers-align .mat-expansion-panel-header-title,
+    .example-headers-align .mat-expansion-panel-header-description {
+      flex-basis: 0;
+    }
+    
+    .example-headers-align .mat-expansion-panel-header-description {
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hinhthuc-xettuyen{
+        //width: 100%;
+        max-width: 100%;
+        float: left;
+    }
+    .cauhinh-madottuyensinh{
+        max-width: 100%;
+        float: left;
+    }
+    .mat-expansion-panel-body{
+        flex-direction: column!important;
+    }
+    
+    .giaytoyeucau-div {
+        margin-top: 15px;
+        .title {  
+            .addgiayto-span {
+                color: #039be5;
+                margin-left: 10px;
+                &:hover {
+                    color: #00aaff;
+                    cursor: pointer;
+                }
+            }       
+        }
+        .list {  
+            li {
+                margin-bottom: 10px;
+                .deletegiayto-span {
+                    color: #e94e1f;
+                    margin-left: 10px;
+                    &:hover {
+                        color: #ff3c00;
+                        cursor: pointer;
+                    }
+                } 
+            }
+        }
+    }
+    .overlay {  
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:99;
+      }
+
+      .form-dot-xet-tuyen{
+          .header-title{
+              line-height: 1.4;
+              padding: 0 15px;
+              text-align: center;
+              margin: 0 4px;
+          }
+          @media(max-width: 992px){
+            > .center{
+                padding: 0 8px!important;
+            }
+          }
+          $box-scroll-height: 400px;
+          #divCauHinhNganhDaoTao .col-md-6{
+              height: $box-scroll-height!important;  
+              max-height: 415px;                 
+              min-height: 415px;           
+          }
+
+      }
+      .box-scroll{
+        overflow:scroll;
+        max-height:330px;
+        min-height:330px;
+      }
+      .mat-list .mat-list-item, .mat-list .mat-list-option, .mat-nav-list .mat-list-item, .mat-nav-list .mat-list-option, .mat-selection-list .mat-list-item, .mat-selection-list .mat-list-option{
+          height: 36px;
+      }
+      .mat-list .mat-list-item, .mat-nav-list .mat-list-item, .mat-selection-list .mat-list-item{
+          font-size: 14px;
+      }
+      .txt-height{
+          color: $main-color; 
+                 
+                  
+      }
+      .inline-block{
+          display: inline-block;
+      }
+      .small-text{
+          font-size: 12px;
+          line-height: 1.4;
+      }
+      .box-head{
+          width: 100%;
+          height: 30px;
+          padding: 10px 15px 0 15px;
+          font-size: 12px;
+          line-height: 1.4;
+          font-weight: 600;
+          display: block;  
+          white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;  
+          
+      }
+      .giaytoyeucau-div {
+        //background: #c5c6cb;
+        margin-top: 15px;
+        input {
+          display: none;
+        }
+        .list {
+          padding: 0px 30px;
+          .itemgiayto-div {
+            border-bottom: 1px solid #ddd;  
+            margin-top: 15px;
+            padding: 5px 0; 
+            .filedinhkem-div {
+              padding-top: 5px;
+              padding-left: 20px;
+            } 
+            .taifile-span {
+              color: #039be5;
+              margin-left: 5px;
+              &:hover {
+                cursor: pointer;
+                color: #1eacf3;
+              }
+            }
+            .downfile-span {
+              color: #414141;
+              &:hover {
+                cursor: pointer;
+                color: #050505;
+              } 
+            }
+            .xoafile-span {
+              color: #f44336;
+              margin-left: 5px;
+              &:hover {
+                cursor: pointer;
+                color: #f81100;
+              }  
+          }
+        }
+      }
+      }
+}
+.giayto{
+    display: -webkit-inline-box;
+}
+.divider{
+    clear: both;
+    margin-top: 15px !important;
+}

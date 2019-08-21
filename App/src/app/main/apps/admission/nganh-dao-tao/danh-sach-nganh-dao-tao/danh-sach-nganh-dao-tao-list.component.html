@@ -1,0 +1,46 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll a">
+  <!-- CENTER -->
+  <div class="center a">
+    <!-- HEADER -->
+    <div class="header a" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <div class="col-sm-9">
+      <!-- SEARCH -->
+      <div class="search-wrapper">
+        <div class="search-list" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input (keyup)="onfilter()" type="text" [(ngModel)]="filterNganhDaoTao" placeholder="Tìm Ngành Đào Tạo">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+    </div>
+
+    <div class="col-sm-3">
+      <!-- BUTTON -->
+      <!-- <button mat-raised-button matTooltip="Chọn ngành đào tạo" style="margin-left:10px;"
+        (click)="openDialog()">Chọn</button> -->
+      <!-- / ADD BUTTON -->
+      <a class="link-button" (click)="openDialog()">Chọn Thêm</a>
+    </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <mat-nav-list class="box-scroll" >
+        <mat-list-item class="matlist" *ngFor="let nganhDaoTao of nganhDaoTaos"
+          [ngClass]="{'active': nganhDaoTao.Id==nganhDaoTaoSelected.Id}">
+
+          <span (click)="onClickNganhDaoTao(nganhDaoTao)" class="item-nganh" title="{{nganhDaoTao.Ten}} ({{nganhDaoTao.NhomChaId==null?'ngành':'chuyên ngành'}})">
+            {{nganhDaoTao.Ten}} ({{nganhDaoTao.NhomChaId==null?'ngành':'chuyên ngành'}})</span>
+          <mat-icon (click)="onRemoveNganhDaoTao(nganhDaoTao)" class="logo-icon s-16">
+            close
+          </mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
+  <!-- / CENTER -->
+</div>

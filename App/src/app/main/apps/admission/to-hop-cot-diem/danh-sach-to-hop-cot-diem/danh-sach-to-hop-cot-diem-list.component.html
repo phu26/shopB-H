@@ -1,0 +1,40 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll a">
+
+  <!-- CENTER -->
+  <div class="center a">
+
+    <!-- HEADER -->
+    <!-- <div class="header a" #filter fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center"> -->
+
+      <!-- BUTTON -->      
+      <!-- <button [disabled]="nganhDaoTaoSelected.Id==null" (click)="openDialog()" 
+      mat-raised-button matTooltip="Chọn tổ hợp môn" 
+      class="add-product-button fuse-white mt-24 mt-md-0">
+        <span>Chọn</span>
+      </button> -->
+     
+      <!-- / ADD BUTTON -->
+
+    <!-- </div> -->
+    <a class="link-button" (click)="openDialog()"> Chọn Thêm</a>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card" #filter>
+      <mat-nav-list style="overflow:scroll;max-height:211px;min-height:211px">
+        <mat-list-item class="matlist" *ngFor="let toHopCotDiem of nganhDaoTaoSelected.DanhSachToHopCotDiem">
+          
+          <span (click)="onClickToHopMon(toHopCotDiem)" style="width:90%;cursor: pointer">{{toHopCotDiem.Ten}}</span>
+
+          <mat-icon (click)="onClickRemoveToHopCotDiem(toHopCotDiem)" class="logo-icon s-16">
+            close
+          </mat-icon>
+          
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+
+  </div>
+  <!-- / CENTER -->
+</div>

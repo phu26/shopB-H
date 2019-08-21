@@ -1,0 +1,137 @@
+<div id="dotxettuyens" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          shopping_basket
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Đợt xét tuyển</span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper  ml-sm-32">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm đợt xét tuyển">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/admission/dot-xet-tuyen/them'">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 example-table-container">
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="dotxettuyens-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn"> Tên đợt xét tuyển</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn" [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">
+            <p class="text-truncate">{{row.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="dotTuyenSinhId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Đợt tuyển sinh</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">
+            <p class="text-truncate">
+              {{((row.DotTuyenSinh==null)?'':row.DotTuyenSinh.Ten)}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="kichHoat">
+          <mat-header-cell *matHeaderCellDef class="DotTuyenSinhIDColumn" mat-sort-header fxHide fxShow.gt-xs> Kích hoạt </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">
+            <mat-icon *ngIf="row.KichHoat" class="active-icon green-600 s-16">check</mat-icon>
+            <mat-icon *ngIf="!row.KichHoat" class="active-icon red-500 s-16">close</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="ngayTao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Ngày tạo </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">{{row.ngayTao |  date: 'dd-MM-yyyy'}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="ngaySua">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Ngày sửa </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">{{row.ngaySua |  date: 'dd-MM-yyyy'}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="nguoiTao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Người tạo </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">{{row.nguoiTao}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="nguoiSua">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Người sửa </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">{{row.nguoiSua}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="congThucTinhDiem">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Công thức </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="DotTuyenSinhIDColumn"
+            [routerLink]="['/admission/dot-xet-tuyen/'+row.Id]">{{row.congThucTinhDiem}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Xóa -->
+        <ng-container matColumnDef="xoa">
+          <mat-header-cell *matHeaderCellDef class="XoaColumn">Xóa</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="XoaColumn" (click)="btnXoaClicked(row.Id)">
+            <mat-icon >
+              delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="dotxettuyen" matRipple>
+        </mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

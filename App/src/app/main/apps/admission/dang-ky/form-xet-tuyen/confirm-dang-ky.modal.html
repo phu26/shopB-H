@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="text-center text-bold">THÔNG BÁO</h2>
+<mat-dialog-content>
+  <!-- <h3 class="text-bold">CHÚC MỪNG BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG</h3> -->
+  <div [innerHTML]="data.NoiDungThongBao"></div>
+  <p>
+    Thông tin đăng nhập để xem lại hoặc để điều chỉnh thông tin đăng ký.<br>
+    <span class="ml-24 accent-600-fg">Tên đăng nhập: </span> 
+    <span class="accent-600-fg text-bold">{{data.TenDangNhap}}</span><br>
+    <span class="ml-24 accent-600-fg">Mật khẩu: </span><span class="accent-600-fg text-bold">{{data.MatKhau}}</span>
+    <br>
+    Thông tin này đã được gửi qua email khi bạn đăng ký.
+    
+    <a target="_blank" href="{{data.LinkInBienNhan}}">Nhấp vào đây để tải phiếu đăng ký.</a>
+
+  </p>
+ 
+  <p class="text-center text-bold">Trân trọng cảm ơn!</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Đóng</button>
+</mat-dialog-actions>

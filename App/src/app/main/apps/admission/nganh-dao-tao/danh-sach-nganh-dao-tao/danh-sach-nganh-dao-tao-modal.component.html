@@ -1,0 +1,120 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <span class="logo-text h1">
+          Ngành Đào Tạo
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm kiếm ngành đào tạo">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <ng-container matColumnDef="select">
+          
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn">Tên Ngành đào tạo</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn">
+            <p class="text-truncate">{{row.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ghiChu">
+          <mat-header-cell *matHeaderCellDef fxHide mat-sort-header fxShow.gt-sm>Ghi chú</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+            <p class="text-truncate">{{row.GhiChu}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nganhUisId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Mã ngành Uis</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <p class="text-truncate">{{row.NganhUisId}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="kichHoat">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs class="KichHoatColumn">Kích hoạt
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs class="KichHoatColumn">
+            <mat-icon *ngIf="row.KichHoat" class="active-icon green-600 s-16">check</mat-icon>
+            <mat-icon *ngIf="!row.KichHoat" class="active-icon red-500 s-16">close</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nhomChaId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Nhóm cha</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+            <p class="text-truncate">
+              {{((row.NhomCha==null)?'':row.NhomCha.Ten)}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple (click)="$event ? selection.toggle(row) : null">
+        </mat-row>
+
+      </mat-table>
+    </div>
+
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+
+
+    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0" (click)='onCloseClick()'>
+      <mat-icon class="logo-icon">
+        add_circle_outline
+      </mat-icon>
+      <span>Đóng</span>
+    </button>
+
+
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

@@ -1,0 +1,15 @@
+<p>
+  <button class="mat-raised-button mat-primary" (click)="Loading()">Loading</button>
+</p>
+
+<ul *ngFor="let item of Jobs">
+  <li id="{{item}}">{{item}}</li>
+</ul>
+<p>
+  <strong>
+    <span id="job-status">Waiting to start...</span>
+  </strong>
+</p>
+<p>
+  <button class="mat-raised-button mat-primary" (click)="Send()">Send</button>
+</p>

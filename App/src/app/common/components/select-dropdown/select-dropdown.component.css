@@ -1,0 +1,68 @@
+
+.dd-list-item{
+    padding: 5px 12px !important;
+    cursor: pointer;
+  }
+ 
+  .dd-display-item{
+    border: 1px solid #ddd;
+    padding: 11.5px 12px !important;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.25;
+    display: block;
+    cursor: pointer;
+      
+  }
+
+  .dd-control-container {
+    margin-top: 4px
+  }
+
+  .label {
+    position: absolute;
+    z-index: 1;
+    font-size: 75%;
+    top: -2px;
+    padding: 0 5px;
+    margin-left: 5px;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  
+  .dd-active{
+    background-color: #ddd;
+  }
+  
+  .dd-highlight-item{
+    background-color: #00b7d4;
+    color: #fff;
+  }
+  
+  .dd-items-container{
+    border: 1px solid #00b7d4;
+    background-color: #fff;
+    position: absolute;
+    font-size: 14px;
+    overflow: auto;
+    height: 180px;
+    width: 95%;
+    z-index: 9;
+    top: 27px;
+  }
+  
+  .drop-input{
+    position: absolute;
+    text-indent: 15px;
+    font-size: 14px;
+    z-index: 10;
+    width: 95%;
+    padding: 0 12px !important;
+    background-color: #ffffff;
+    border: 1px solid #00b7d4;
+    height: 28px;
+  }
+  .dd-list-container{
+    position: relative;
+  }

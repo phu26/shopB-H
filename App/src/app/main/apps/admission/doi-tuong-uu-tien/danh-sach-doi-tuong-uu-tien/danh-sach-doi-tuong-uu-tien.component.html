@@ -1,0 +1,102 @@
+<div id="doituonguutiens" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          perm_contact_calendar
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Đối tượng ưu tiên
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm kiếm một đối tượng...">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <button mat-raised-button [routerLink]="['/admission/doi-tuong-uu-tien/new']" class="add-product-button fuse-white mt-24 mt-md-0">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <!-- <mat-spinner></mat-spinner> -->
+      </div>
+      <mat-table class="doituonguutiens-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ten-column">Tên đối tượng</mat-header-cell>
+          <mat-cell *matCellDef="let doituong" class="ten-column" [routerLink]="['/admission/doi-tuong-uu-tien/'+ doituong.Id]">
+            <p class="text-truncate">{{doituong.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="maDoiTuong">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="diem-column">Mã đối tượng</mat-header-cell>
+          <mat-cell *matCellDef="let doituong" class="diem-column" [routerLink]="['/admission/doi-tuong-uu-tien/'+ doituong.Id]">
+            <p class="text-truncate">{{doituong.MaDoiTuongUuTien}}</p>
+          </mat-cell>
+        </ng-container>
+
+
+        <!-- DiemCong Column -->
+        <ng-container matColumnDef="diemCong">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="diem-column">Điểm cộng</mat-header-cell>
+          <mat-cell *matCellDef="let doituong" class="diem-column" [routerLink]="['/admission/doi-tuong-uu-tien/'+ doituong.Id]">
+            <p class="text-truncate">{{doituong.DiemCong}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="xoa">
+          <mat-header-cell *matHeaderCellDef class="delete-column">Xóa</mat-header-cell>
+          <mat-cell *matCellDef="let doituong" class="delete-column" (click)="ngDeleteColumn(doituong.Id)">
+            <mat-icon id="delete-logo">
+              delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <!--go [RouteLink] when click to row-->
+        <mat-row *matRowDef="let doituong; columns: displayedColumns;" class="doituonguutien" matRipple [routerLink]="'/admission/doi-tuong-uu-tien'">
+        </mat-row>
+
+      </mat-table>
+
+      <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+
+    </div>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

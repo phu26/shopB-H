@@ -1,0 +1,110 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg "></div>
+    <!-- / TOP BACKGROUND -->
+  
+    <!-- CENTER -->
+    <div class="center">
+  
+      <!-- HEADER -->
+      <div class="header " fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+        fxLayoutAlign.gt-sm="space-between center">
+  
+        <!-- APP TITLE -->
+        <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            collections_bookmark
+          </mat-icon>
+          <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+            Hồ sơ xét tuyển
+          </span>
+        </div>
+        <!-- / APP TITLE -->
+  
+        <!-- SEARCH -->
+        <div class="search-wrapper mx-32 mx-md-0">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>search</mat-icon>
+            <input #textSearch placeholder="Tìm kiếm hồ sơ xét tuyển">
+          </div>
+        </div>
+        <!-- / SEARCH -->
+  
+
+  
+      </div>
+      <!-- / HEADER -->
+  
+      <!-- CONTENT CARD -->
+      <div class="mat-elevation-z8 content-card">
+  
+        <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+          <!-- http://tuyensinhapi.azurewebsites.net/api/v1.0/hosoxettuyens/page  -->
+        </div>
+        <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+          fusePerfectScrollbar>
+  
+          <ng-container  matColumnDef="hoSoId">
+            <mat-header-cell class="smwidth-hosoxettuyenshow" *matHeaderCellDef mat-sort-header>Mã hồ sơ</mat-header-cell>
+            <mat-cell class="smwidth-hosoxettuyenshow" *matCellDef="let row">
+              <p class="text-truncate">{{row.MaHoSo}}</p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="hinhThucXetTuyen">
+            <mat-header-cell class="mdwidth-hosoxettuyenshow" *matHeaderCellDef mat-sort-header>Hình thức xét tuyển</mat-header-cell>
+            <mat-cell class="mdwidth-hosoxettuyenshow" *matCellDef="let row">
+              <p>{{row.DotTuyenSinh.Ten}}</p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="danhSachNguyenVong">
+            <mat-header-cell *matHeaderCellDef>Danh Sách Nguyện Vọng:</mat-header-cell>
+            <mat-cell  *matCellDef="let row">
+                <span [innerHtml]="convertObject(row.NguyenVongs)"></span>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="xemThongBao">
+            <mat-header-cell *matHeaderCellDef class="XoaColumn-hosoxettuyenshow">Xem TB</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="XoaColumn-hosoxettuyenshow" (click)="btnXemTBClicked(row.DotTuyenSinh.Id,row)">
+              <mat-icon >
+                announcement icon
+              </mat-icon>
+              <img src="../../../../../../assets/icons/new.gif">
+            </mat-cell>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="xoa">
+            <mat-header-cell *matHeaderCellDef class="XoaColumn-hosoxettuyenshow">Xóa</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="XoaColumn-hosoxettuyenshow" (click)="btnXoaClicked(row.Id)">
+              <mat-icon >
+                delete
+              </mat-icon>
+            </mat-cell>
+          </ng-container> -->
+  
+          <ng-container matColumnDef="sua">
+            <mat-header-cell class="XoaColumn-hosoxettuyenshow" *matHeaderCellDef >Sửa</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="XoaColumn-hosoxettuyenshow" [routerLink]="['/tuyen-sinh/dang-ky/'+row.HinhThucXetTuyenId+'/'+row.HinhThucXetTuyen.Loai+'/'+row.Id+'/'+row.DotTuyenSinhId]">
+              <mat-icon class="btnEdit">
+                edit
+              </mat-icon>
+              <!-- <a href="['admission/dang-ky/form-xet-tuyen-dai-hoc/'+row.HinhThucXetTuyenId+'/'+row.DotTuyenSinhId]">{{'admission/dang-ky/form-xet-tuyen-dai-hoc/'+row.HinhThucXetTuyenId+'/'+row.DotTuyenSinhId+'/'+row.Id}}</a> -->
+            </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple>
+          </mat-row>
+  
+        </mat-table>
+      </div>
+      <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="20"
+        [pageSizeOptions]="[2, 5, 10, 25, 100]">
+      </mat-paginator>
+      <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+  </div>

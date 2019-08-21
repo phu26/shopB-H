@@ -1,0 +1,99 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          collections_bookmark
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          PHƯƠNG THỨC ĐĂNG KÝ
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <!-- <div class="mx-32 mx-md-0">
+        <div class="matruong" fxFlex fxLayout="row" fxLayoutAlign="start center">
+           <h1>Mã trường: HIU</h1> 
+        </div>
+      </div> -->
+      <!-- / SEARCH -->
+
+      <!-- BUTTON -->
+      <!-- <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/tuyen-sinh/dot-tuyen-sinh/null'">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>ADD</span>
+      </button> -->
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <!-- <mat-spinner></mat-spinner> -->
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+        <ng-container matColumnDef="ten" >
+          <mat-header-cell class="lgwidth-dottuyensinhshow" *matHeaderCellDef>Tên đợt tuyển sinh</mat-header-cell>
+            <mat-cell class="lgwidth-dottuyensinhshow" *matCellDef="let row" [routerLink]="">
+              <span><strong class="mobile">Đợt tuyển sinh:<br></strong>{{row.Ten | uppercase }}</span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ngayBatDau">
+          <mat-header-cell class="mdwidth-dottuyensinhshow" *matHeaderCellDef fxHide fxShow.gt-xs >Ngày bắt đầu</mat-header-cell>
+          <mat-cell class="mdwidth-dottuyensinhshow" *matCellDef="let row" fxHide fxShow.gt-xs
+            [routerLink]="">
+            <span><strong class="mobile">Ngày bắt đầu:</strong>{{ row.NgayBatDau | date:'dd-MM-yyyy' }}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ngayKetThuc">
+          <mat-header-cell class="mdwidth-dottuyensinhshow" *matHeaderCellDef fxHide fxShow.gt-xs >Ngày kết thúc</mat-header-cell>
+          <mat-cell class="mdwidth-dottuyensinhshow" *matCellDef="let row" fxHide fxShow.gt-xs
+            [routerLink]="">
+            <span><strong class="mobile">Hạn đăng ký:</strong>{{ row.HanDangKy | date:'dd-MM-yyyy' }}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dangKy">
+          <mat-header-cell class="sxwidth-dottuyensinhshow" *matHeaderCellDef >Đăng ký</mat-header-cell>
+          <mat-cell  class="sxwidth-dottuyensinhshow" *matCellDef="let row"  >
+            <span><strong class="mobile">Đăng ký:</strong></span>
+            <mat-icon [routerLink]="['/tuyen-sinh/dang-ky/'+row.HinhThucXetTuyenId+'/'+row.HinhThucXetTuyen.Loai+'/null/'+row.Id]" *ngIf="!ComparseCurrentDate(row.HanDangKy)" >input</mat-icon>
+            <mat-icon [routerLink]="['/tuyen-sinh/thong-bao']" *ngIf="ComparseCurrentDate(row.HanDangKy)">input</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;"  class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

@@ -1,0 +1,103 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{cotDiem.Ten}}
+          </div>
+          <div class="h2" *ngIf="pageType ==='new'">
+            Cột điểm mới
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Thông tin Cột điểm</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <button mat-raised-button class="save-product-button" [disabled]="cotDiemForm.invalid"
+        *ngIf="pageType ==='new'" (click)="addCotDiem()">
+        <span>Thêm</span>
+      </button>
+
+      <button mat-raised-button class="save-product-button"
+        [disabled]="cotDiemForm.invalid || cotDiemForm.pristine" *ngIf="pageType ==='edit'"
+        (click)="saveCotDiem()">
+        <span>Lưu</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content p-24">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <form fxLayoutAlign="start" name="cotDiemForm" [formGroup]="cotDiemForm" class="product w-100-p"
+            fxLayout="column" fxFlex="1 0 auto">
+
+            <div class="h2 mb-24" *ngIf="pageType ==='new'">CỘT ĐIỂM</div>
+            <div class="h2 mb-24" *ngIf="pageType ==='edit'">{{cotDiem.Ten}}</div>
+
+            <div *ngIf="pageType ==='edit'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="ID" readonly name="Id" formControlName="Id">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Tên Cột điểm</mat-label>
+                <input matInput placeholder="Tên Cột điểm" name="Ten" formControlName="Ten" required>
+                <!-- thông báo lỗi -->
+                <mat-error>Tên cột điểm là bắt buộc</mat-error>
+              </mat-form-field>
+              <!-- Cách tạo khoảng trống giữa các input -->
+              <!-- <div fxFlex="20" appearance="outline" class="w-100-p">&nbsp;</div> -->
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Mã cột điêm</mat-label>
+                <input matInput placeholder="Mã Cột điểm" name="Ma" formControlName="Ma" required>
+                <!-- thông báo lỗi -->
+                <p style="color:#666666;font-size:8pt">Mã phải viết liền không dấu và không được trùng.</p>
+                <mat-error>Mã cột điểm là bắt buộc</mat-error>
+              </mat-form-field>
+              <!-- Cách tạo khoảng trống giữa các input -->
+              <!-- <div fxFlex="20" appearance="outline" class="w-100-p">&nbsp;</div> -->
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Ghi chú</mat-label>
+                <textarea matInput placeholder="Ghi chú" name="GhiChu" formControlName="GhiChu" rows="5"></textarea>
+              </mat-form-field>
+            </div>
+
+            <!-- Ngày sửa, ngày tạo, người sửa, người tạo => bổ sung sau -->
+          </form>
+        </div>
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

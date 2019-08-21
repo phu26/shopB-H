@@ -1,0 +1,170 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16">
+          collections_bookmark
+        </mat-icon>
+        <span class="logo-text h1">
+          Ngành Đào Tạo
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm kiếm ngành đào tạo">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- BUTTON -->
+      <button  mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/admission/nganh-dao-tao/them'">
+        <mat-icon class="logo-icon">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn">Tên Ngành đào tạo</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn" [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">{{row.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ghiChu">
+          <mat-header-cell *matHeaderCellDef fxHide mat-sort-header fxShow.gt-sm>Ghi chú</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">{{row.GhiChu}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nganhUisId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Mã ngành</mat-header-cell>
+          <mat-cell *matCellDef="let row" [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">{{row.NganhId}}</p>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actionsColumn">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="accent" (click)="dataSource.createNew()"><i class="fa fa-plus mat-icon"></i></button>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+                  <i class="fa fa-pencil mat-icon"></i>
+                </button>
+            <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
+                  <i class="fa fa-check mat-icon"></i>
+                </button>
+            <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
+                  <i class="fa fa-times mat-icon"></i>
+                </button>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="KichHoat">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs class="KichHoatColumn">Kích hoạt
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs class="KichHoatColumn"
+            [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <mat-icon *ngIf="row.KichHoat" class="active-icon green-600 s-16">check</mat-icon>
+            <mat-icon *ngIf="!row.KichHoat" class="active-icon red-500 s-16">close</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nhomChaId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Nhóm cha</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">
+              {{((row.NhomCha==null)?'':row.NhomCha.Ten)}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="nguoiTao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Người tạo</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">
+              {{row.nguoiTao}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ngayTao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Ngày tạo</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">
+              {{row.ngayTao |  date: 'dd-MM-yyyy'}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nguoiSua">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Người sửa</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">
+              {{row.nguoiSua}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ngaySua">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Ngày sửa</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs [routerLink]="['/admission/nganh-dao-tao/'+row.Id]">
+            <p class="text-truncate">
+              {{row.ngaySua |  date: 'dd-MM-yyyy'}}
+            </p>
+          </mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef="xoa">
+          <mat-header-cell *matHeaderCellDef class="XoaColumn">Xóa</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="XoaColumn" (click)="btnXoaClicked(row.Id)">
+            <mat-icon>
+              delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

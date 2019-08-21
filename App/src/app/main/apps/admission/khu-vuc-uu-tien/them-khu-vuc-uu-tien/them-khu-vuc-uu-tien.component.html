@@ -1,0 +1,111 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/khu-vuc-uu-tien'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+
+
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{khuVucUuTien.Ten}}
+          </div>
+          <div class="h2" *ngIf="pageType ==='new'">
+            Khu vực ưu tiên mới
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Thông tin Khu vực ưu tiên</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <button mat-raised-button class="save-product-button" [disabled]="khuVucUuTienForm.invalid"
+        *ngIf="pageType ==='new'" (click)="addKhuVucUuTien()">
+        <span>Thêm</span>
+      </button>
+
+      <button mat-raised-button class="save-product-button"
+        [disabled]="khuVucUuTienForm.invalid || khuVucUuTienForm.pristine" *ngIf="pageType ==='edit'"
+        (click)="saveKhuVucUuTien()">
+        <span>Lưu</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content p-24">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <form fxLayoutAlign="start" name="khuVucUuTienForm" [formGroup]="khuVucUuTienForm" class="product w-100-p"
+            fxLayout="column" fxFlex="1 0 auto">
+
+            <div class="h2 mb-24" *ngIf="pageType ==='new'">THÊM KHU VỰC ƯU TIÊN</div>
+            <div class="h2 mb-24" *ngIf="pageType ==='edit'">{{khuVucUuTien.Ten}}</div>
+
+            <!-- Control -->
+
+            <div *ngIf="pageType ==='edit'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="ID" readonly name="Id" formControlName="Id">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Tên khu vực ưu tiên</mat-label>
+                <input matInput placeholder="Tên khu vực ưu tiên" name="Ten" formControlName="Ten" required>
+                <!-- thông báo lỗi -->
+                <mat-error>Tên là bắt buộc</mat-error>
+              </mat-form-field>
+              <!-- Cách tạo khoảng trống giữa các input -->
+              <!-- <div fxFlex="20" appearance="outline" class="w-100-p">&nbsp;</div> -->
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Điểm cộng</mat-label>
+                <input matInput placeholder="Điểm cộng theo khu vực" name="DiemCong" formControlName="DiemCong"
+                  required>
+                <mat-error>Bắt buộc nhập điểm!!!</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Mã khu vực ưu tiên</mat-label>
+                <input matInput placeholder="Mã khu vực ưu tiên" name="MaKhuVucUuTien" formControlName="MaKhuVucUuTien"
+                  required>
+                <mat-error>Bắt buộc nhập!!!</mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Ngày sửa, ngày tạo, người sửa, người tạo => bổ sung sau -->
+          </form>
+        </div>
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

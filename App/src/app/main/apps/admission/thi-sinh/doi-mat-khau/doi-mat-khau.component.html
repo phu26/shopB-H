@@ -1,0 +1,88 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent coloring">
+    <!-- HEADER -->
+    <!-- <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center"> -->
+    
+      <!-- APP TITLE -->
+      <!-- <div>
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2">
+            Cập nhật mật khẩu
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Chi tiết cập nhật</span>
+          </div>
+        </div>
+      </div> -->
+      <!-- / APP TITLE -->
+    <!-- </div> -->
+    <!-- / HEADER -->
+  </div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent coloring" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div>
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2">
+            Cập nhật mật khẩu
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Chi tiết cập nhật</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card" fxLayout="row" fxLayoutAlign="center center">
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <form name="doiMatKhauForm" [formGroup]="doiMatKhauForm" class="product w-100-p" fxLayout="column"
+          fxLayoutAlign="center center">
+
+          <div class="tab-content p-24" fusePerfectScrollbar>
+          
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>Mật khẩu cũ</mat-label>
+              <input matInput placeholder="Mật khẩu cũ" type="password" name="MatKhau" formControlName="MatKhau" required>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>Mật khẩu mới</mat-label>
+              <input matInput placeholder="Mật khẩu mới" type="password" name="MatKhauMoi" formControlName="MatKhauMoi" required>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>Xác nhận mật khẩu mới</mat-label>
+              <input matInput placeholder="Xác nhận mật khẩu mới" type="password" name="XacNhanMatKhauMoi" formControlName="XacNhanMatKhauMoi"
+                required>
+            </mat-form-field>
+          
+          </div>
+          <button mat-button class="update-password-button" [disabled]="doiMatKhauForm.invalid" (click)="updateMatKhau()">
+            <span>Cập nhật</span>
+          </button>
+        </form>
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

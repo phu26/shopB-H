@@ -1,0 +1,22 @@
+<!-- <div class="file-uploader">
+    <input type="file" multiple #fileInput/>
+    <button mat-fab
+            color="warn"
+            class="add-file-button"
+            (click)="onUploadClick()"
+            aria-label="Add file"
+            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+        
+        upload
+    </button>
+</div> -->
+ 
+<input type="file" multiple #fileInput class="input-file" />
+<button class="button-file" (click)="upload()">Upload</button>
+Phần trăm upload : {{percentDone}}% <br />
+
+<div *ngIf="uploadSuccess">
+  Upload Successful
+</div>
+
+ 

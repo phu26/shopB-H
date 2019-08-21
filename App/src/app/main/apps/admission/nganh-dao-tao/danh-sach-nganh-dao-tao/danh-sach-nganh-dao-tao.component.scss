@@ -1,0 +1,221 @@
+
+
+
+@import "src/@fuse/scss/fuse";
+
+app-danh-sach-nganh-dao-tao,app-danh-sach-nganh-dao-tao-list,app-danh-sach-nganh-dao-tao-modal {
+
+    #nganhdaotaos {
+
+        .top-bg {
+
+            @include media-breakpoint('lt-md') {
+                height: 256px;
+            }
+        }
+
+        > .center {
+
+            > .header {
+
+                .search-wrapper {
+                    width: 100%;
+                    max-width: 480px;
+                    border-radius: 28px;
+                    overflow: hidden;
+                    @include mat-elevation(1);
+
+                    @include media-breakpoint('xs') {
+                        width: 100%;
+                    }
+
+                    .search {
+                        width: 100%;
+                        height: 48px;
+                        line-height: 48px;
+                        padding: 0 18px;
+
+                        input {
+                            width: 100%;
+                            height: 48px;
+                            min-height: 48px;
+                            max-height: 48px;
+                            padding: 0 16px;
+                            border: none;
+                            outline: none;
+                        }
+                    }.search-list{
+                        width: 50%;
+                        height: 38px;
+                        line-height: 48px;
+                        padding: 0 18px;
+
+                        input {
+                            width: 100%;
+                            height: 48px;
+                            min-height: 48px;
+                            max-height: 48px;
+                            padding: 0 16px;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
+
+                // @include media-breakpoint('lt-md') {
+                //     padding: 8px 0;
+                //     height: 192px !important;
+                //     min-height: 192px !important;
+                //     max-height: 192px !important;
+                // }
+            }
+        }
+    }
+    .loading-indicator {
+        position: fixed;
+        z-index: 999;
+        height: 2em;
+        width: 2em;
+        overflow: show;
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      
+      /* Transparent Overlay */
+      .loading-indicator:before {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // background-color: rgba(0,0,0,0.3);
+      }
+    .nganhdaotaos-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, .12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 620px;
+        min-height: 620px;
+        position: relative;
+        .mat-header-row {
+            min-height: 64px;
+        }
+
+        .nganhdaotao {
+            position: relative;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .active-icon {
+            border-radius: 50%;
+        }
+        .IDColumn{
+            width: 25px;
+            max-width: 70px;
+        }
+        .XoaColumn{
+            width: 25px;
+            max-width: 70px;
+        }
+        .KichHoatColumn{
+            width: 25px;
+            max-width: 100px;
+        }
+        .TenColumn{
+            width: 250px;
+            min-width: 200px;
+        }
+    }
+    .nganhdaotaos-table.dts{
+        max-height: 300px!important;
+        min-height: 300px!important;
+        height: 300px!important;
+    }
+    .item-nganh{
+        line-height:48px;
+        width:90%;
+        cursor: pointer;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+   
+   .col-sm-9{
+       width: 75%;
+       float: left;
+       padding: 0 5px;
+   }
+   .col-sm-3{
+    width: 25%;
+    float: left;
+    padding: 0 5px;
+   }
+   @media(max-width: 992px){
+       .col-sm-9,.col-sm-3{
+           width: 100%;
+       }
+   }
+}
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  mat-header-cell{
+      text-align: center !important;
+      font-weight: bold !important;
+  }
+
+  .mat-grid-tile .mat-figure{
+    justify-content: unset;
+  }
+  .page-layout.carded.fullwidth > .center.a{
+      padding: 0;
+  }
+  .page-layout.carded.fullwidth > .center.a > .header {
+    height: 80px !important;
+    min-height: 50px !important;
+    max-height: 110px !important;
+}
+.active {
+    background: rgb(167, 154, 154);
+    color: white;
+}
+
+  .label-daotao{
+      font-size: 20pt;
+      color: red;
+  }
+
+  
+
+  app-danh-sach-nganh-dao-tao-modal{
+    .nganhdaotaos-table {
+        max-height: 315px;
+        min-height: 315px;
+    }
+  }
+  .link-button{
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    padding: 5px;
+}

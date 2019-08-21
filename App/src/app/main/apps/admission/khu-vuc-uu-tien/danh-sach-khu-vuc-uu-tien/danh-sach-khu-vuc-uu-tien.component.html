@@ -1,0 +1,126 @@
+<div id="khuvucuutiens" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          shopping_basket
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Khu vực ưu tiên</span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper  ml-sm-32">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm khu vực">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/admission/khu-vuc-uu-tien/them'">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 example-table-container">
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="khuvucuutiens-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <!-- Tên khu vực Column -->
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn"> Tên khu vực ưu tiên </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn" [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">
+            <p class="text-truncate">{{row.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="makhuvuc">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn"> Mã khu vực </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn" [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">
+            <p class="text-truncate">{{row.MaKhuVucUuTien}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="diemCong">
+          <mat-header-cell *matHeaderCellDef class="DiemCongColumn" mat-sort-header fxHide fxShow.gt-xs> Điểm cộng</mat-header-cell>>
+          <mat-cell *matCellDef="let row" class="DiemCongColumn"
+            [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">
+            <p class="text-truncate">
+              {{row.DiemCong}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="ngayTao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Ngày tạo </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="NgayTaoIDColumn"
+            [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">{{row.ngayTao |  date: 'dd-MM-yyyy'}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="ngaySua">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Ngày sửa </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="NgayTaoIDColumn"
+            [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">{{row.ngaySua |  date: 'dd-MM-yyyy'}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="nguoiTao">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Người tạo </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="NgayTaoIDColumn"
+            [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">{{row.nguoiTao}} </mat-cell>
+        </ng-container> -->
+
+        <!-- Date create -->
+        <!-- <ng-container matColumnDef="nguoiSua">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs> Người sửa </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="NgayTaoIDColumn"
+            [routerLink]="['/admission/khu-vuc-uu-tien/'+row.Id]">{{row.nguoiSua}} </mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef="xoa">
+          <mat-header-cell *matHeaderCellDef class="XoaColumn">Xóa</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="XoaColumn" (click)="btnXoaClicked(row.Id)">
+            <mat-icon >
+              delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="dotxettuyen" matRipple>
+        </mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

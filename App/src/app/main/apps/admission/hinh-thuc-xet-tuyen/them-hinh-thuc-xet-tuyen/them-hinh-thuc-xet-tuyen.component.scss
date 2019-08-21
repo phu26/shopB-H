@@ -1,0 +1,58 @@
+.xettuyenMatSelect {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    width: 150px;
+}
+
+.loaidiem-div {
+    padding: 15px 0;
+    div {
+        display: block;
+    }
+    .title {
+        font-family: Muli, Helvetica Neue, Arial, sans-serif;
+        font-size: 16px;
+        > span {
+            margin-left: 15px;
+            color: green;
+                &:hover {
+                    cursor: pointer;
+                    color: #039be5;
+                }
+        }
+    }
+    .danhsach-div {
+        padding: 15px;
+        > div {
+            padding: 5px;
+            > span:nth-child(1) {
+                margin-right: 15px;
+            }
+            > span:not(:nth-child(1)) {
+                padding: 0 5px;
+            }
+            > .update-span {
+                color: blue;                
+                &:hover {
+                    cursor: pointer;
+                    color: #039be5;
+                }
+            }
+            > .delete-span {
+                color: red;
+                &:hover {
+                    cursor: pointer;
+                    color: #039be5;
+                }
+            }
+        }
+    }
+}
+
+.loaidiemDialog {
+    .mat-form-field-infix {
+        border-top-width: 0.8em !important;
+    }
+}

@@ -1,0 +1,164 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/dot-tuyen-sinh/quan-ly'">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          collections_bookmark
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Hồ sơ xét tuyển
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #textSearch placeholder="Tìm kiếm hồ sơ xét tuyển">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- BUTTON -->
+      <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="['/admission/dang-ky/form-xet-tuyen-dai-hoc/'+_hinhThucXetTuyenIdRouter+'/null/'+_dotTuyenSinhIdRouter]">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <!-- http://tuyensinhapi.azurewebsites.net/api/v1.0/hosoxettuyens/page  -->
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+        <ng-container matColumnDef="hoten">
+          <mat-header-cell *matHeaderCellDef class="TenColumn" style="max-width:250px;">Họ tên thí sinh
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn" style="max-width:250px;">
+            <span>
+              <strong>Mã HS: </strong>{{row.MaHoSo}}
+              <br>
+              <strong>CMND: </strong>{{row.CMND}}
+              <br>
+              <strong>Họ và Tên: </strong>{{(row.HoLot==null)?'':row.HoLot}} {{(row.Ten==null)?'':row.Ten}}
+              <br>
+              <strong>Tên đăng nhập:</strong> {{(row.TenDangNhap==null)?'':row.TenDangNhap}}
+              <br>
+              <strong>Mật khẩu:</strong> {{(row.MatKhau==null)?'':row.MatKhau}}
+              <br>
+              <strong>Ngày sinh:</strong> {{row.NgaySinh |  date: 'dd-MM-yyyy'}}
+              <br>
+              <strong>Email: </strong>{{(row.Email==null)?'':row.Email}}
+              <br>
+              <strong>SDT: </strong>{{(row.SDT==null)?'':row.SDT}}
+              <br>
+              <strong>Ngày tạo:</strong> {{row.NgayTao |  date: 'dd-MM-yyyy'}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell class="mdwidth-hosoxettuyenshow" *matHeaderCellDef mat-sort-header>Thông tin liên lạc
+          </mat-header-cell>
+          <mat-cell class="mdwidth-hosoxettuyenshow" *matCellDef="let row" fxHide fxShow.gt-xs>
+            <span>
+              <strong>Địa chỉ: </strong>{{(row.DiaChiLienLac==null)?'':row.DiaChiLienLac}}
+              <br *ngIf="row.PhuongXa!=''">
+              <strong *ngIf="row.PhuongXa!=''">Phường xã: </strong>{{(row.PhuongXa==null)?'':row.PhuongXa}}
+              <br *ngIf="row.QuanHuyen!=''">
+              <strong *ngIf="row.QuanHuyen!=''">Quận huyện: </strong>{{(row.QuanHuyen==null)?'':row.QuanHuyen}}
+              <br *ngIf="row.TinhThanh!=''">
+              <strong *ngIf="row.TinhThanh!=''">Tỉnh thành: </strong>{{(row.TinhThanh==null)?'':row.TinhThanh}}
+
+              <br *ngIf="row.DiaChiLienLacTamTru!=null">
+              <strong *ngIf="row.DiaChiLienLacTamTru!=null">Địa chỉ tạm trú:
+              </strong>{{(row.DiaChiLienLacTamTru==null)?'':row.DiaChiLienLacTamTru}}
+              <br *ngIf="row.PhuongXaTamTru!=''">
+              <strong *ngIf="row.PhuongXaTamTru!=''">Phường xã tạm trú:
+              </strong>{{(row.PhuongXaTamTru==null)?'':row.PhuongXaTamTru}}
+              <br *ngIf="row.QuanHuyenTamTru!=''">
+              <strong *ngIf="row.QuanHuyenTamTru!=''">Quận huyện tạm trú:
+              </strong>{{(row.QuanHuyenTamTru==null)?'':row.QuanHuyenTamTru}}
+              <br *ngIf="row.TinhThanhTamTru!=''">
+              <strong *ngIf="row.TinhThanhTamTru!=''">Tỉnh thành tạm trú:
+              </strong>{{(row.TinhThanhTamTru==null)?'':row.TinhThanhTamTru}}
+
+            </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="NVJson">
+          <mat-header-cell *matHeaderCellDef class="TenColumn">Nguyện vọng</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn">
+            <span [innerHTML]="parseNguyenVongJSon(row.NVJSon)">
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quanli">
+          <mat-header-cell class="XoaColumn" *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="XoaColumn" *matCellDef="let row">
+            <button (click)="_listItemSelected=row" mat-icon-button #menuTrigger="matMenuTrigger"
+              [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="20"
+      [pageSizeOptions]="[2, 5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>
+<mat-menu #menu="matMenu">
+  <button class="ListMenuItem" mat-menu-item>
+    <mat-checkbox style="padding-left: 4px;" (click)="ChangeLockHoSo(_listItemSelected.Id)" [checked]="_listItemSelected.KichHoat"></mat-checkbox>
+    <span style="padding-left: 17px;">Khóa</span>
+  </button>
+
+  <button class="ListMenuItem" mat-menu-item
+    [routerLink]="['/admission/dang-ky/admin/'+ _listItemSelected.HinhThucXetTuyenId+'/'+ _listItemSelected.Loai+'/'+ _listItemSelected.Id+'/'+ _listItemSelected.DotTuyenSinhId]">
+    <mat-icon>
+      edit
+    </mat-icon>
+    <span>Sửa</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item (click)="btnXoaClicked(_listItemSelected.Id)">
+    <mat-icon>
+      delete
+    </mat-icon>
+    <span>Xóa</span>
+  </button>
+</mat-menu>

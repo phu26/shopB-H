@@ -1,0 +1,225 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- CENTER -->
+  <div class="center">
+
+
+    <!-- CONTENT CARD -->
+    <div class="content-card" style="margin-top:10px; box-shadow: 0 0 2px 2px rgba(158, 134, 134, 0.8);">
+
+      <div class="loading-indicator" *ngIf="loadSpinner">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <!-- CONTENT -->
+      <div class="content p-24">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <div class="h2 mb-24">
+
+            <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/dot-tuyen-sinh/quan-ly'">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+            Upload Files <a (click)="openHuongDan()" style="cursor:pointer;" >xem hướng dẫn import file</a> <br />
+          </div>
+          <div [hidden]="!isOpenHD" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            Hướng dẫn Import file <br>
+            1. Chọn danh mục muốn import
+            <img src="/assets/files/danhmuc.PNG" alt="">
+            nếu chưa có danh mục nhập chọn vào button add danh mục (2) theo trên hình để tạo mới 1 danh mục
+            <br>
+            2. Sau khi chọn danh mục thì xuất hiện control upload file như hình dưới
+            <img src="/assets/files/upfile.PNG" alt="">
+            click vào chọn tệp (1) để chọn file muốn upload. sau đó click vào button upload (2) để tiến hành upload 
+            Lưu ý : file upload phải theo mẫu sau <a href="/assets/files/FileImportMau.xlsx" download> file mẫu</a>
+            <br>
+            3. Sau khi upload file thành công thì xuất hiện danh sách như hình sau
+            <img src="/assets/files/uploadfinish.PNG" alt="">
+            sau khi đã upload được dữ liệu thì có thể sử dụng chức năng import dữ liêu để import hồ sơ thí sinh vào hệ thống
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field class="cboDanhMucUpload">
+              <mat-select placeholder="Chọn danh mục upload" (selectionChange)="loadSinhVien($event.source.value)"
+                [(ngModel)]="danhmucid">
+                <mat-option *ngFor="let danhmuc of danhMucs" [value]="danhmuc.Id">
+                  {{danhmuc.Ten}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-icon-button class="mr-0 mr-sm-16" (click)="addCategory()">
+              <mat-icon>add_box</mat-icon>
+            </button>
+           
+            <div *ngIf="danhmucid!=null">
+              <input type="file" #fileInput (change)="upload($event.target.files)" class="input-file" />
+              <button class="button-file btn btn-primary" (click)="insertSQL()">
+                Upload
+              </button>
+            </div>
+            <div [ngClass]="{'hiddenDiv': (!isUpload && !isLoadData)}">
+              <button style="color: WHITE;background-color: rgb(3, 155, 229);margin-left: 3px" mat-flat-button (click)="importData()">
+                Kiểm tra đồng bộ danh mục
+              </button>
+              <button (click)="execImportData()" style="float: right;color: WHITE;background-color: rgb(3, 155, 229);margin-left: 3px" mat-flat-button>
+                <mat-icon>autorenew</mat-icon> Import Dữ Liệu
+              </button>
+
+              <div class="example-container mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+                  <!-- Checkbox Column -->
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <!-- <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                      </mat-checkbox> -->
+                      <span>Trạng thái</span>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <!-- <span [hidden]="isImportData||row.IsSuccess!=null">
+                      <mat-checkbox  (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+                      </mat-checkbox>
+                    </span> -->
+                    <!-- <span [hidden]="!isImportData||row.IsSuccess!=null">
+                      <mat-spinner  [diameter]="20"></mat-spinner>
+                    </span> -->
+                    <span [hidden]="row.IsSuccess==0||row.IsSuccess==null">
+                      <mat-icon style="border-radius:50%" class="green-500 s-16">check</mat-icon>
+                    </span>
+                    <span [hidden]="row.IsSuccess==1||row.IsSuccess==null">
+                      <mat-icon style="border-radius:50%" class="red-500 s-16">close</mat-icon>
+                    </span>
+                    </td>
+                  </ng-container>
+
+                  <!-- Ho -->
+                  <ng-container matColumnDef="ho">
+                    <th mat-header-cell *matHeaderCellDef> Họ và Tên Lót </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Ho}} </td>
+                  </ng-container>
+
+                  <!-- ten -->
+                  <ng-container matColumnDef="ten">
+                    <th mat-header-cell *matHeaderCellDef> Ten </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Ten}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="ngaysinh">
+                    <th mat-header-cell *matHeaderCellDef> Ngày sinh </th>
+                    <td mat-cell *matCellDef="let element"> {{element.NgaySinh}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="noisinh">
+                    <th mat-header-cell *matHeaderCellDef> Nơi Sinh </th>
+                    <td mat-cell *matCellDef="let element"> {{element.NoiSinh}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="cmnd">
+                    <th mat-header-cell *matHeaderCellDef> CMND </th>
+                    <td mat-cell *matCellDef="let element"> {{element.CMND}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="gioitinh">
+                    <th mat-header-cell *matHeaderCellDef> Giới Tính </th>
+                    <td mat-cell *matCellDef="let element"> {{element.GioiTinh}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="diachilienlac">
+                    <th mat-header-cell *matHeaderCellDef> Địa chỉ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.DiaChiLienLac}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="madoituonguutien">
+                    <th mat-header-cell *matHeaderCellDef> Mã DTUT </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaDoiTuongUuTien}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="makhuvucuutien">
+                    <th mat-header-cell *matHeaderCellDef> Mã KVUT </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaKhuVucUuTien}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="matinhthanh">
+                    <th mat-header-cell *matHeaderCellDef> Mã Tỉnh </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaTinhThanh}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="maquanhuyen">
+                    <th mat-header-cell *matHeaderCellDef> Mã Quận Huyện </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaQuanHuyen}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="sdt">
+                    <th mat-header-cell *matHeaderCellDef> Số điện thoại </th>
+                    <td mat-cell *matCellDef="let element"> {{element.SDT}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="matruonglop12">
+                    <th mat-header-cell *matHeaderCellDef> Mã Trường Lớp 12 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaTruongLop12}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="namtn">
+                    <th mat-header-cell *matHeaderCellDef> Năm tốt nghiệp </th>
+                    <td mat-cell *matCellDef="let element"> {{element.NamTotNghiep}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="sobaodanh">
+                    <th mat-header-cell *matHeaderCellDef> Số Báo Danh </th>
+                    <td mat-cell *matCellDef="let element"> {{element.SoBaoDanh}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="manganhdaotao">
+                    <th mat-header-cell *matHeaderCellDef> Mã Ngành Đào Tạo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaNganhDaoTao}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="matohopmon">
+                    <th mat-header-cell *matHeaderCellDef> Mã THM </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaToHopMon}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="diemmon1">
+                    <th mat-header-cell *matHeaderCellDef> Điểm môn 1 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.DiemMon1}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="diemmon2">
+                    <th mat-header-cell *matHeaderCellDef> Điểm môn 2 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.DiemMon3}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="diemmon3">
+                    <th mat-header-cell *matHeaderCellDef> Điểm môn 3 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.DiemMon3}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+                  </tr>
+                </table>
+              </div>
+              <mat-paginator #paginatorup [length]="dataSource.length" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+              </mat-paginator>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- / CONTENT -->
+
+
+
+  </div>
+  <!-- / CONTENT CARD -->
+
+</div>
+<!-- / CENTER -->

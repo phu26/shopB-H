@@ -1,0 +1,37 @@
+.tabThongBao {
+  width: 650px;
+  padding: 30px 10px;
+  max-height: 600px;
+}
+@media(max-width:768px){
+  .tabThongBao{
+    max-height: 500px;
+  }
+}
+
+.tabThongBao .thongbaoketqua .col-md-12{
+  width:100%!important;
+  border: 1px #000 solid;
+  margin: 3px;
+  display: flex!important; justify-content: center;
+}
+
+.tabThongBao .thongbaoketqua .col-md-12 .ghichu{
+    width: 100%;
+    border: 1px #000 solid;
+    margin: 1px;
+}
+.tabThongBao .thongbaoketqua .col-md-12 .ghichu p{
+  padding: 5px;
+}
+.tabThongBao .thongbaoketqua .col-md-12 .boder{
+  margin: 1px;
+  border: 0.5px #000 solid;
+}
+.tabThongBao .thongbaoketqua .col-md-12 .boder p{
+  padding: 5px;
+  font-weight: bold;
+}
+.tabThongBao .thongbaoketqua{
+  color: blue;
+}

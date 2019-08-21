@@ -1,0 +1,209 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          collections_bookmark
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Đợt tuyển sinh
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm kiếm đợt tuyển sinh">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- BUTTON -->
+      <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/admission/dot-tuyen-sinh/them-dot-tuyen-sinh'">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <!-- <mat-spinner></mat-spinner> -->
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tenDotTuyenSinh">Tên đợt tuyển sinh
+          </mat-header-cell>
+          <mat-cell class="tenDotTuyenSinh" *matCellDef="let row" [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]">
+            <p>{{row.Ten | uppercase}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="heDaoTaoId">
+          <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs mat-sort-header class="heDaoTao">Hệ đào tạo
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs class="heDaoTao"
+            [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]">
+            <p>{{((row.HeDaoTao==null)?'':row.HeDaoTao.Ten)}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="hinhThucXetTuyenId">
+          <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs mat-sort-header class="hinhThuc">Hình thức
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs class="hinhThuc"
+            [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]">
+            <p>
+              {{((row.HinhThucXetTuyen==null)?'':row.HinhThucXetTuyen.Ten)}}
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bacDaoTaoId">
+          <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs mat-sort-header class="bacDaoTao">Bậc đào tạo
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs class="bacDaoTao"
+            [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]">
+            <p>
+              {{((row.BacDaoTao==null)?'':row.BacDaoTao.Ten)}}
+            </p>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="soLuongNguyenVong">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="soLuongNguyenVong">SL nguyện vọng</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="soLuongNguyenVong"
+            [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]">
+            <p style="text-align:center">{{row.SoLuongNguyenVong}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Date create -->
+        <ng-container matColumnDef="hanDangKy">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs class="hanDangKy"> Hạn đăng ký
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="hanDangKy" [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]">
+            {{row.HanDangKy |  date: 'dd-MM-yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="kichHoatDK">
+          <mat-header-cell *matHeaderCellDef class="KichHoatColumn"> Được đăng ký</mat-header-cell>
+          <mat-cell *matCellDef="let row" [routerLink]="['/admission/dot-tuyen-sinh/'+row.Id]" class="KichHoatColumn">
+            <mat-icon *ngIf="row.KichHoatDK" class="active-icon green-600 s-16">check</mat-icon>
+            <mat-icon *ngIf="!row.KichHoatDK" class="active-icon red-500 s-16">close</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quanly">
+          <mat-header-cell class="XoaColumn" *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="add-product-button fuse-white mt-12 mt-md-0 iconbutton" class="XoaColumn"
+            *matCellDef="let row">
+            <button (click)="_listItemSelected=row" mat-icon-button #menuTrigger="matMenuTrigger"
+              [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>
+<mat-menu #menu="matMenu">
+  <button class="ListMenuItem" mat-menu-item
+    [routerLink]="['/admission/dang-ky/admin/'+_listItemSelected.HinhThucXetTuyenId+'/'+_listItemSelected.HinhThucXetTuyen.Loai+'/null/'+_listItemSelected.Id]">
+    <mat-icon>
+      assignment_turned_in
+    </mat-icon>
+    <span>Đăng kí</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item
+    [routerLink]="['/admission/dot-tuyen-sinh/thong-bao-email', _listItemSelected.Id, 'thongbao']">
+    <mat-icon>
+      announcement icon
+    </mat-icon>
+    <span>Nhập thông báo</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item
+    [routerLink]="['/admission/dot-tuyen-sinh/thong-bao-email', _listItemSelected.Id, 'email']">
+    <mat-icon>
+      email icon
+    </mat-icon>
+    <span>Nhập Email</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item
+    [routerLink]="['/admission/ho-so-xet-tuyen/theo-dot/'+_listItemSelected.HinhThucXetTuyen.Loai+'/'+_listItemSelected.Id]">
+    <mat-icon>
+      collections_bookmark
+    </mat-icon>
+    <span>Xem hồ sơ xét tuyển</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item [routerLink]="['/admission/nguyen-vong/theo-dot/'+_listItemSelected.Id]">
+    <mat-icon>
+      import_contacts
+    </mat-icon>
+    <span>Xem danh sách nguyện vọng</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item [routerLink]="['/admission/uploadfiles/'+_listItemSelected.Id]">
+    <mat-icon>
+      cloud_upload
+    </mat-icon>
+    <span>Upload files</span>
+  </button>
+  <a class="ListMenuItem" mat-menu-item target="_blank"
+    href="{{enviroment}}/hosoxettuyens/exportexceltheonguyenvong/{{_listItemSelected.Id}}">
+    <mat-icon>
+      get_app
+    </mat-icon>
+    <span>Xuất danh sách nguyện vọng của thí sinh</span>
+  </a>
+  <button class="ListMenuItem" mat-menu-item (click)="btnXoaClicked(_listItemSelected.Id)">
+    <mat-icon>
+      delete
+    </mat-icon>
+    <span>Xóa</span>
+  </button>
+  <button class="ListMenuItem" mat-menu-item (click)="btnCapNhatDanhSachDau(_listItemSelected.Id)">
+        <mat-icon>
+            refresh
+        </mat-icon>
+        <span>Cập nhật kết quả xét tuyển</span>
+    </button>
+    <a class="ListMenuItem" mat-menu-item
+        href="/admission/dot-tuyen-sinh/them-dot-tuyen-sinh?idClone={{_listItemSelected.Id}}">
+        <mat-icon>
+            flip_to_front
+        </mat-icon>
+        <span>Sao chép đợt tuyển sinh</span>
+    </a>
+</mat-menu>

@@ -1,0 +1,99 @@
+<div id="khuvucuutiens" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          shopping_basket
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Danh Mục Upload</span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper  ml-sm-32">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm danh mục upload">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <button (click)="add()" mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 example-table-container">
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="khuvucuutiens-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <!-- ID Column -->
+        <!-- <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="IDColumn"> ID </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="IDColumn">
+            <p class="text-truncate">{{row.Id}}</p>
+          </mat-cell>
+        </ng-container> -->
+
+        <!-- Tên khu vực Column -->
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn"> Tên Danh Mục </mat-header-cell>
+          <mat-cell (click)="chosenRow(row)" *matCellDef="let row" class="TenColumn">
+            <input [ngClass]="{'inputedit': row.editing||row.Id==null}" type="text" [(ngModel)]="row.Ten" placeholder="tên danh mục" [disabled]="!row.editing&&row.Id!=null"
+              matInput>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <mat-icon class="iconbutton" (click)="row.editing=true" *ngIf="!row.editing&&row.Id!=null">
+              edit
+            </mat-icon>
+            <mat-icon class="iconbutton" (click)="saveRow(row)" *ngIf="row.editing||row.Id==null">
+              save
+            </mat-icon>
+            <mat-icon class="iconbutton" (click)="cancelRow(row)" *ngIf="row.editing||row.Id==null">
+              cancel
+            </mat-icon>
+            <mat-icon class="iconbutton" (click)="btnXoaClicked(row.Id)" *ngIf="!row.editing&&row.Id!=null">
+                delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="dotxettuyen" matRipple>
+        </mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <div  class="pt-24" style="text-align: center;">
+      <button mat-button (click)="dialogRef.close(null)">Đóng</button>
+  </div>
+  <!-- / CENTER -->
+</div>

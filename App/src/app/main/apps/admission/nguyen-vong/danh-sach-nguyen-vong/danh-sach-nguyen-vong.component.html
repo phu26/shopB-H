@@ -1,0 +1,182 @@
+<div id="khuvucuutiens" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          shopping_basket
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Nguyện vọng</span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper  ml-sm-32">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm nguyện vọng">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <!-- <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/admission/nganh-dao-tao/them'">
+        <mat-icon class="logo-icon" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          add_circle_outline
+        </mat-icon>
+        <span>ADD</span>
+      </button> -->
+      <!-- / ADD BUTTON -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 example-table-container">
+      <div>
+        <div style="margin-bottom:5px;background-color: RGB(255,255,255);padding: 10px;text-align: right">
+          <mat-form-field style="width:200px">
+            <mat-label>Lọc theo</mat-label>
+            <mat-select [(value)]="DongBoQuery" (selectionChange)="DongBoQuerySelectedChange($event)">
+              <mat-option>--Không--</mat-option>
+              <mat-option value="1">Đã đồng bộ</mat-option>
+              <mat-option value="2">Đồng bộ lỗi</mat-option>
+              <mat-option value="null">Chưa đồng bộ</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button (click)="UISDongBoClicked()" style="color: WHITE;background-color: rgb(3, 155, 229);margin-left: 3px" mat-flat-button>
+            <mat-icon>autorenew</mat-icon> Đồng bộ
+          </button>
+          <button (click)="UISDongBoAllClicked()" style="color: WHITE;background-color: rgb(3, 155, 229);margin-left: 3px" mat-flat-button>
+            <mat-icon>autorenew</mat-icon> Đồng bộ tất cả
+          </button>
+        </div>
+      </div>
+      <div>
+        <mat-table class="khuvucuutiens-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+          fusePerfectScrollbar>
+
+          <ng-container matColumnDef="select">
+            <th class="checkboxunboder" mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" >
+              </mat-checkbox>
+            </th>
+            <td class="checkboxunboder" mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" >
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="MaHoSo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="IDColumn">Mã nguyện vọng</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="IDColumn">
+              <p class="text-truncate">{{row.NguyenVongId}}</p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ThiSinh">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="HoSoColumn">Thí sinh</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="HoSoColumn">
+              <span> <b>Họ tên:</b> {{row.HoLot}} {{row.Ten}} <br>
+                <b>CMND:</b> {{row.CMND}}<br>
+                <b>Số ĐT:</b> {{row.SDT}}</span>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="NguyenVong">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="NguyenVongColumn">Nguyện vọng</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="NguyenVongColumn">
+              <p class="text-truncate">
+                {{row.NganhDaoTao}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Diem">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Điểm</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+              <span [innerHTML]="convertObject(row.Diem)"></span>
+              <!-- <p class="text-truncate">
+                  {{convertObject(row.Diem)}}
+                  
+                </p> -->
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="UISDongBo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide class="KichHoatColumn" fxShow.gt-xs>Đồng bộ UIS
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="KichHoatColumn" fxHide fxShow.gt-xs>
+              <mat-icon *ngIf="row.UISDongBo == 1" class="active-icon green-600 s-16">check</mat-icon>
+              <mat-icon *ngIf="row.UISDongBo == null" class="active-icon black-600 s-20">not_interested</mat-icon>
+              <mat-icon *ngIf="row.UISDongBo == 2" class="active-icon red-600 s-16">close</mat-icon>
+            </mat-cell>
+          </ng-container>
+          <!-- <ng-container matColumnDef="TrungTuyen">
+              <mat-header-cell *matHeaderCellDef mat-sort-header fxHide class="KichHoatColumn" fxShow.gt-xs>Trúng tuyển</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="KichHoatColumn" fxHide fxShow.gt-xs
+                >
+                <mat-icon *ngIf="row.TrungTuyen" class="active-icon green-600 s-16">check</mat-icon>
+                <mat-icon *ngIf="!row.TrungTuyen" class="active-icon red-500 s-16">close</mat-icon>
+              </mat-cell>
+            </ng-container> -->
+
+          <ng-container matColumnDef="InHoSo">
+            <mat-header-cell *matHeaderCellDef class="KichHoatColumn" fxShow.gt-xs>In hồ sơ</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="KichHoatColumn" fxShow.gt-xs>
+              <a target="_blank" *ngIf="!row.InHoSo" href="{{serviceUrl}}/Reports/ExportPDF?id={{row.HoSoXetTuyenId}}">
+                <mat-icon class="active-icon">print</mat-icon>
+              </a>
+            </mat-cell>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="DieuKienXetTuyen">
+              <mat-header-cell *matHeaderCellDef class="KichHoatColumn" fxShow.gt-xs>Đủ điều kiện xét tuyển
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="KichHoatColumn" fxShow.gt-xs
+                >
+                <mat-icon *ngIf="row.DieuKienXetTuyen" class="active-icon green-600 s-16">check</mat-icon>
+                <mat-icon *ngIf="!row.DieuKienXetTuyen" class="active-icon red-500 s-16">close</mat-icon>
+              </mat-cell>
+            </ng-container> -->
+
+
+          <ng-container matColumnDef="xoa">
+            <mat-header-cell *matHeaderCellDef class="XoaColumn">Xóa</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="XoaColumn" (click)="btnXoaClicked(row.NguyenVongId)">
+              <mat-icon>
+                delete
+              </mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" class="dotxettuyen" matRipple>
+          </mat-row>
+        </mat-table>
+      </div>
+      <!-- <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div> -->
+
+    </div>
+    <mat-paginator (page)="PanigatorChange()" #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

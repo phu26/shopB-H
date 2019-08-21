@@ -1,0 +1,70 @@
+<!-- PROGRESS BAR -->
+<fuse-progress-bar></fuse-progress-bar>
+<!-- / PROGRESS BAR -->
+
+<!-- VERTICAL LAYOUT 1 -->
+<ng-container *ngIf="fuseConfig.layout.style === 'vertical-layout-1'">
+    <vertical-layout-1></vertical-layout-1>
+</ng-container>
+<!-- / VERTICAL LAYOUT 1 -->
+
+<!-- VERTICAL LAYOUT 2 -->
+<ng-container *ngIf="fuseConfig.layout.style === 'vertical-layout-2'">
+    <vertical-layout-2></vertical-layout-2>
+</ng-container>
+<!-- / VERTICAL LAYOUT 2 -->
+
+<!-- VERTICAL LAYOUT 3 -->
+<ng-container *ngIf="fuseConfig.layout.style === 'vertical-layout-3'">
+    <vertical-layout-3></vertical-layout-3>
+</ng-container>
+<!-- / VERTICAL LAYOUT 3 -->
+
+<!-- HORIZONTAL LAYOUT 1 -->
+<ng-container *ngIf="fuseConfig.layout.style === 'horizontal-layout-1'">
+    <horizontal-layout-1></horizontal-layout-1>
+</ng-container>
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='hiu'">
+    <app-layout-thi-sinh-hiu></app-layout-thi-sinh-hiu>
+</ng-container> 
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='shop'">
+    <app-layout-shop></app-layout-shop>
+</ng-container> 
+
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='sona'">
+    <app-layout-thi-sinh-sona></app-layout-thi-sinh-sona>
+</ng-container>
+
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='yersin'">
+    <app-layout-thi-sinh-yersin></app-layout-thi-sinh-yersin>
+</ng-container>
+
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='neu'">
+    <app-layout-thi-sinh-neu></app-layout-thi-sinh-neu>
+</ng-container>
+
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='qnu'">
+    <app-layout-thi-sinh-qnu></app-layout-thi-sinh-qnu>
+</ng-container>
+
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='law'">
+    <app-layout-thi-sinh-law></app-layout-thi-sinh-law>
+</ng-container>
+
+<ng-container *ngIf="fuseConfig.layout.style === 'layout-thi-sinh' && _TruongLayout=='dnu'">
+    <app-layout-thi-sinh-dnu></app-layout-thi-sinh-dnu>
+</ng-container>
+<!-- / HORIZONTAL LAYOUT 1 -->
+
+<!-- THEME OPTIONS PANEL -->
+<!-- <button mat-icon-button class="warn mat-elevation-z2 theme-options-button"
+        [ngClass]="{'right-side-panel': fuseConfig.layout.sidepanel.position === 'right',
+                    'side-panel-hidden': fuseConfig.layout.sidepanel.hidden === true}"
+        (click)="toggleSidebarOpen('themeOptionsPanel')">
+    <mat-icon>settings</mat-icon>
+</button> -->
+
+<!-- <fuse-sidebar name="themeOptionsPanel" class="theme-options-sidebar" position="right" [invisibleOverlay]="true">
+    <fuse-theme-options></fuse-theme-options>
+</fuse-sidebar> -->
+<!-- / THEME OPTIONS PANEL -->

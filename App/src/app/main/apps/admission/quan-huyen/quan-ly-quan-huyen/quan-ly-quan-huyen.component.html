@@ -1,0 +1,66 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16">
+          collections_bookmark
+        </mat-icon>
+        <span class="logo-text h1">
+          Quản lý đơn vị hành chính
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+      <button mat-raised-button color="warn" (click)="openDialog(null)"
+        style="border-radius: 3px; border: 1px solid #8080803b; margin: 15px 5px; width: fit-content;">Thêm đơn
+        vị</button>
+
+      <tree-root style="width: 100%;" [nodes]="nodess" [options]="options">
+        <!-- <ng-template #treeNodeWrapperTemplate let-node let-index="index">  
+                 
+            {{ node.data.Ten }}
+          
+            <div style="float: right;">
+              <button style="margin-right: 5px;" mat-raised-button color="accent" (click)="openDialog(node.data.id)">Cập nhật</button>            
+              <button mat-raised-button color="primary" (click)="btnXoa(node.data.id)">Xóa</button>               
+            </div>            
+          </ng-template> -->
+
+        <ng-template #treeNodeWrapperTemplate let-node let-index="index">
+          <div class="node-wrapper">
+         
+            <tree-node-expander [node]="node"></tree-node-expander>
+            <div class="node-content-wrapper">
+
+              <tree-node-content [node]="node" [index]="index"></tree-node-content>
+            </div>
+
+            <div *ngIf="node.data.Ten != 'Root'" style="width:23%;float: right;">
+              <button style="margin-right: 5px;" mat-raised-button color="accent" (click)="openDialog(node.data.Id)">Cập
+                nhật</button>
+              <button mat-raised-button color="primary" (click)="btnXoa(node.data.Id)">Xóa</button>
+            </div>
+          </div>
+        </ng-template>
+      </tree-root>
+
+    </div>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

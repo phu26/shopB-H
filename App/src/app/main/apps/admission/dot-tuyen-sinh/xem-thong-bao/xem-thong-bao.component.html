@@ -1,0 +1,524 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab class="tabThongBao" label="Kết quả dự thi">
+        <ng-template matTabContent>
+            <div *ngIf="_TruongLayout=='law'" class="tabThongBao" style="overflow: scroll">
+                <p style="text-align: center;"><strong><span style="font-size: 20pt; color: #232323;">Hồ sơ của
+                            tôi</span></strong></p>
+                <p style="text-align: justify; text-indent: 24px; padding: 0px;"><span style="color: #232323;">Mã hồ
+                        sơ:&nbsp;</span><strong><span style="color: #2f5496;">{{hoSoXetTuyen.MaHoSo}}</span></strong>
+                </p>
+                <p style="text-align: justify; text-indent: 24px; padding: 0px;"><span style="color: #232323;">Hình thức
+                        xét tuyển: XÉT TUYỂN TRƯỜNG ĐẠI HỌC
+                        LUẬT TP. HỒ CHÍ MINH HỆ CHÍNH QUY</span><strong><span style="color: red;">
+                            NĂM {{dotTuyenSinh.NamTuyenSinh}}</span></strong></p>
+                <p style="text-align: justify; text-indent: 24px; padding: 0px;"><span style="color: #232323;">Xem chi
+                        tiết</span></p>
+
+                <div *ngIf="hoSoXetTuyen.KetQua==1">
+                    <p style="text-align: justify; text-indent: 24px; padding: 0px;">
+                        <strong><span style="color: red;">- Chúc mừng Thí sinh đã đạt yêu cầu
+                                xét tuyển sơ bộ.</span></strong></p>
+                    <p style="text-align: justify; text-indent: 24px; padding: 0px;">
+                        <span style="color: #232323;">- Hội đồng tuyển sinh: Đề nghị Thí sinh có mặt tại
+                            phòng kiểm tra theo thời gian, địa điểm vvà đọc kỹ thông tin dưới
+                            đây
+                            khi
+                            dự kiểm tra năng lực:</span></p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: #232323;">○ Ngày kiểm tra:&nbsp;</span><strong><span style="color: red;">Thí
+                                sinh {{thiSinh.HoLotVaTen}} có mặt tại
+                                phòng kiểm
+                                tra
+                                lúc 8 giờ 00 sáng ngày 21/07/2019 (Chủ nhật)</span></strong></p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: #232323;">○ </span><strong><span style="color: green;">Số báo danh:
+                                {{hoSoXetTuyen.SoBaoDanhKiemTra}}</span></strong></p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: #232323;">○ </span><strong><span style="color: green;">Địa điểm kiểm tra:
+                                {{hoSoXetTuyen.DiaDiemKiemTra}} - {{hoSoXetTuyen.DiaChiKiemTra}}</span></strong></p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: #232323;">○ </span><strong><span style="color: green;">Phòng kiểm
+                                tra:
+                                {{hoSoXetTuyen.PhongKiemTra}}</span></strong></p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: #232323;">○ Lệ phí kiểm tra năng lực:&nbsp;</span><strong><span
+                                style="color: red;">200.000 đồng/thí sinh.</span></strong><span
+                            style="color: #232323;">&nbsp;(Nộp khi vào phòng kiểm tra)</span></p>
+                    <p style="text-align: justify; text-indent: 24px; padding: 0px;">
+                        <span style="color: black;">- Hình thức kiểm tra: trắc nghiệm trần giấy; Thời gian
+                            làm
+                            bài kiểm tra: 75 phút; Số lượng câu hỏi kiểm tra: 100 câu.</span>
+                    </p>
+                    <p style="text-align: justify; text-indent: 24px; padding: 0px;">
+                        <span style="color: black;">-&nbsp;<strong>Khi dự kiểm tra năng lực, thí sinh phải
+                                tuân
+                                thủ
+                                các quy định của Quy chế thi THPT quốc gia và đồng thời mang
+                                theo:</strong></span>
+                    </p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: black;">○ Bản chính Giấy chứng minh nhân dân/Thẻ căn cước
+                            công dân hoặc các giấy tờ tùy thân khác có
+                            dán
+                            ảnh <strong>(Bắt buộc)</strong></span></p>
+                    <p style="text-align: justify; text-indent: 48px; padding: 0px;">
+                        <span style="color: black;">○ <strong>Bút viết, bút chì, tẩy</strong>,
+                            thước kẻ,
+                            máy tính bỏ túi không có chức năng soạn thảo văn bản
+                            và
+                            không có thể nhớ.</span></p>
+                    <p style="text-align: justify; text-indent: 24px; padding: 0px;">
+                        <span style="color: black;">-&nbsp;<strong>Khi dự kiểm tra năng lực, thí sinh không
+                                được
+                                mang
+                                vào phòng kiểm tra:</strong>&nbsp;Bút xóa, tài liệu,
+                            thiết bị
+                            truyền tin hoặc thông tin có thể lợi dụng để gian lận trong quá
+                            trình
+                            làm bài kiểm tra; không được mang điện thoại di động vào khu
+                            vực</span><span style="color: #232323;"> kiểm tra và phòng kiểm tra.</span>
+                    </p>
+                </div>
+
+                <div *ngIf="hoSoXetTuyen.KetQua==0" class="tabThongBao">
+                    <p style="text-align: justify; text-indent: 24px; line-height: 150%;"><strong>Thí
+                            sinh</strong><strong><span style="color: red;"> không đạt yầu cầu xét
+                                tuyển sơ bộ</span></strong></p>
+                </div>
+                <div *ngIf="hoSoXetTuyen.KetQua==2" class="tabThongBao">
+                    <p><strong style="color: red;">- Chúc mừng Thí sinh</strong><strong style="color: green;">
+                            {{thiSinh.HoLotVaTen}}</strong>
+                        <strong style="color: red;">,
+                            số CMND/CCCD </strong><strong style="color: green;"> {{thiSinh.CMND}}
+                        </strong><strong style="color: red;">đã trúng tuyển vào Trường theo phương thức tuyển
+                            thẳng</strong></p>
+                    <p>- Thí sinh xác nhận nhập học: <strong style="color: red;">từ ngày 22/7/2019 đến 11g30'
+                            ngày 27/7/2019</strong>, thí sinh trúng tuyển phải nộp<strong> bản
+                            chính Giấy chứng nhận kết quả thi THPT quốc gia</strong><strong> năm
+                            {{dotTuyenSinh.NamTuyenSinh}}
+                        </strong><em>(có chữ ký; của Chủ tịch Hội đồng thi và đóng dấu đỏ của
+                            Sở Giáo dục và Đào tạo)</em> cho Nhà trường thông qua
+                        đường bưu điện <em>(theo hình thức chuyển phát nhanh, dịch vụ chuyển phát
+                            ưu tiên)</em> hoặc trực tiếp tại Trường. Quá thời hạn này, thí
+                        sinh không nộp bản chính Giấy chứng nhận kết quả thi THPT quốc gia năm 2019 để
+                        xác nhận nhập học được xem như từ chối trúng tuyển thẳng..</p>
+                </div>
+
+                <div *ngIf="hoSoXetTuyen.KetQua==null" class="tabThongBao">
+                    <p style="text-align: justify; text-indent: 24px; line-height: 150%;"><strong>Thí
+                            sinh</strong><strong><span style="color: green;"> đang chờ xét kết quả</span></strong></p>
+                </div>
+
+            </div>
+            <div *ngIf="_TruongLayout=='hiu'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"
+                class="tabThongBao">
+                <mat-form-field appearance="outline" fxFlex="50" class="w-60-p thisinh">
+                    <mat-label>Họ tên:</mat-label>
+                    <input matInput id="mavachkythithpt" [(ngModel)]="thiSinh.HoLotVaTen"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-40-p">
+                    <mat-label>Ngày sinh:</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Chọn ngày" id="birth"
+                        [(ngModel)]="thiSinh.NgaySinh" [ngModelOptions]="{standalone: true}">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-100-p">
+                    <mat-label>Số báo danh (KTNL):</mat-label>
+                    <input matInput id="sobaodanhthithpt" [(ngModel)]="thiSinh.SoBaoDanhThiTHPTQG"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-100-p">
+                    <mat-label>Ngày kiểm tra :</mat-label>
+                    <input matInput id="ngaykiemtranangly" [(ngModel)]="thiSinh.NgayKiemTraNangLuc"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-100-p">
+                    <mat-label>Địa điểm thi:</mat-label>
+                    <input matInput id="mavachkythithpt" [(ngModel)]="thiSinh.DiaDiemThiNangLuc"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-100-p">
+                    <mat-label>Phòng thi:</mat-label>
+                    <input matInput id="phongthiktnl" [(ngModel)]="thiSinh.PhongThiNangLuc"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-30-p thisinh">
+                    <mat-label>Giờ thi:</mat-label>
+                    <input matInput id="giothiktnl" [(ngModel)]="thiSinh.GioThiNangLuc"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50" class="w-30-p thisinh">
+                    <mat-label>Điểm kiểm tra :</mat-label>
+                    <input matInput id="diemktnl" [(ngModel)]="thiSinh.DiemThiNangLuc"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="_TruongLayout=='law'" label="Kết quả xét tuyển">
+        <ng-template matTabContent>
+            <!-- <div class="tabThongBao" [innerHtml]="dotTuyenSinh.NoiDungThongBao"> -->
+            <div class="tabThongBao">
+                <div class="container thongbaoketqua">
+                    <div class="top">
+                        <p style="text-align: center;"><strong>CỘNG H&Ograve;A Xã HỘI CHỦ NGHĨA VIỆT NAM</strong>
+                        </p>
+                        <p style="text-align: center;"><strong>Độc lập - Tự do - Hạnh phúc</strong></p>
+                        <p style="text-align: center;"><strong>------------------------------------</strong></p>
+                        <p style="text-align: center;"><strong>&nbsp;</strong></p>
+                        <p style="text-align: center;"><strong><span style="font-size: 20.0pt;">KẾT QUẢ X&Eacute;T TUYỂN
+                                    ĐẠI HỌC HỆ CHíNH QUY</span></strong></p>
+                        <p style="text-align: center;"><strong><span style="font-size: 20.0pt;">TRƯỜNG ĐẠI HỌC LUẬT TP.
+                                    HỒ CHí MINH </span></strong></p>
+                        <p style="text-align: center;"><strong><span style="font-size: 20.0pt;">NĂM
+                                </span></strong><strong><span
+                                    style="font-size: 20.0pt; color: red;">2019</span></strong></p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12 hoten">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.6%!important;">
+                            <p>Họ Tên:</p>
+                        </div>
+                        <div class="col-md-3 col-lg-4 col-xs-12 boder" style="width:25%!important;">
+                            <p>{{thiSinh.Ten}}</p>
+                        </div>
+                        <div class="col-md-2 col-lg-2 col-xs-12 boder" style="width:16.4%!important;">
+                            <p>Ngày sinh:</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xs-12 boder" style="width:25%!important;">
+                            <p>{{thiSinh.NgaySinh | date:'dd-MM-yyyy'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>SDB (KTNL):</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{hoSoXetTuyen.SoBaoDanhKiemTra}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Điểm học bạ(10%):</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{thiSinh.DiemHocBa}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Điểm thi THPTQG(60%):</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{thiSinh.DiemThiTHPT}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Điểm KTNL(30%):</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{thiSinh.DiemKTNL}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Cộng điểm sau khi quy đổi:</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{thiSinh.CongDiemSauQD}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Điểm ƯT:</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{diemDoiTuongUuTien+diemKhuVucUuTien}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Điểm xét tuyển:</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{thiSinh.DiemTong}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="col-md-4 col-lg-3 col-xs-12 boder" style="width:33.3%!important;">
+                            <p>Tổ hợp ĐKXT:</p>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-xs-12 boder" style="width:66.7%!important;">
+                            <p>{{thiSinh.ToHop}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="hoSoXetTuyen.KetQua==4 || hoSoXetTuyen.KetQua==2 || hoSoXetTuyen.KetQua ==5" class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="text boder" style="width:100%">
+                            <p><strong><span style=" font-family: 'Times New Roman',serif; color: blue;">Chúc
+                                        mừng thí sinh đã trúng tuyển vào ngành
+                                    </span><span
+                                        style=" font-family: 'Times New Roman',serif; color: red;">{{tenNganhDaoTao}}</span><span
+                                        style=" font-family: 'Times New Roman',serif; color: blue;">
+                                        của Trường Đại học Luật TP. Hồ Chí Minh.</span></strong></p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="hoSoXetTuyen.IsPhucKhao==1" class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="text boder" style="width:100%">
+                            <p><span style=" font-family: 'Times New Roman',serif; color: blue;">
+                                Kết quả phúc khảo điểm kiểm tra năng lực 2019 của Bạn</span> <span
+                                style=" font-family: 'Times New Roman',serif; color: red;"> không thay đổi </span></p>
+                        </div>
+                    </div> 
+<!-- 
+                    <div *ngIf="hoSoXetTuyen.KetQua==1" class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="text boder" style="width:100%">
+                            <button class="mr-24" color="accent" mat-raised-button (click)="isDangKyPhucKhao()">
+                                <mat-icon matSuffix class="mr-8">save</mat-icon>
+                                <span>{{!hoSoXetTuyen.IsPhucKhao?"Đăng ký phúc khảo":"Hủy đăng ký phúc khảo"}}</span>
+                            </button>
+                            <label *ngIf="hoSoXetTuyen.IsPhucKhao">Đã đăng ký phúc khảo bài thi kiểm tra năng lực năng
+                                lực. </label>
+                            <label *ngIf="!hoSoXetTuyen.IsPhucKhao">Chưa đăng ký phúc khảo bài thi kiểm tra năng lực
+                                năng lực. </label>
+                        </div>
+                    </div> -->
+
+                    <!-- <div *ngIf="hoSoXetTuyen.KetQua==4 || hoSoXetTuyen.KetQua==2" class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="text boder">
+                            <p><strong><span style=" font-family: 'Times New Roman',serif; color: blue;">Nhà
+                                        trường </span><span
+                                        style=" font-family: 'Times New Roman',serif; color: red;">đã
+                                        nhận</span><span style=" font-family: 'Times New Roman',serif; color: blue;">
+                                        được giấy chứng nhận kết quả thi THPT quốc gia</span><span
+                                        style=" font-family: 'Times New Roman',serif; color: red;">
+                                        năm {{dotTuyenSinh.NamTuyenSinh}}</span><span
+                                        style=" font-family: 'Times New Roman',serif; color: blue;">
+                                        của bạn vào lúc</span><span
+                                        style=" font-family: 'Times New Roman',serif; color: red;">
+                                        {{hoSoXetTuyen.NgayTao | date:'medium'}} </span></strong></p>
+                        </div>
+                    </div> -->
+                    <div *ngIf="hoSoXetTuyen.KetQua==4 || hoSoXetTuyen.KetQua==2 || hoSoXetTuyen.KetQua ==5" class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="ghichu">
+                            <p style="text-align: justify;"><strong><span style="color: red;">Một số lưu &yacute; đối
+                                        với thí sinh:</span></strong></p>
+                            <ol>
+                                <li>Ngay sau khi Nhà trường công bố kết quả trúng tuyển, thí
+                                    sinh có tên trong danh sách này và vẫn c&ograve;n
+                                    nguyện vọng học tại Trường Đại học Luật TP. Hồ Chí Minh th&igrave; ngay lập
+                                    tức d&ugrave;ng&nbsp;&lt;<strong>tài khoản</strong>&gt; và
+                                    &lt;<strong>mật khẩu cá nh&acirc;n</strong>&gt; đã được các
+                                    thầy/ cô THPT cấp khi nộp hồ sơ<strong><span style="color: red;">để truy cập
+                                            vào Cổng thông tin tuyển sinh của Bộ Giáo dục và
+                                            Đào tạo</span></strong>để kiểm tra thông tin về nguyện vọng
+                                    đăng k&yacute; x&eacute;t tuyển và thực hiện việc điều chỉnh nguyện vọng đăng
+                                    k&yacute; x&eacute;t tuyển. Khi đó,<strong>&nbsp;</strong><strong>thí
+                                        sinh phải chọn ngành và tổ hợp mà thí sinh
+                                        trúng tuyển vào Trường Đại học Luật TP. Hồ Chí Minh
+                                        là thứ tự nguyện vọng 1.&nbsp;</strong></li>
+                                <li>Hiện nay, Nhà trường <strong>chưa tiến hành x&eacute;t ph&acirc;n Khoa
+                                        chuyên ngành đối với thí sinh đạt điểm trúng tuyển
+                                        ngành Luật</strong>. Sau khi thí sinh <span style="color: red;">nộp bản chính
+                                        Giấy chứng nhận kết quả thi THPT quốc
+                                        gia</span><span style="color: fuchsia;"> năm 2019</span> và <span
+                                        style="color: red;">làm thủ tục nhập học</span>, căn cứ vào năng
+                                    lực đào tạo của từng Khoa, nguyện vọng và mức điểm của thí
+                                    sinh, Nhà trường sẽ công bố điểm trúng tuyển vào
+                                    các Khoa chuyên ngành, trước khi thí sinh vào học
+                                    chính thức.</li>
+                            </ol>
+                            <ol start="3">
+                                <li><strong> Về việc xác nhận nhập học</strong></li>
+                            </ol>
+                            <p style="text-align: justify; text-indent: .5in;">Trường Đại học Luật TP. Hồ Chí
+                                Minh thông báo thời gian và cách thức nộp bản chính
+                                Giấy chứng nhận kết quả thi THPT quốc gia<span style="color: red;"> năm
+                                    {{dotTuyenSinh.NamTuyenSinh}} </span>của
+                                thí sinh trúng tuyển <em><span style="color: red;">(có chữ
+                                        k&yacute; của Chủ tịch Hội đồng thi và đóng dấu đỏ của Sở
+                                        Giáo dục và Đào tạo)</span></em> để xác nhận nguyện
+                                vọng theo học tại Trường như sau:</p>
+                            <p style="text-align: justify; text-indent: .5in;"><strong>3.1. Cách thức và
+                                    thời hạn</strong></p>
+                            <p style="text-align: justify; text-indent: .75in;"><strong>* </strong>Nộp trực tiếp tại
+                                Trường:</p>
+                            <p style="text-align: justify; text-indent: 1.0in;">- Địa điểm: Giảng đường C.301, số 02
+                                Nguyễn Tất Thành, Phường 12, Quận 4;</p>
+                            <p style="text-align: justify; text-indent: 1.0in;">- Thời gian:<span
+                                    style="color: fuchsia;"> <strong>từ 9g00' sáng </strong></span><strong><span
+                                        style="color: red;">ngày 24/7/2019 đến 11g30' ngày
+                                        27/7/2019</span></strong>. Buổi sáng từ 8g00' đến 11g30'; buổi chiều: từ
+                                14g00' đến 17g00'.</p>
+                            <p style="margin-top: 6.0pt; text-align: justify; text-indent: .75in;"><strong>*
+                                </strong>Nộp qua đường bưu điện:</p>
+                            <p style="text-align: justify; text-indent: 1.0in;">- Cách thức: <strong>phải theo
+                                    h&igrave;nh thức chuyển phát nhanh hoặc chuyển phát ưu
+                                    tiên</strong>. Lưu &yacute;: bên ngoài phong b&igrave; thư ghi
+                                thêm thông tin: <strong><em>Thí sinh nộp bản chính Giấy chứng
+                                        nhận kết quả thi</em></strong>.</p>
+                            <p style="text-align: justify; text-indent: 1.0in;">- Địa chỉ nhận hồ sơ: Hội đồng tuyển
+                                sinh Trường Đại học Luật TP. Hồ Chí Minh, số 02 Nguyễn Tất Thành, Phường
+                                12, Quận 4.</p>
+                            <p style="text-align: justify; text-indent: 1.0in;">- Thời gian:<span style="color: red;">
+                                    <strong>từ sáng ngày 24/7/2019 đến 11g30' ngày
+                                        25/7/2019</strong> </span>(tính theo dấu bưu điện).</p>
+                            <p style="text-align: justify; text-indent: 1.0in;">Lưu &yacute;: Có thể việc chuyển
+                                Giấy chứng nhận kết thi THPT quốc gia<span style="color: red;"> năm 2019 </span>đến
+                                Trường theo h&igrave;nh thức chuyển phát nhanh hoặc chuyển phát ưu
+                                tiên<strong> không đảm bảo đúng thời hạn quy định</strong>, do vậy,
+                                trước khi gửi Giấy chứng nhận này qua cơ quan/ công ty dịch vụ chuyển
+                                phát nhanh, chuyển phát ưu tiên, thí sinh cần làm
+                                các bước sau:</p>
+                            <p style="text-align: justify; text-indent: 1.25in;">+ <em>Thứ nhất</em>, chụp ảnh (hoặc
+                                scan) Giấy chứng nhận kết quả thi THPT quốc gia<span style="color: red;"> năm
+                                    2019</span>;</p>
+                            <p style="text-align: justify; text-indent: 1.25in;">+ <em>Thứ hai</em>, thực hiện
+                                các thủ tục với cơ quan/ công ty làm dịch vụ chuyển phát
+                                nhanh, chuyển phát ưu tiên để gửi hỏa tốc;</p>
+                            <p style="text-align: justify; text-indent: 1.25in;">+ <em>Thứ ba</em>, chụp ảnh hoặc scan
+                                Giấy biên nhận/ Phiếu yêu cầu cung cấp dịch vụ này;</p>
+                            <p style="text-align: justify; text-indent: 1.25in;">+ <em>Thứ tư</em>, Gửi email về cho
+                                Trường Đại học Luật TP. Hồ Chí Minh với nội dung: &ldquo;Thí sinh (ghi đầy
+                                đủ họ tên) &hellip;&hellip;&hellip;., số điện thoại&hellip;&hellip;., số
+                                báo danh kiểm tra năng lực&hellip;&hellip;.. đồng &yacute; nhập học vào
+                                Trường Đại học Luật TP. Hồ Chí Minh&rdquo;.<strong> Đính k&egrave;m theo
+                                    email là h&igrave;nh ảnh của Giấy chứng nhận kết quả thi THPT quốc
+                                    gia</strong><strong><span style="color: red;"> năm 2019 </span>và Giấy
+                                    biên nhận/ Phiếu yêu cầu cung cấp dịch vụ.</strong></p>
+                            <p style="text-align: justify; text-indent: .75in;">Địa chỉ gửi email: thí sinh
+                                có số báo danh kiểm tra năng lực:</p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Từ 000001 đến 001000: gửi về địa chỉ: <a
+                                        href="mailto:vdle@hcmulaw.edu.vn">vdle@hcmulaw.edu.vn</a>;</span></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Từ 001001 đến 002000: gửi về địa chỉ: <a
+                                        href="mailto:ptdung@hcmulaw.edu.vn">ptdung@hcmulaw.edu.vn</a>;</span></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Từ 002001 đến 003000: gửi về địa chỉ: <a
+                                        href="mailto:nqhung@hcmulaw.edu.vn">nqhung@hcmulaw.edu.vn</a>;</span></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Từ 003001 đến hết: gửi về địa chỉ: <a
+                                        href="mailto:nthau@hcmulaw.edu.vn">nthau@hcmulaw.edu.vn</a></span><span
+                                    style="font-size: 11.0pt; color: blue;">.</span></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: .75in; line-height: normal;">
+                                <strong><span style=" color: blue;">Thí sinh lưu
+                                        &yacute;:</span></strong></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Trong mọi trường hợp, nếu Nhà
+                                    trường không nhận được đầy đủ 2 loại Giấy tờ với các thông tin
+                                    nêu trên <strong>qua emai</strong> vdle@hcmulaw.edu.vn, <a
+                                        href="mailto:ptdung@hcmulaw.edu.vn">ptdung@hcmulaw.edu.vn</a>, <a
+                                        href="mailto:nqhung@hcmulaw.edu.vn">nqhung@hcmulaw.edu.vn</a> và <a
+                                        href="mailto:nthau@hcmulaw.edu.vn">nthau@hcmulaw.edu.vn</a> </span><strong><span
+                                        style=" color: red;">trước 11g30' ngày
+                                        25/7/2019</span></strong><span style=" color: blue;">
+                                    th&igrave; coi như thí sinh<strong> không c&ograve;n nguyện
+                                        vọng</strong> học tại Trường Đại học Luật TP. Hồ Chí Minh;</span></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Khi gửi email với nội dung nêu
+                                    trên về các địa chỉ mail theo quy định là thí
+                                    sinh<strong> đã chấp nhận</strong> vào học tại Trường Đại học Luật TP.
+                                    Hồ Chí Minh. Thí sinh sẽ không c&ograve;n quyền x&eacute;t tuyển
+                                    vào các trường đại học khác. Mọi thắc mắc, khiếu nại sau
+                                    này sẽ không được giải quyết.</span></p>
+                            <p
+                                style="margin: 0in; margin-bottom: .0001pt; text-align: justify; text-indent: 1.0in; line-height: normal;">
+                                <span style=" color: blue;">- Ngoài ra, để hồ sơ tránh
+                                    bị thất lạc cũng như được chuyển đến không đúng thời gian theo quy
+                                    định, Nhà trường khuyến khích thí sinh nộp bản chính
+                                    Giấy chứng nhận kết quả thi THPT quốc gia</span><span style=" color: red;"> năm
+                                    2019</span><span style=" color: blue;"> theo h&igrave;nh thức trực tiếp tại
+                                    Trường.</span></p>
+                            <p style="margin-top: 6.0pt; text-align: justify; text-indent: .5in;"><strong>3.2.
+                                </strong>Thí sinh không nộp bản chính Giấy chứng nhận kết quả thi
+                                theo đúng thời hạn nêu trên th&igrave; được xem như từ chối nhập học
+                                vào Trường Đại học Luật TP. Hồ Chí Minh.</p>
+
+                            <ol start="4">
+                                <li><strong>Học phí: </strong>Học phí<span style="color: red;">
+                                        (thu theo học kỳ) năm học 2019-2020: </span>lớp đại trà<span
+                                        style="color: red;">: 17.500.000đ</span>, lớp Anh văn pháp
+                                    l&yacute;: <span style="color: red;">35.000.000đ</span>, lớp chất lượng
+                                    cao<span style="color: red;">: 43.750.000đ.</span></li>
+                                <li><strong> Đối với thí sinh </strong><strong><span style="color: red;">trúng tuyển nếu
+                                            không c&ograve;n
+                                            nguyện vọng học</span> tại Trường Đại học Luật TP. Hồ Chí
+                                        Minh: </strong>thực hiện quyền điều chỉnh nguyện vọng theo quy định
+                                    chung của Bộ Giáo dục và Đào tạo theo thời hạn
+                                    và cách thức như sau:</li>
+
+                                <p style="text-align: justify; text-indent: .75in;">- Bằng phương thức trực tuyến:
+                                    từ ngày 24/7 đến ngày 29/7/2019 <em>(với phương thức này,
+                                        thí sinh vẫn c&ograve;n 6 ngày để thực hiện quyền điều
+                                        chỉnh)</em>;</p>
+                                <p style="text-align: justify; text-indent: .75in;">-
+                                    Bằng phương thức ghi phiếu: từ ngày 24/7 đến ngày 31/7/2019
+                                    <em>(với phương thức này, thí sinh vẫn c&ograve;n 8 ngày để
+                                        thực hiện quyền điều chỉnh).</em>
+                                </p>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="hoSoXetTuyen.KetQua==0 || hoSoXetTuyen.KetQua==1" class="container">
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="text boder">
+                            <p><strong><span
+                                        style="font-size: 14.0pt; font-family: 'Times New Roman',serif; color: blue;">-
+                                        Th&iacute; sinh</span><span
+                                        style="font-size: 14.0pt; font-family: 'Times New Roman',serif; color: red;">
+                                        kh&ocirc;ng tr&uacute;ng tuyển</span><span
+                                        style="font-size: 14.0pt; font-family: 'Times New Roman',serif; color: blue;">
+                                        v&agrave;o Trường Đại học Luật TP. Hồ Ch&iacute; Minh.</span></strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="_TruongLayout=='law'" label="Kết quả nhập học">
+        <ng-template matTabContent>
+            <div *ngIf="hoSoXetTuyen.KetQua==5" class="tabThongBao">
+                <div class="container thongbaoketqua">
+                    <div class="top">
+                        <p style="text-align: center;"><strong>THÔNG BÁO</strong>
+                        </p>
+                    </div>
+                    <p>Tính đến thời điểm hiện tại, Nhà trường <span style="color: red">đã nhận</span> được giấy chứng
+                        nhận kết quả thi THPT quôc gia <span style="color: red">năm 2019</span> của bạn</p>
+                </div>
+            </div>
+            <div *ngIf="hoSoXetTuyen.KetQua==4" class="tabThongBao">
+                <div class="container thongbaoketqua">
+                    <div class="top">
+                        <p style="text-align: center;"><strong>THÔNG BÁO</strong>
+                        </p>
+                    </div>
+                    <p>Tính đến thời gian 10h00 ngày 29/7/2019, Nhà trường <span style="color: red">vẫn chưa nhận</span>
+                        được giấy chứng nhận kết quả thi THPT quốc gia <span style="color: red">năm 2019</span> của bạn
+                    </p>
+                </div>
+            </div>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

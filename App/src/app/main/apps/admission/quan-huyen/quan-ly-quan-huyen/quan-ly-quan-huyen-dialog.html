@@ -1,0 +1,84 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <mat-dialog-content name="quanHuyenForm" [formGroup]="quanHuyenForm">
+
+        <div class="content p-24">
+          <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>Tên đơn vị hành chính</mat-label>
+                <input matInput placeholder="Tên đơn vị hành chính" name="Ten" formControlName="Ten">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>Mã quản lý</mat-label>
+                <input matInput placeholder="Mã quản lý" name="MaQuanLy" formControlName="MaQuanLy">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Chọn cấp tiếp nhận</mat-label>
+                <mat-select placeholder="Chọn cấp tiếp nhận" [(value)]="captn" formControlName="Cap"
+                  (selectionChange)="changeCapTiepNhan($event)">
+                  <mat-option *ngFor="let captiepnhan of CapTiepNhan" [value]="captiepnhan.Id">
+                    {{ captiepnhan.Ten }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="captn=='quanhuyen' || captn=='phuongxa'" fxLayout="row" fxLayoutAlign="start center"
+              fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Chọn tỉnh thành phố</mat-label>
+                <mat-select placeholder="Chọn tỉnh thành phố" [(value)]="_TinhThanhPhoDuocChon"
+                  (selectionChange)="changeTinhThanhPho()">
+                  <mat-option *ngFor="let tinhthanhpho of DSTinhThanhPho" [value]="tinhthanhpho.Id">
+                    {{ tinhthanhpho.Ten }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="captn =='phuongxa'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Chọn quận huyện</mat-label>
+                <mat-select placeholder="Thuộc quận huyện" [(value)]="_QuanHuyenDuocChon"
+                (selectionChange)="changeQuanHuyen()">
+                  <mat-option *ngFor="let quanhuyen of DSQuanHuyenPhuongXa" [value]="quanhuyen.Id">
+                    {{ quanhuyen.Ten }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+          <mat-dialog-actions>
+            <button class="mat-raised-button" (click)="close()">Close</button>
+            <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+          </mat-dialog-actions>
+        </div>
+
+      </mat-dialog-content>
+
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

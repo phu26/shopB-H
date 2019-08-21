@@ -1,0 +1,740 @@
+$ma-truong: "hiu"; /*thay doi ma truong theo source*/
+$green:#056839;
+$color-text:#056839;
+
+@if ($ma-truong == 'sona') {
+  $green:#003767;
+  $color-text:#000;
+}
+@if ($ma-truong == 'hiu') {
+  $green:#056839;
+  $color-text:#056839;
+}
+@if ($ma-truong == 'qnu') {
+  $green:#056839;
+  $color-text:#056839;
+}
+@if ($ma-truong == 'yersin') {
+  $green:#992626;
+  $color-text:#000;
+}
+@if ($ma-truong == 'law') {
+  $green:#056839;
+  $color-text:#056839;
+}
+//$green:#992626; 
+//hiu #056839
+//sona #003767
+//yersin #992626
+
+
+
+$font-header:'UTM HelvetIns',Arial, 'Helvetica Neue', Helvetica, sans-serif;	
+$font-body:Arial, 'Helvetica Neue', Helvetica, sans-serif;	
+
+.is-loading ::ng-deep .mat-option-text {
+  display: flex;
+  justify-content: center;
+}
+
+
+.giaytoyeucau-div {
+  //background: #c5c6cb;
+  margin-top: 15px;
+  input {
+    display: none;
+  }
+  .list {
+    padding: 0px 30px;
+    .itemgiayto-div {
+      border-bottom: 1px solid #ddd;  
+      margin-top: 15px;
+      padding: 5px 0; 
+      .filedinhkem-div {
+        padding-top: 5px;
+        padding-left: 20px;
+      } 
+      .taifile-span {
+        color: #039be5;
+        margin-left: 5px;
+        &:hover {
+          cursor: pointer;
+          color: #1eacf3;
+        }
+      }
+      .downfile-span {
+        color: #414141;
+        &:hover {
+          cursor: pointer;
+          color: #050505;
+        } 
+      }
+      .xoafile-span {
+        color: #f44336;
+        margin-left: 5px;
+        &:hover {
+          cursor: pointer;
+          color: #f81100;
+        }  
+    }
+  }
+}
+}
+
+:host {
+  .content {
+    form {
+      width: 100%;
+      max-width: 800px !important;
+    }
+
+    .form-errors-model {
+      flex: 1;
+
+      code {
+        background: none !important;
+      }
+    }
+
+    .horizontal-stepper-wrapper,
+    .vertical-stepper-wrapper {
+      max-width: 800px;
+    }
+  }
+
+  .float-right {
+    float: right;
+  }
+}
+
+.HeaderCenter {
+  text-align: center;
+  padding: 0 0 10px 0;
+  line-height: 1.5;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+}
+
+.inline-block {
+  display: inline-block;
+  padding-bottom: 1.34375em;
+  vertical-align: top;
+}
+
+.error .dd-display-item {
+  border: 2px solid #f44336 !important;
+}
+
+.page-layout {
+  overflow: initial !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.col-md-12 {
+  width: 100% !important;
+  display: inline-block !important;
+}
+
+.col-md-6 {
+  width: 50% !important;
+  display: inline-block !important;
+}
+
+.col-md-5 {
+  width: 41.666666%!important;
+  display: inline-block !important;
+}
+.col-md-4 {
+  width: 33.33333% !important;
+  display: inline-block !important;
+}
+
+.col-md-8 {
+  width: 66.666666% !important;
+  display: inline-block !important;
+}
+.col-md-9 {
+  width: 75% !important;
+  display: inline-block !important;
+}
+
+
+.col-md-3 {
+  width: 25% !important;
+  display: inline-block !important;
+}
+
+.col-md-2 {
+  width: 16.6666666% !important;
+  display: inline-block !important;
+}
+.col-md-1 {
+  width: 8.3333333% !important;
+  display: inline-block !important;
+}
+
+
+.font-mini {
+  font-size: 75%;
+  padding: 5px;
+}
+
+.col-25 {
+  width: 25%;
+  display: inline-block !important;
+}
+
+.col-50 {
+  width: 50%;
+  display: inline-block !important;
+}
+
+.col-33 {
+  width: 33.333333%;
+  display: inline-block !important;
+}
+
+.col-20 {
+  width: 20%;
+  display: inline-block !important;
+}
+
+.col-40 {
+  width: 40%;
+  display: inline-block !important;
+}
+
+$spacer: 1px !default;
+$spacers: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $spacer * 1
+    ),
+    2: (
+      $spacer * 2
+    ),
+    3: (
+      $spacer * 3
+    ),
+    4: (
+      $spacer * 4
+    ),
+    5: (
+      $spacer * 5
+    )
+  ),
+  $spacers
+);
+$spacers-reset: () !default;
+$spacers-reset: map-merge(
+  (
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+  ),
+  $spacers-reset
+);
+@mixin margin-class($x) {
+  // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
+  @each $size, $length in $x {
+    .m-#{$size} {
+      margin: $length !important;
+    }
+    .mt-#{$size},
+    .my-#{$size} {
+      margin-top: $length !important;
+    }
+    .mr-#{$size},
+    .mx-#{$size} {
+      margin-right: $length !important;
+    }
+    .mb-#{$size},
+    .my-#{$size} {
+      margin-bottom: $length !important;
+    }
+    .ml-#{$size},
+    .mx-#{$size} {
+      margin-left: $length !important;
+    }
+    .p-#{$size} {
+      padding: $length !important;
+    }
+    .pt-#{$size},
+    .py-#{$size} {
+      padding-top: $length !important;
+    }
+    .pr-#{$size},
+    .px-#{$size} {
+      padding-right: $length !important;
+    }
+    .pb-#{$size},
+    .py-#{$size} {
+      padding-bottom: $length !important;
+    }
+    .pl-#{$size},
+    .px-#{$size} {
+      padding-left: $length !important;
+    }
+    .plr-#{$size} {
+      padding-left: $length !important;
+      padding-right: $length !important;
+    }
+  }
+}
+@media (max-width: 768px) {
+  @include margin-class($spacers-reset);
+}
+@media (min-width: 769px) {
+  @include margin-class($spacers);
+}
+
+@media (max-width: 768px) {
+  .col-md-6 {
+    width: 100% !important;
+  }
+
+  .col-md-4 {
+    width: 100% !important;
+  }
+
+  .col-md-3 {
+    width: 100% !important;
+  }
+
+  .col-md-8 {
+    width: 100% !important;
+  }
+
+  .col-md-2 {
+    width: 100% !important;
+  }
+
+  .col-xs-80 {
+    width: 80% !important;
+  }
+  .col-xs-20 {
+    width: 20% !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -63px;
+  }
+
+  .col-xs-50 {
+    width: 50% !important;
+  }
+}
+
+.header-title {
+  font-family: $font-header;
+  font-size: 24px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 20px;
+  color: $green;
+}
+
+.header-title-child {
+  font-family: $font-header;
+  font-size: 18px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 300;
+  color: #fff;
+}
+.header-child {
+  &.style-1 {
+    position: relative;
+
+    .stt {
+      font-family: $font-header;
+      font-size: 18px;
+      line-height: 1.2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $green;
+      color: #fff;
+      width: 30px;
+      height: 100%;
+
+      display: flex;
+      span {
+        display: block;
+        margin: auto;
+      }
+    }
+    .content-header {
+      margin-left: 40px;
+    }
+    .header-title-child {
+      color: $green;
+      position: relative;
+      padding-bottom: 10px;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $green;
+      }
+    }
+  }
+}
+.mat-form-field-label,
+.dd-display-item,
+.label,
+.mat-hint,
+.mat-card,
+.mat-form-field-label {
+  color: $color-text!important;
+  font-family: $font-body !important;
+  font-size: 13px !important;;
+  line-height: 1.5 !important;;
+}
+
+@media (min-width: 1041px) {
+  .container.a4 {
+    width: 1024px !important;
+  }
+}
+
+table.table-responsive {
+  font-family: $font-body !important;
+  border-collapse: collapse;
+  th,
+  td {
+    color: $green !important;
+  }
+  thead > tr > th {
+    &:nth-child(1) {
+      width: 10%;
+    }
+    &:nth-child(2) {
+      width: 20%;
+    }
+    &:nth-child(3) {
+      width: 30%;
+    }
+    &:nth-child(4) {
+      width: 30%;
+    }
+    &:nth-child(5) {
+      width: 10%;
+    }
+  }
+  tbody > tr > td {
+    padding-left: 15px;
+    &:last-child {
+      .mat-form-field-infix {
+        min-width: 70px;
+        width: auto;
+      }
+    }
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+}
+.table-bordered {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > th {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding-left: 15px;
+}
+@media (max-width: 768px) {
+  .table-responsive,
+  .table-responsive thead,
+  .table-responsive tbody,
+  .table-responsive th,
+  .table-responsive td,
+  .table-responsive tr {
+    display: block;
+  }
+  .table-responsive > thead > tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .table-responsive > tbody > tr {
+    border-bottom: 1px solid $green;
+    height: auto !important;
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+  .table-responsive > tbody > tr:first-child {
+    border-radius: 3px 3px 0 0;
+    border-top: none;
+  }
+  .table-responsive > tbody > tr:last-child {
+    border-radius: 0 0 3px 3px;
+    border-bottom: none;
+  }
+  .table-responsive > tbody > tr td {
+    border: none;
+    border-bottom: 1px solid $green;
+    position: relative;
+    padding-left: 30% !important;
+    width: 100%;
+    min-height: 45px;
+    padding: 8px 15px 8px 0;
+    color: $green !important;
+  }
+  .table-responsive > tbody > tr td:before {
+    content: attr(data-title);
+    position: absolute;
+    top: 8px;
+    left: 14px;
+    width: 30%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .table-responsive > tbody > tr td:first-child {
+    text-align: left;
+  }
+}
+body.theme-default .mat-select-value {
+  color: $green;
+}
+
+.searchMaHoSo {
+  float: right !important;
+}
+.searchMaHoSo .searchMaHoSoSearchformfeild .mat-form-field-infix {
+  padding: 0.1em 0 0.7em 0 !important;
+}
+
+.searchMaHoSoBtn {
+  background-color: $green !important;
+  color: white !important;
+}
+.searchMaHoSoBtn .mat-icon{
+  color: white !important;
+}
+.searchMaHoSoSearchformfeild{
+  width: 200px !important;
+  max-width: 200px !important;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+/* Thong tin dang ky*/
+
+table.table-responsive.tbl-Diem{  
+    thead > tr > th {
+      padding-left:10px;
+      padding-right: 10px; 
+      min-width: 100px;
+      width: 20%;
+      &:nth-child(1) { /*Mon*/
+        width: 15%;        
+      }      
+    }
+    tbody > tr > td{      
+      padding-left:10px;
+      padding-right: 10px; 
+    }
+  
+  .mat-form-field-infix{
+    width: 100%;
+  }
+}
+.pb-vertical{
+  padding-bottom: 10px;
+  vertical-align: middle;
+}
+
+/* Dia chi thuong tru */
+.fluid-width .mat-form-field-infix{
+  width: 100%;
+  padding-bottom: 7px!important;
+}
+
+.mat-placeholder-required .mat-form-field-required-marker .ng-tns-c18-2 .ng-star-inserted
+{
+  color: red !important;
+}
+
+/* dotted line */
+
+.mat-form-field-ripple{
+
+  opacity:1!important;
+  transform: none!important;
+}
+
+body.theme-default .mat-form-field-ripple{
+  background-color: #fff!important;
+  border-bottom: 1px solid #ddd;
+  
+}
+body.theme-default .mat-form-field.mat-form-field-invalid .mat-form-field-ripple, body.theme-default .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent{
+  background-color: #fff!important;
+  border-bottom: 1px solid #ddd;
+  
+}
+:not(.mat-form-field-disabled).mat-form-field-appearance-fill .mat-form-field-flex:hover ~ .mat-form-field-underline .mat-form-field-ripple{
+  opacity: 1;
+}
+
+body.theme-default .mat-form-field-appearance-fill .mat-form-field-flex{
+  background-color: #fff;
+}
+/* them border cho auto complete */
+.mat-form-field-appearance-fill .mat-form-field-flex{
+    border-radius: 4px!important;
+    padding:0 15px !important;
+    border: 1px solid #ddd;
+}
+.mat-form-field-underline{
+    opacity: 0;
+}
+.mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-fill.mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label{
+    display: inline-block;
+    background: #fff;
+    width: auto;
+    padding: 0 4px;
+    font-size: 17px!important;
+}
+.fluid-width .mat-form-field-appearance-fill.mat-form-field{
+    display: block!important;
+}
+/*end*/
+
+#forms .tt-ts .mat-form-field-infix{
+  padding: 4px 4px 4px!important;
+  border-top:4px solid transparent!important;
+}
+
+
+:not(.mat-form-field-appearance-legacy).mat-form-field .mat-form-field-prefix .mat-icon-button, :not(.mat-form-field-appearance-legacy).mat-form-field .mat-form-field-suffix .mat-icon-button{
+ width: 1.5em;
+ height: 1.5em;
+}
+body.theme-default .mat-error{
+  font-size: 11px;
+  line-height: 1.2;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex{
+  padding: 4px 4px 0 4px;
+}
+.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 1.23em;
+}
+
+.note{
+  padding-bottom: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  p{
+    margin: 5px 0;
+  }  
+}
+.check-list{
+ 
+  strong{
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .mat-checkbox-layout{
+    white-space: normal;
+    margin-bottom:10px;
+  }
+  .mat-checkbox{
+    font-family:$font-body; 
+    font-size: 13px;
+    line-height: 1.5!important;
+
+  }
+}
+.chung-chi{
+  .mat-radio-container,.mat-radio-outer-circle,.mat-radio-inner-circle{
+    width:15px;
+    height: 15px;
+    
+  }
+  .mat-radio-label{
+    padding-right: 20px;
+    &:last-child(){
+      padding-right: 0;
+    }
+  }
+}
+body.theme-default .mat-radio-button.mat-accent .mat-radio-inner-circle, body.theme-default .mat-radio-button.mat-accent .mat-radio-ripple :not(.mat-radio-persistent-ripple).mat-ripple-element, body.theme-default .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, body.theme-default .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple{
+  background-color:$green;
+}
+body.theme-default .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color: $green;
+  border-width: 1px;
+}
+.mat-radio-container:hover .mat-radio-persistent-ripple{
+  opacity: 0;
+}
+body.theme-default .mat-radio-outer-circle{
+  border-color:$green;
+  border-width: 1px;
+  } 
+.my-btn{
+  background-color: $green!important;
+}
+.mat-placeholder-required,
+body.theme-default .mat-focused .mat-form-field-required-marker{
+  color: #f00;
+}
+span.mat-error{display: inline;}
+/*07.05.19*/
+.isEdit .mat-form-field-label{
+-webkit-transform: translateY(-0.59375em) scale(0.75);
+    transform: translateY(-0.59375em) scale(0.75);
+    
+}
+/* edn07.05.19*/
+.red-info-header{
+  color: red;
+  font-style: italic;
+}
+.note-text{
+  margin-top: -15px;
+  padding-left: 15px;
+}
+
+.blue-snackbar {
+  background: #2196F3;
+}
+.green-snackbar {
+  background: #1DE9B6;
+}
+.red-snackbar {
+  background: #B00020;
+}

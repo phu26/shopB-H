@@ -1,0 +1,8 @@
+<div style="width:100%;text-align:center;align-self: center"><b>Các tiến trình đang chạy</b></div>
+<div style="padding: 10px">
+    <div *ngFor="let item of processList">
+        <span style="font-size: 12pt;
+          font-weight: 300;">{{item.processName}}</span>
+        <mat-progress-bar mode="determinate" [value]="item.completedValue"></mat-progress-bar>
+      </div>
+</div>

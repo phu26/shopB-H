@@ -1,0 +1,181 @@
+<header id="yt_header">
+    <div class="container">
+        <div class="row">
+            <!-- ...........  #top1 ........... -->
+            <div  id="top1" class="col-top1 ">
+                <ul class="menu ">
+                    <li  class="deeper parent"><a fxHide fxShow.gt-xs href="https://yersin.edu.vn/Tuyen-sinh-danh-sach/">CỔNG TUYỂN SINH CỦA TRƯỜNG ĐẠI HỌC YERSIN ĐÀ LẠT</a></li>
+
+                </ul>
+            </div>
+            <!-- ........... /#top1 ........... -->
+            <div id="top2" class="col-top2 ">
+                <div class="module  me-language  ">
+                    <div class="modcontent clearfix">
+                        <div class="mod-languages ">
+                            <div *ngIf="!loggedIn">
+                                <button style="color: rgb(252, 227, 227); background-color: blue" mat-button (click)="clickDangNhap()" >Đăng nhập</button>
+                            </div>
+
+                            <div *ngIf="loggedIn">
+                                <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                                    <div fxLayout="row" fxLayoutAlign="center center" class="user-div">
+                                        <div>
+                                            <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg">
+                                        </div>
+                                        <div>
+                                            <span *ngIf="authData!=null" class="username mr-12" fxHide fxShow.gt-sm>{{authData.fullName}}</span>
+                                            <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                                        </div>
+                                    </div>
+                                </button>
+            
+                                <mat-menu #userMenu="matMenu" [overlapTrigger]="false" >
+                                    <button mat-menu-item [routerLink]="['/tuyen-sinh/profile/ho-so-xet-tuyen/'+authData.userId+'/'+null]">
+                                        <mat-icon>contacts</mat-icon>
+                                        <span>Hồ sơ của tôi</span>
+                                    </button>  
+                                    <button mat-menu-item [routerLink]="['/tuyen-sinh/profile/doi-mat-khau/'+authData.userId]">
+                                        <mat-icon>loop</mat-icon>
+                                        <span>Đổi mật khẩu</span>
+                                    </button>
+                                    <button mat-menu-item (click)="logOut()">
+                                        <mat-icon>exit_to_app</mat-icon>
+                                        <span>Đăng xuất</span>
+                                    </button>              
+                                </mat-menu>
+                               
+
+                            </div>
+                                
+                        </div>
+                        <!-- mod-languges -->
+                    </div>
+                </div>
+            </div>
+            <!-- top2 -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+</header>
+<nav id="yt_menuwrap" class="block">
+    <div class="container">
+        <div class="row">
+            <div id="yt_logo" class="col-logo">
+                <a class="logo" [routerLink]="[ '/tuyen-sinh' ]" title="Trường Đại Học Yersin Đà Lạt">
+                    <img data-placeholder="no" src="assets/images/logos/YU_red.png" alt="Logo Trường Đại Học Yersin Đà Lạt"
+                        class="img-responsive">
+                </a>
+            </div><!-- /#yt_logo -->
+
+            <div id="yt_mainmenu" class="col-menu ">
+                <ul id="meganavigator" class="clearfix navi ">
+                    <!-- Trang chủ -->
+                    <li class="active level1 first ">
+                        <a title="Trang chủ " class="active level1 first  item-link"  [routerLink]="[ '/tuyen-sinh' ]">
+                            <span class="menu-title">trang chủ</span>
+                        </a>
+                    </li>
+                    <!-- Giới thiệu -->
+                    <li class="level1 havechild ">
+                        <a title="Giới thiệu " class="level1 havechild  item-link" href="#">
+                            <span class="menu-title">thông báo</span>
+                        </a>
+                    </li>
+
+                </ul><!-- /#meganavigator -->
+
+            </div><!-- /#yt_mainmenu -->
+            <!-- menu mobile -->
+            <!-- <div id="yt-responivemenu" class="yt-resmenu ">
+                <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar collapsed"
+                    type="button">
+                    <i class="fa fa-bars"></i> Menu
+                </button>
+                <div id="resmenu_sidebar" class="nav-collapse collapse">
+                    <ul class="nav resmenu">
+                        <li><a title="Trang chủ " href="#" class="active">trang chủ</a> </li>
+                        <li><a title="Giới thiệu " href="#">giới thiệu </a> </li>
+                        <li><a title="Tuyển sinh " href="#">tuyển sinh </a> </li>
+                        <li><a title="Đào tạo " href="#">đào tạo </a> </li>
+                        <li><a title="Tổ chức " href="#">tổ chức </a> </li>
+                    </ul>
+                </div>
+            </div>  -->
+            <!-- /.yt-responivemenu -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</nav>
+
+<router-outlet></router-outlet>
+
+<section id="yt_spotlight8" class="block">
+    <div class="container">
+        <div class="row">
+            <div id="bottom2" class="col-bottom1">
+                <div class="module  get-in-touch ">
+                    <h3 class="modtitle">thông tin liên hệ</h3>
+                    <div class="modcontent clearfix">
+                        <ul>
+                            <li><span>TRƯỜNG ĐẠI HỌC YERSIN ĐÀ LẠT</span></li>
+                            <li><span> Địa chỉ: <b>27 Tôn Thất Tùng, P.8, TP.Đà Lạt, Lâm Đồng.</b></span>
+                            </li>
+                            <li><span>Website: <a style="color:white;" href="http://yersin.edu.vn/" >www.yersin.edu.vn</a>| Email: <b>tuyensinh@yersin.edu.vn</b></span></li>
+                            <li><span>Điện thoại: <b>(0263)3 52 0000</b> - Fax: <b>(0263)3 55 4966</b> </span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<footer id="yt_footer" class="block">
+    <div class="container">
+            <div id="yt_copyright">
+                <div class="row">
+                    <div class="copyright col-copyright">
+                        Copyright © 2019 TTC Group.</div>
+                    <div class="powered-by col-powered">
+                        <a href="http://psctelecom.com.vn" tilte="PSC">
+                            <p class="by">All Rights Reserved Developed by
+                                <img alt="" src="assets/images/logos/Logo_PSC_white.png" class="logo-ft">
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</footer>
+<!-- / FOOTER -->
+<script type="text/javascript">
+    jQuery(document).ready(function ($)
+ {
+        $('.btn-navbar').click(function () {
+            $(this).children().toggleClass('fa-times');
+            $('#resmenu_sidebar').slideToggle();
+        });
+        $("ul.resmenu li.haveChild").each(function () {
+            $(this).children(".res-wrapnav").css('display', 'none');
+            var ua = navigator.userAgent,
+                event = (ua.match(/iPad/i)) ? "touchstart" : "click";
+            $(this).children(".menuress-toggle").bind(event, function () {
+
+                $(this).siblings(".res-wrapnav").slideDown(350);
+                $(this).parent().siblings("li").children(".res-wrapnav").slideUp(350);
+                $(this).parent().siblings("li").removeClass("active");
+
+                $(this).parent().addClass(function () {
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                        $(this).children(".res-wrapnav").slideToggle();
+                        return "";
+                    }
+                    return "active";
+                });
+            });
+        });
+    });
+
+</script>

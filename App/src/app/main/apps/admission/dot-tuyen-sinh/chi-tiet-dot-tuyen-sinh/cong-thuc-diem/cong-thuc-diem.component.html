@@ -1,0 +1,28 @@
+<div class="full-width">
+  <div class="left-grid">
+
+    <div class="left-grid-content">
+      <mat-form-field class="left-grid-content" fxFlex="100" appearance="outline">
+        <mat-label>Công thức điểm</mat-label>
+        <textarea (keypress)="keydownCongThuc($event)" #myTextArea (click)="getCaretPos(myTextArea)" class="left-grid-content" rows="5" [(ngModel)]="congthucArea" matInput placeholder="Ghi chú"
+          name="GhiChu"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="left-grid-content cal-content">
+      <button mat-icon-button *ngFor="let btnCal of btnCals" class="btnCal"
+        (click)="OnbtnCalClicked(btnCal)">
+          <mat-icon *ngIf="!checkNum(btnCal)">{{btnCal}}</mat-icon>
+          <span *ngIf="checkNum(btnCal)">{{btnCal}}</span>
+      </button>
+    </div>
+    <div class="left-grid-content divConfirmCongThuc">
+      <button mat-icon-button class="btnConfirmCongThuc SuccessSnackbar"
+        (click)="onConfirmClicked()">
+          Xác nhận
+      </button>
+    </div>
+  </div>
+  <div class="right-grid">
+    <app-danh-sach-loai-diem [dotTuyenSinhId]="dotTuyenSinhId" (cotDiemEmit)="cotDiemEmit($event)"></app-danh-sach-loai-diem>
+  </div>
+</div>

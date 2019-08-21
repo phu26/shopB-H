@@ -1,0 +1,110 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/hinh-thuc-xet-tuyen'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+
+
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{hinhThucXetTuyen.Ten}}
+          </div>
+          <!-- <div class="h2" *ngIf="pageType ==='new'">
+            Đợt xét tuyển mới
+          </div> -->
+          <div class="subtitle secondary-text">
+            <span>Thông tin Khu vực ưu tiên</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- <button mat-raised-button class="save-product-button" [disabled]="hinhThucXetTuyenForm.invalid"
+        *ngIf="pageType ==='new'" (click)="addHinhThucXetTuyen()">
+        <span>Thêm</span>
+      </button> -->
+
+      <button mat-raised-button class="save-product-button"
+        [disabled]="hinhThucXetTuyenForm.invalid || hinhThucXetTuyenForm.pristine" *ngIf="pageType ==='edit'"
+        (click)="saveHinhThucXetTuyen()">
+        <span>Lưu</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content p-24">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <form fxLayoutAlign="start" name="hinhThucXetTuyenForm" [formGroup]="hinhThucXetTuyenForm" class="product w-100-p"
+            fxLayout="column" fxFlex="1 0 auto">
+
+            <!-- <div class="h2 mb-24" *ngIf="pageType ==='new'">THÊM HÌNH THỨC XÉT TUYỂN</div> -->
+            <div class="h2 mb-24" *ngIf="pageType ==='edit'">{{hinhThucXetTuyen.Ten}}</div>
+
+            <!-- Control -->
+
+            <div *ngIf="pageType ==='edit'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="ID" readonly name="Id" formControlName="Id">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Tên hình thức</mat-label>
+                <input  matInput placeholder="Tên hình thức xét tuyển" name="Ten" formControlName="Ten" required>
+                <mat-error>Tên là bắt buộc</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-checkbox [labelPosition]="'before'" name="KichHoat" formControlName="KichHoat" fxFlex="100"
+                appearance="outline" class="w-100-p" [(ngModel)]="hinhThucXetTuyen.KichHoat">Kích hoạt</mat-checkbox>
+            </div>
+
+            <!-- <mat-select class="xettuyenMatSelect" name="Loai" formControlName="Loai" [(value)]="loaixettuyenSelected">
+              <mat-option *ngFor="let item of loaixettuyen" [value]="item.value">
+                {{item.text}}
+              </mat-option>
+            </mat-select> -->
+
+            <div class="loaidiem-div">
+              <div class="title">Loại điểm <span (click)="onClickThemLoaiDiem()">Thêm</span></div>
+              <div class="danhsach-div">
+                <div *ngFor="let loaidiem of hinhThucXetTuyen.LoaiDiems">
+                  <span>{{loaidiem.Ten}} ({{loaidiem.Ma}})</span> <span (click)="onClickUpdateLoaiDiem(loaidiem)" class="update-span">Sửa</span> <span (click)="onClickDeleteLoaiDiem(loaidiem)" class="delete-span">Xóa</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ngày sửa, ngày tạo, người sửa, người tạo => bổ sung sau -->
+          </form>
+        </div>
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

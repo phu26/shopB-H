@@ -1,0 +1,404 @@
+@import "src/@fuse/scss/fuse";
+app-danh-sach-dot-tuyen-sinh,app-danh-sach-dot-tuyen-sinh-quan-ly {
+    
+    #nganhdaotaos {
+
+        .top-bg {
+
+            @include media-breakpoint('lt-md') {
+                height: 256px;
+            }
+        }
+
+        > .center {
+
+            > .header {
+
+                .search-wrapper {
+                    width: 100%;
+                    max-width: 480px;
+                    border-radius: 28px;
+                    overflow: hidden;
+                    @include mat-elevation(1);
+
+                    @include media-breakpoint('xs') {
+                        width: 100%;
+                    }
+
+                    .search {
+                        width: 100%;
+                        height: 48px;
+                        line-height: 48px;
+                        padding: 0 18px;
+
+                        input {
+                            width: 100%;
+                            height: 48px;
+                            min-height: 48px;
+                            max-height: 48px;
+                            padding: 0 16px;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
+
+                @include media-breakpoint('lt-md') {
+                    padding: 8px 0;
+                    height: 192px !important;
+                    min-height: 192px !important;
+                    max-height: 192px !important;
+                }
+            }
+        }
+    }
+    .nganhdaotaos-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, .12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 620px;
+        min-height: 620px;
+        position: relative;
+
+        .mat-header-row {
+            min-height: 64px;
+        }
+
+        .nganhdaotao {
+            position: relative;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .active-icon {
+            border-radius: 50%;
+        }
+        .XoaColumn{
+            width: 25px;
+            max-width: 70px;
+        }
+        .KichHoatColumn{
+            width: 25px;
+            max-width: 70px;
+        }
+        .TenColumn{
+            // width: 250px;
+            max-width: 185px;
+        }
+        .KichHoatColumn{
+            max-width: 100px;
+        }
+    }
+}
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  mat-header-cell{
+      text-align: center !important;
+      font-weight: bold !important;
+  }
+
+  app-danh-sach-dot-tuyen-sinh-show {
+    
+    #nganhdaotaos {
+
+        .top-bg {
+
+            @include media-breakpoint('lt-md') {
+                height: 256px;
+            }
+        }
+
+        > .center {
+
+            > .header {
+
+                .search-wrapper {
+                    width: 100%;
+                    max-width: 480px;
+                    border-radius: 28px;
+                    overflow: hidden;
+                    @include mat-elevation(1);
+
+                    @include media-breakpoint('xs') {
+                        width: 100%;
+                    }
+
+                    .search {
+                        width: 100%;
+                        height: 48px;
+                        line-height: 48px;
+                        padding: 0 18px;
+
+                        input {
+                            width: 100%;
+                            height: 48px;
+                            min-height: 48px;
+                            max-height: 48px;
+                            padding: 0 16px;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
+
+                @include media-breakpoint('lt-md') {
+                    padding: 8px 0;
+                    height: 192px !important;
+                    min-height: 192px !important;
+                    max-height: 192px !important;
+                }
+            }
+        }
+    }
+    .mobile{
+        display: none;
+    }
+    .nganhdaotaos-table {
+        flex: 1 1 auto;
+        // border-bottom: 1px solid rgba(0, 0, 0, .12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 315px;
+        min-height: 315px;
+        position: relative;
+
+        .mat-header-row {
+            min-height: 64px;
+            text-align: center;
+        }
+
+        .nganhdaotao {
+            position: relative;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            width: 250px;
+        }
+    }
+    .matruong{
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        padding: 0 18px;
+    }
+    .page-layout.carded.fullwidth > .center > .header {
+        height: 50px !important;
+        min-height: 75px !important;
+        max-height: 55px !important;
+    }
+    .content-card {
+        border: solid #e4e2e2 1px;
+    }
+    .mat-header-row{
+        background: #f2dedf;
+        border-bottom-width: inherit;
+    }
+    .nganhdaotao{
+        border-color: #e4e4e4;
+        border-width: 0;
+        border-bottom-width: 0.1px;
+    }
+    
+
+
+
+}
+
+.add-product-button {
+    min-width: 35px!important;
+}
+
+.sxwidth-dottuyensinhshow {
+    max-width: 100px !important;
+    text-align: center!important;
+    font-size: 16px;
+    padding-right: 0px!important;
+}
+.smwidth-dottuyensinhshow{
+    max-width: 120px !important;
+    
+    
+}
+.mdwidth-dottuyensinhshow{
+    max-width: 300px !important;
+    font-size: 16px;
+}
+.lgwidth-dottuyensinhshow{
+    max-width: 1100px !important;
+    font-size: 16px;
+}
+mat-cell:last-of-type{
+    padding-right: 0px !important;
+}
+.iconbutton{
+    padding: 0;
+    margin-left: 2px;
+}
+
+.tenDotTuyenSinh{
+    width: 350px!important;
+    min-width: 300px!important;
+    padding-right: 10px;
+}
+.heDaoTao{
+    max-width: 120px;
+    padding-right: 15px;
+}
+.soLuongNguyenVong{
+    max-width: 80px;
+}
+.bacDaoTao{
+    max-width: 120px;
+}
+.lgwidth-dottuyensinh{
+    max-width: 200px;
+}
+.mdwidth-dottuyensinh{
+    max-width: 150px;
+}
+.hanDangKy{
+    max-width: 120px;
+}
+
+app-layout-thi-sinh-sona {
+    app-danh-sach-dot-tuyen-sinh-show .page-layout.carded.fullwidth > .center > .header,   .page-layout.carded >  .accent{
+        background-color: #003767!important;
+        color: white !important;
+    }
+}
+
+app-layout-thi-sinh-yersin {
+    app-danh-sach-dot-tuyen-sinh-show .page-layout.carded.fullwidth > .center > .header,   .page-layout.carded >  .accent{
+        background-color: #003767!important;
+        color: white !important;
+    }
+}
+app-layout-thi-sinh-neu {
+    app-danh-sach-dot-tuyen-sinh-show .page-layout.carded.fullwidth > .center > .header,   .page-layout.carded >  .accent{
+        background-color: #0065ca!important;
+        color: white !important;
+    }
+}
+
+app-layout-thi-sinh-qnu {
+    app-danh-sach-dot-tuyen-sinh-show .page-layout.carded.fullwidth > .center > .header,   .page-layout.carded >  .accent{
+        background-color: #37497e!important;
+        color: white !important;
+    }
+}
+
+app-layout-thi-sinh-dnu {
+    app-danh-sach-dot-tuyen-sinh-show .page-layout.carded.fullwidth > .center > .header,   .page-layout.carded >  .accent{
+        background-color: #0072BC!important;
+        color: white !important;
+    }
+}
+
+app-layout-thi-sinh-hiu {
+    app-danh-sach-dot-tuyen-sinh-show .page-layout.carded.fullwidth > .center > .header,  .page-layout.carded >  .accent{
+        background-color: #2e9028 !important;
+        color: white !important;
+    }
+}
+ .ListMenuItem:hover{
+    text-decoration: none !important;
+    background-color: #cccccc !important;
+    color: #333333 !important;
+}
+ .ListMenuItem{
+    text-decoration: none !important;
+    background-color: white !important;
+}
+
+
+@media(max-width:768px){
+	app-danh-sach-dot-tuyen-sinh-show #nganhdaotaos > .center > .header{
+        min-height: unset !important;
+        height: unset !important;
+    }	
+}
+app-danh-sach-dot-tuyen-sinh-show{
+@media screen and (max-width: 960px) {
+	.mat-table {
+	  border: 0;
+	  vertical-align: middle
+	}
+  
+	.mat-table caption {
+	  font-size: 1em;
+	}
+
+	.mat-table .mat-row {
+	  border-bottom: 5px solid #ddd;
+	  display: block;
+	}
+
+	.mat-table .mat-cell {
+	  border-bottom: 1px solid #ddd;
+	  display: block;
+	  font-size: 1em;
+	  text-align: left;
+	  font-weight: bold;
+	  padding-left: 12px;
+	  margin-bottom: 4%;
+	}
+	.mat-table .mat-cell:before {
+	  content: attr(data-label);
+	  float: left;
+	  text-transform: uppercase;
+	  font-weight: normal;
+	  
+	  font-size: .85em;
+	}
+	.mat-table .mat-cell:last-child {
+	  border-bottom: 0;
+	}
+	  .mat-table .mat-cell:first-child {
+	  margin-top: 4%;
+	}
+	// app-tra-cuu .mat-header-row{
+	//   display: none;
+	// }
+	#yt_header[_ngcontent-c6] #top2[_ngcontent-c6]{
+	  margin: unset;
+	  top:2%;
+	  right: 2%;
+    }
+    .nganhdaotaos-table .mat-header-row{
+        display: none;
+    }
+    .mobile{
+        display: block;
+        width: auto;
+        float: left;
+        padding-right: 5%;
+    }
+    .nganhdaotaos-table .mat-cell{
+        width: 100%;
+    }
+    .mdwidth-dottuyensinhshow{
+        max-width: unset!important;
+    }
+    .sxwidth-dottuyensinhshow{
+        max-width: unset!important;
+    }
+  }
+}

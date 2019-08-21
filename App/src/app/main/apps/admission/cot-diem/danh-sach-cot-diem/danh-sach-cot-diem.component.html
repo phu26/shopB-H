@@ -1,0 +1,105 @@
+-
+<div id="toHopCotDiems" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg "></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center dscd nopadding">
+
+    <!-- HEADER -->
+    <div class="header dscd" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm kiếm cột điểm">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- BUTTON -->
+      <button mat-raised-button class="add-product-button mini-button fuse-white mt-24 mt-md-0"
+        (click)="addCotDiemClicked()">
+        <mat-icon class="logo-icon">
+          add_circle_outline
+        </mat-icon>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header >Tên cột điểm</mat-header-cell>
+          <mat-cell *matCellDef="let row"  (click)="rowCotDiemClicked(row)">
+            <p>{{row.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ma">
+          <mat-header-cell class="smwidth" *matHeaderCellDef mat-sort-header >Mã</mat-header-cell>
+          <mat-cell class="smwidth" *matCellDef="let row"  (click)="rowCotDiemClicked(row)">
+            <p class="text-truncate">{{row.Ma}}</p>
+          </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="quyDinhId">
+          <mat-header-cell *matHeaderCellDef fxHide mat-sort-header class="TenColumn">Quy định</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide class="TenColumn" (click)="rowCotDiemClicked(row)" >
+            <p class="text-truncate">{{row.QuyDinhId}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ghiChu">
+          <mat-header-cell *matHeaderCellDef fxHide mat-sort-header class="TenColumn">Ghi chú</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide class="TenColumn" (click)="rowCotDiemClicked(row)">
+            <p class="text-truncate">{{row.GhiChu}}</p>
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef >sửa</mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row"  (click)="btnSuaClicked(row.Id)">
+            <mat-icon>
+              edit
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="xoa">
+          <mat-header-cell class="sxwidth mat-header-cell-last" *matHeaderCellDef >Xóa</mat-header-cell>
+          <mat-cell class="sxwidth mat-cell-last" *matCellDef="let row"  (click)="btnXoaClicked(row.Id)">
+            <mat-icon>
+              delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row  *matRowDef="let row; columns: displayedColumns;"  class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator class="pani-height-50" #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

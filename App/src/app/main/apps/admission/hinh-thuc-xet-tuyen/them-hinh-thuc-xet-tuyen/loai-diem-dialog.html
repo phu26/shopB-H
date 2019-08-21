@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Nhập loại điểm</h1>
+<div mat-dialog-content class="loaidiemDialog">
+
+    <mat-form-field>
+        <mat-label>Tên</mat-label>
+        <input matInput placeholder="Tên" [(ngModel)]="data.Ten">
+      </mat-form-field>
+      
+      <mat-form-field>
+          <mat-label>Mã</mat-label>
+          <input matInput placeholder="Mã" [(ngModel)]="data.Ma">
+        </mat-form-field>
+</div>
+<div mat-dialog-actions style="margin-bottom: 0;">
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Lưu</button>
+  <button mat-button (click)="onClickCancelEditLoaiDiem()">Hủy</button>
+</div>

@@ -1,0 +1,107 @@
+<div id="nganhdaotaoss" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16">
+          collections_bookmark
+        </mat-icon>
+        <span class="logo-text h1">
+          Đơn vị hành chính
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Tìm kiếm đơn vị hành chính">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <!-- BUTTON -->
+      <button  mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        (click)="openDialog(null)">
+        <mat-icon class="logo-icon">
+          add_circle_outline
+        </mat-icon>
+        <span>Thêm</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <ng-container matColumnDef="maQuanLy">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="IDColumn">Mã quản lý</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="IDColumn" (click)="openDialog(row.Id)">
+            <p class="text-truncate">{{row.MaQuanLy}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ten">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="TenColumn">Tên đơn vị</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="TenColumn" (click)="openDialog(row.Id)">
+            <p class="text-truncate">{{row.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tenCapCha">
+          <mat-header-cell *matHeaderCellDef fxHide  fxShow.gt-sm>Tên cấp quản lý</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm (click)="openDialog(row.Id)">
+            <p class="text-truncate">{{row.tenCapCha}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cap">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Cấp đơn vị</mat-header-cell>
+          <mat-cell *matCellDef="let row" (click)="openDialog(row.Id)">
+            <p class="text-truncate">{{row.Cap}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="xoa">
+          <mat-header-cell *matHeaderCellDef class="XoaColumn">Xóa</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="XoaColumn" (click)="btnXoaClicked(row.Id)">
+            <mat-icon>
+              delete
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

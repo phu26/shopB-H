@@ -1,0 +1,122 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content p-12">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <form fxLayoutAlign="start" name="toHopCotDiemForm" [formGroup]="toHopCotDiemForm" class="product w-100-p"
+            fxLayout="column" fxFlex="1 0 auto">
+
+            <div class="h2 mb-24" *ngIf="pageType ==='new'">THÊM TỔ HỢP CỘT ĐIỂM <button mat-raised-button
+                class="save-product-button modalbtn" [disabled]="toHopCotDiemForm.invalid" *ngIf="pageType ==='new'"
+                (click)="addToHopCotDiem()">
+                <span>Thêm</span>
+              </button></div>
+
+            <div class="h2 mb-24" *ngIf="pageType ==='edit'">{{toHopCotDiem.Ten}} <button mat-raised-button
+                class="save-product-button modalbtn" [disabled]="toHopCotDiemForm.invalid" *ngIf="pageType ==='edit'"
+                (click)="saveToHopCotDiem()">
+                <span>Lưu</span>
+              </button></div>
+
+
+
+            <div *ngIf="pageType ==='edit'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="ID" readonly name="Id" formControlName="Id">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="85" appearance="outline" class="w-85-p">
+                <mat-label>Tên Tổ Hợp Cột Điểm</mat-label>
+                <input matInput placeholder="Tên tổ hợp cột điểm" name="Ten" formControlName="Ten" required>
+                <!-- thông báo lỗi -->
+                <mat-error>Tên Tổ Hợp Cột Điểm là bắt buộc</mat-error>
+              </mat-form-field>
+              <mat-checkbox [labelPosition]="'before'" name="KichHoat" formControlName="KichHoat" fxFlex="15"
+                appearance="outline" class="w-15-p" [(ngModel)]="toHopCotDiem.KichHoat">Kích hoạt</mat-checkbox>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="50" appearance="outline" class="w-100-p">
+                <mat-label>Mã tổ hợp cột điểm</mat-label>
+                <input matInput placeholder="Nhập mã tổ hợp cột điểm" name="MaToHopCotDiem" formControlName="MaToHopCotDiem" required>
+                <!-- thông báo lỗi -->
+                <mat-error>Mã Tổ Hợp Cột Điểm là bắt buộc</mat-error>
+              </mat-form-field>
+              <!-- Cách tạo khoảng trống giữa các input -->
+              <!-- <div fxFlex="20" appearance="outline" class="w-100-p">&nbsp;</div> -->
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Hình thức xét tuyển</mat-label>
+                <mat-select (selectionChange)="onSelectHinhThucXetTuyen()" formControlName="HinhThucXetTuyenId" required>
+                  <!-- <mat-option [value]="null">
+                    -Không-
+                  </mat-option> -->
+                  <mat-option (click)="filterByHinhThucXetTuyen()" *ngFor="let hinhthucxettuyenitem of hinhThucXetTuyens" [value]="hinhthucxettuyenitem.Id">
+                    {{hinhthucxettuyenitem.Ten}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Hình thức xét tuyển là bắt buộc là bắt buộc</mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-checkbox [labelPosition]="'before'" name="KichHoat" formControlName="KichHoat" fxFlex="100"
+                appearance="outline" class="w-100-p" [(ngModel)]="toHopCotDiem.KichHoat">Kích hoạt</mat-checkbox>
+            </div> -->
+
+            <div class="container">
+              <div class="full-width">
+                <div class="left-grid" cdkDropListGroup fxLayout="column" fxLayoutAlign="start center"
+                  fxFlex="1 0 auto">
+                  <span>Danh sách cột điểm trong tổ hợp</span>
+                  <div class="col-md-12 col-lg-12 col-xs-12" style="width:100%; min-height: 300px; margin-top: 15px;">
+                    <mat-list cdkDropList [cdkDropListData]="_cotDiem_toHopCotDiems" (cdkDropListDropped)="drop($event)"
+                      role="list" class="mat-list-cotdiem">
+                      <mat-list-item *ngFor="let item of _cotDiem_toHopCotDiems" cdkDrag role="listitem">
+                        <span class="selectitem-45">{{item.CotDiem.Ten}}</span>
+                        <mat-select class="selectitem-45" (selectionChange)="onSelectLoaiCotDiem()" placeholder="Chọn loại"
+                          [(ngModel)]="item.Loai" [ngModelOptions]="{standalone: true}">
+                          <mat-option *ngFor="let itemLoai of _dsLoaiCotDiem" [disabled]="itemLoai.Chosen"
+                            [value]="itemLoai.key">
+                            {{itemLoai.Loai}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon (click)="onRemoveCotDiemfromToHop(item)" class="ls-18 selectitem-right">
+                          close
+                        </mat-icon>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+                <div class="right-grid">
+                  <app-danh-sach-cot-diem (cotDiemEmit)="onAddCotDiemtoToHop($event)"></app-danh-sach-cot-diem>
+                </div>
+              </div>
+            </div>
+            <div class="under-contain">
+                <button mat-raised-button class="add-product-button fuse-gray mt-24 mt-md-0 btnDong" (click)='onCloseClick()'>
+                    <mat-icon class="logo-icon">
+                      add_circle_outline
+                    </mat-icon>
+                    <span>Đóng</span>
+                  </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- / CONTENT -->
+    </div>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

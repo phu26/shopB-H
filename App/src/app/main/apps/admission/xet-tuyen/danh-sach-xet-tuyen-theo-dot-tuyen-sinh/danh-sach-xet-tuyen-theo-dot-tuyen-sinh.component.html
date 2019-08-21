@@ -1,0 +1,138 @@
+<div id="nganhdaotaos" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/dot-tuyen-sinh/quan-ly'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Đợt tuyển sinh: {{tenDotTuyenSinh}}
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div style="display: none">
+        <div>
+          <input #textSearch placeholder="Tìm kiếm ngành trong đợt tuyển sinh">
+        </div>
+      </div>
+      <!-- / SEARCH -->
+
+      <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+        [routerLink]="'/admission/dot-tuyen-sinh/'+_idRouter">
+        <mat-icon class="logo-icon">
+          add_circle_outline
+        </mat-icon>
+        <span>Chỉnh sửa đợt tuyển sinh</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="mat-elevation-z8 content-card">
+
+      <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <!-- <mat-spinner></mat-spinner> -->
+      </div>
+      <mat-table class="nganhdaotaos-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+
+        <ng-container matColumnDef="nganhDaoTaoId">
+          <mat-header-cell class="mdwidth" *matHeaderCellDef mat-sort-header >Ngành đào tạo</mat-header-cell>
+          <mat-cell class="mdwidth" *matCellDef="let row" (click)="getNganhDaoTao(row.nganhDaoTaoId)">
+            <p>{{(row.NganhDaoTao==null)?'':row.NganhDaoTao.Ten}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nganhUisId">
+          <mat-header-cell class="smwidth" *matHeaderCellDef>Mã ngành</mat-header-cell>
+          <mat-cell class="smwidth" *matCellDef="let row">
+            <p>{{row.NganhDaoTao.NganhUisId}}</p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="DanhSachToHopMon">
+          <mat-header-cell  *matHeaderCellDef>Tổ hợp xét tuyển</mat-header-cell>
+          <mat-cell  *matCellDef="let row">
+            <p>{{row.DanhSachToHopMon}}</p>
+          </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="chiTieu">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef mat-sort-header>Chỉ tiêu</mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <input [ngClass]="{'inputedit': row.editing}" type="number" [(ngModel)]="row.ChiTieu" placeholder="Chỉ tiêu" [disabled]="!row.editing" matInput>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="chiTieuVuot">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef mat-sort-header>Chỉ tiêu vượt</mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <input [ngClass]="{'inputedit': row.editing}" type="number" [(ngModel)]="row.ChiTieuVuot" placeholder="Chỉ tiêu vượt" [disabled]="!row.editing"
+              matInput>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="chiTieuThapNhat">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef mat-sort-header>Chỉ tiêu thấp nhất</mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <input [ngClass]="{'inputedit': row.editing}" type="number" [(ngModel)]="row.ChiTieuThapNhat" placeholder="Chỉ tiêu thấp nhất" [disabled]="!row.editing"
+              matInput>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="diemSan">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef mat-sort-header>Điểm sàn</mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <input [ngClass]="{'inputedit': row.editing}" type="number" [(ngModel)]="row.DiemSan" placeholder="Điểm sàn" [disabled]="!row.editing" matInput>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="diemChuan">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef mat-sort-header>Điểm chuẩn</mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <input [ngClass]="{'inputedit': row.editing}" type="number" [(ngModel)]="row.DiemChuan" placeholder="Điểm chuẩn" [disabled]="!row.editing" matInput>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="sxwidth" *matHeaderCellDef mat-sort-header></mat-header-cell>
+          <mat-cell class="sxwidth" *matCellDef="let row">
+            <mat-icon class="iconbutton" (click)="row.editing=true" *ngIf="!row.editing">
+              edit
+            </mat-icon>
+            <mat-icon class="iconbutton" (click)="saveRow(row)" *ngIf="row.editing">
+              save
+            </mat-icon>
+            <mat-icon class="iconbutton" (click)="cancelRow(row)" *ngIf="row.editing">
+              cancel
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="nganhdaotao" matRipple>
+        </mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="20"
+      [pageSizeOptions]="[2, 5, 10, 25, 100]">
+    </mat-paginator>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

@@ -1,0 +1,70 @@
+<!-- <div class="angEditor">
+  <div class="h2">Đợt xét tuyển: {{item.Ten}}</div>
+  <div class="subtitle secondary-text">Nội dung {{_loaiNhap}}:</div>
+  <angular-editor [(ngModel)]="htmlContent" class="agEditor" id="editor" [config]="editorConfig"></angular-editor>
+  <button mat-raised-button class="save-product-button" (click)="onClinckSave()">
+        <span>Lưu</span>
+      </button>
+</div> -->
+
+
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+  
+    <!-- CENTER -->
+    <div class="center">
+  
+      <!-- HEADER -->
+      <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+  
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+  
+          <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/dot-tuyen-sinh/admin'">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+  
+          <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+              <div class="h2">Đợt xét tuyển: {{item.Ten}}</div>
+          </div>
+        </div>
+        <!-- / APP TITLE -->
+  
+        <button mat-raised-button class="save-product-button" [disabled]="itemForm.invalid"
+          *ngIf="pageType ==='new'" (click)="addItem()">
+          <span>Thêm</span>
+        </button>
+  
+        <button mat-raised-button class="save-product-button"
+          [disabled]="itemForm.invalid || itemForm.pristine" *ngIf="pageType ==='edit'"
+          (click)="editItem()">
+          <span>Lưu</span>
+        </button>
+      </div>
+      <!-- / HEADER -->
+  
+      <!-- CONTENT CARD -->
+      <div class="content-card">
+  
+        <!-- CONTENT -->
+        <div class="content p-24">
+            <div class="subtitle secondary-text">Nội dung {{_loaiNhap}}:</div>
+          <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+              <angular-editor [(ngModel)]="htmlContent" class="agEditor" id="editor" [config]="editorConfig"></angular-editor>
+          </div>
+        </div>
+        <button mat-raised-button class="save-product-button" (click)="onClinckSave()">
+              <span>Lưu</span>
+            </button>
+        <!-- / CONTENT -->
+  
+      </div>
+      <!-- / CONTENT CARD -->
+  
+    </div>
+    <!-- / CENTER -->
+  
+  </div>

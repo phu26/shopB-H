@@ -1,0 +1,805 @@
+<!-- Page-layout -->
+<form id="forms" #f="ngForm" class="page-layout simple fullwidth" fxLayout="column">
+  <!-- Content -->
+  <div class="container a4 p-24 col-md-offset-6" style="margin:auto">
+    <div class="mb-24" fxLayout="column" fxLayoutAlign="center" fxLayout.gt-md="row">
+      <div fxLayout="column" fxLayoutAlign="center" fxFlex="1 0 auto">
+        <!-- HEADER -->
+        <div class="mat-card p-10">
+          <a title="Quay lại" mat-icon-button class="mr-0 mr-sm-16" (click)="_location.back()">
+            <mat-icon>arrow_back</mat-icon>
+          </a>
+          <!-- APP TITLE -->
+          <div class="logo mb-12 mb-sm-0" class="HeaderCenter" fxLayout="row" fxLayoutAlign="start center">
+
+            <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+              <b class="header-title">{{_dotTuyenSinh.Ten | uppercase}}</b></span>
+          </div>
+          <div class="searchMaHoSo" *ngIf="IsGiaoDienTrongAdmin">
+            <mat-label><b>MÃ HỒ SƠ: </b></mat-label>
+            <mat-form-field appearance="outline" class="searchMaHoSoSearchformfeild">
+              <!-- <mat-hint>Vd: 151</mat-hint> -->
+              <input matInput [(ngModel)]="maHoSoSearch" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <a class="mr-24 searchMaHoSoBtn" mat-raised-button (click)="SearchMaHoSo()">
+              <mat-icon matSuffix class="secondary-text">search</mat-icon>Tìm kiếm
+            </a>
+          </div>
+          <div class="diadiem">
+            <mat-label><b>Địa điểm đào tạo</b></mat-label>
+            <mat-form-field appearance="outline" fxFlex="30" class="mat-form-field w-40-p">
+              <mat-label>Chọn địa điểm đào tạo</mat-label>
+              <mat-select [(ngModel)]="model.ThiSinh.DiaDiemDaoTao" [ngModelOptions]="{standalone: true}" required>
+                <mat-option *ngFor="let diaDiemDT of diaDiemDTs" [value]="diaDiemDT.Id">
+                  {{ diaDiemDT.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- / APP TITLE -->
+
+        </div>
+        <!-- / HEADER -->
+        <!-- Thí sinh -->
+        <div class="mat-card p-20 pb-10">
+          <div class="header-child style-1">
+            <div class="stt"><span>1</span></div>
+            <div class="content-header">
+              <h2 class="header-title-child">THÔNG TIN BẢN THÂN</h2>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <!-- <mat-form-field *ngIf="_dotTuyenSinh.HinhThucXetTuyen.Id!=19 && _dotTuyenSinh.HinhThucXetTuyen.Id!=11" appearance="fill" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label><strong>Mã vạch (Mã hồ sơ):</strong><span class="mat-error">&nbsp;&nbsp;Nhà trường nhập </span></mat-label>
+              <input matInput id="sobaodanhthithpt" [(ngModel)]="model.ThiSinh.MaVachThiTHPTQG"
+                [ngModelOptions]="{standalone: true}" [disabled]="IsGiaoDienTrongAdmin==true? false : true">
+            </mat-form-field> -->
+
+            <mat-form-field appearance="fill" fxFlex="70" class="mat-form-field w-70-p">
+              <mat-label><strong>Họ và tên:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.HoLotVaTen" required [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="30" class="mat-form-field w-30-p">
+              <mat-label><strong>Giới tính:</strong></mat-label>
+              <mat-select required [(ngModel)]="model.ThiSinh.GioiTinh" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let gender of genders; let i=index" [value]="i">
+                  {{ gender }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>CMND</strong></mat-label>
+              <input matInput name="CMND" placeholder="Nhap CMND" (blur)="kiemTraCMND()" pattern="{{regExpClass.CMND}}"
+                id="identityNum" [(ngModel)]="model.ThiSinh.CMND" required [ngModelOptions]="{standalone: true}">
+              <mat-error>Nhập CMND và đúng định dạng</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Ngày cấp:</strong></mat-label>
+              <input matInput [textMask]="ddmmyyyyMask" [(ngModel)]="model.ThiSinh.NgayCapCMND" required
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" fxFlex="50" class="plr-4 plr-4 col-md-4">
+              <mat-label>Ngày cấp </mat-label>
+              <input matInput [textMask]="ddmmyyyyMask" [(ngModel)]="model.ThiSinh.NgayCapCMND"
+                [ngModelOptions]="{standalone: true}" required>
+              <mat-error>Nhập Ngày cấp CMND</mat-error>
+            </mat-form-field> -->
+
+            <!-- <mat-form-field appearance="fill" fxFlex="50" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Cấp tại:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.HoLotVaTen" required [ngModelOptions]="{standalone: true}">
+            </mat-form-field> -->
+
+            <!-- Nơi cấp cmnd  -->
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 plr-4 col-md-4" id="matTinhThanhNoiCap">
+              <mat-label><strong>Nơi cấp CMND:</strong> (tỉnh hoặc thành phố cấp)</mat-label>
+              <input id="txtNoiCapCMND" type="text" placeholder="nhập tên tỉnh/thành phố" #text aria-label="Number"
+                [formControl]="txtNoiCapCMND" matInput required>
+            </mat-form-field>
+
+            <!-- <mat-autocomplete id="autoTinhThanhNoiCap" #autoTinhThanhNoiSinh="matAutocomplete"
+              [displayWith]="displayWith" showPanel="true">
+              <mat-option *ngFor="let option of tinhThanhNoiSinhs$ | async" [value]="option">
+                {{option.Ten}}
+              </mat-option>
+            </mat-autocomplete> -->
+            <!-- <mat-form-field appearance="fill" fxFlex="50" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Nơi cấp CMND:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.NoiCapCMND" required [ngModelOptions]="{standalone: true}">
+            </mat-form-field> -->
+            <!-- end Nơi sinh -->
+
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label><strong>Ngày Sinh:</strong></mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Chọn ngày" id="birth"
+                [(ngModel)]="model.ThiSinh.NgaySinh" required [ngModelOptions]="{standalone: true}">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Số điện thoại di động:</strong><span class="mat-error">&nbsp;&nbsp;Số ĐT nhận tin nhắn
+                </span></mat-label>
+              <input matInput placeholder="(+84) VietNam" id="phone" [pattern]="regExpClass.SDT"
+                [(ngModel)]="model.ThiSinh.SDT" [ngModelOptions]="{standalone: true}" required
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label> <strong>Email:</strong> </mat-label>
+              <input matInput required email id="email" [(ngModel)]="model.ThiSinh.Email"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="50" class="plr-4 col-md-4" id="matTinhThanhNoiSinh">
+              <mat-label><strong>Nơi Sinh:</strong> (tỉnh hoặc thành phố)</mat-label>
+              <input id="txtTinhThanhNoiSinh" type="text" placeholder="gõ tên hoặc mã Tỉnh/TP thường trú" #text
+                aria-label="Number" [formControl]="txtTinhThanhNoiSinh" matInput
+                [matAutocomplete]="autoTinhThanhNoiSinh" required>
+            </mat-form-field>
+
+            <mat-autocomplete id="autoTinhThanhNoiSinh" #autoTinhThanhNoiSinh="matAutocomplete"
+              [displayWith]="displayWith" showPanel="true">
+              <mat-option *ngFor="let option of tinhThanhNoiSinhs$ | async" [value]="option">
+                {{option.Ten}}
+              </mat-option>
+            </mat-autocomplete>
+
+
+            <div *ngIf="IsGiaoDienTrongAdmin" [ngClass]="{'error': model.ThiSinh.KhuVucUuTienId == null && f.submitted}"
+              appearance="outline" fxFlex="33" class="plr-4 col-md-4 inline-block mat-form-field">
+              <app-select-dropdown name="khuVucUuTien" [(ngModel)]="model.ThiSinh.KhuVucUuTienId" [list]="khuVucUuTiens"
+                placeholder="Khu vực ưu tiên">
+              </app-select-dropdown>
+              <mat-error class="font-mini" *ngIf="model.ThiSinh.KhuVucUuTienId == null && f.submitted">Chọn khu vực ưu
+                tiên
+              </mat-error>
+            </div>
+
+            <div [ngClass]="{'error': model.ThiSinh.DoiTuongUuTienId == null && f.submitted}" appearance="outline"
+              fxFlex="33" class="plr-4 col-md-4 inline-block mat-form-field">
+              <app-select-dropdown name="doituonguutien" [(ngModel)]="model.ThiSinh.DoiTuongUuTienId"
+                [list]="doiTuongUuTiens" placeholder="Đối tượng ưu tiên">
+              </app-select-dropdown>
+              <mat-error class="font-mini" *ngIf="model.ThiSinh.DoiTuongUuTienId == null && f.submitted">Chọn đối tượng
+                ưu tiên
+              </mat-error>
+            </div>
+
+            <!-- <mat-form-field  appearance="fill" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label><strong>Số báo danh THPT QG :</strong><span class="mat-error">&nbsp;&nbsp;Nhập chính xác
+                  và đầy đủ </span></mat-label>
+              <input matInput id="sobaodanhthithpt" [(ngModel)]="model.ThiSinh.SoBaoDanhThiTHPTQG"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field> -->
+            <!-- <div [ngClass]="{'error': model.ThiSinh.TruongTHPT12Id == null && f.submitted}"
+               appearance="outline" fxFlex="33"
+              class="mat-form-field plr-4 col-md-4 inline-block">
+              <app-select-dropdown name="truongthpt12" [(ngModel)]="model.ThiSinh.TruongTHPT12Id" [list]="truongTHPTs"
+                placeholder="Trường THPT Lớp 12" required>
+              </app-select-dropdown>
+            </div>
+            <mat-form-field  appearance="outline" fxFlex="50"
+              class="plr-4 plr-4 col-md-4">
+              <mat-label>Mã trường</mat-label>
+              <input matInput placeholder="Mã trường" [(ngModel)]="model.ThiSinh.TruongTHPT12MaTruong"
+                [ngModelOptions]="{standalone: true}" required>
+            </mat-form-field>
+            <mat-form-field  appearance="outline" fxFlex="50"
+              class="plr-4 col-md-4">
+              <mat-label>Mã tỉnh</mat-label>
+              <input matInput placeholder="Mã tỉnh" [(ngModel)]="model.ThiSinh.TruongTHPT12MaTinh"
+                [ngModelOptions]="{standalone: true}" required>
+          
+            </mat-form-field> -->
+          </div>
+          <!-- Nơi Sinh  -->
+          <!-- end Nơi sinh -->
+          <!-- Tỉnh Thành Thường trú  -->
+          <!-- <div *ngIf="IsGiaoDienTrongAdmin" fxFlex="33" class="fluid-width plr-4 col-md-3">
+
+            <mat-form-field appearance="fill" id="matTinhThanhThuongTru">
+              <mat-label>Tỉnh/Thành phố thường trú:</mat-label>
+              <input id="txtTinhThanhThuongTru" type="text" placeholder="gõ tên hoặc mã Tỉnh/TP thường trú" #text
+                aria-label="Number" [formControl]="txtTinhThanhThuongTru" matInput
+                [matAutocomplete]="autoTinhThanhThuongTru">
+            </mat-form-field>
+
+            <mat-autocomplete id="autoTinhThanhThuongTru"
+              (optionSelected)="onTinhThanhThuongTruSelectionChange($event.option.value)"
+              #autoTinhThanhThuongTru="matAutocomplete" [displayWith]="displayWith" showPanel="true">
+              (optionsScroll)="onTinhThanhThuongTruScroll()" 
+              <mat-option *ngFor="let option of tinhThanhThuongTrus$ | async" [value]="option">
+                {{option.Ten}} - {{option.MaQuanLy==null?'':option.MaQuanLy }}
+              </mat-option>
+            </mat-autocomplete>
+          </div> -->
+
+
+          <!-- end Tỉnh Thành thường trú -->
+
+          <!-- Quận huyện thường trú-->
+          <!-- <div *ngIf="IsGiaoDienTrongAdmin" appearance="fill" fxFlex="33"
+            class="mat-form-field plr-4 plr-3 col-md-3 inline-block">
+
+            <mat-form-field id="matQuanHuyenThuongTru" class="example-full-width">
+              <mat-label>Quận huyện thường trú</mat-label>
+              <input id="txtSearchQuanHuyenThuongTru" type="text" placeholder="gõ tên hoặc mã Quận/huyện" #text
+                aria-label="Number" [formControl]="txtQuanHuyenThuongTru" matInput
+                [matAutocomplete]="autoQuanHuyenThuongTru">
+
+            </mat-form-field>
+
+            <mat-autocomplete id="matautoQuanHuyenThuongTru"
+              (optionSelected)="onQuanHuyenThuongTruSelectionChange($event.option.value)"
+              #autoQuanHuyenThuongTru="matAutocomplete" [displayWith]="displayWith" showPanel="true"
+              (optionsScroll)="onQuanHuyenThuongTruScroll()">
+              <mat-option *ngFor="let option of quanHuyenThuongTrus$ | async " [value]="option">
+                {{option.Ten}} - {{option.MaQuanLy==null?'':option.MaQuanLy }}
+              </mat-option>
+            </mat-autocomplete>
+          </div> -->
+          <!-- end Quận huyện thường trú -->
+
+          <!-- Phường xã  thường trú -->
+          <!-- <div *ngIf="IsGiaoDienTrongAdmin" appearance="fill" fxFlex="33"
+            class="mat-form-field plr-4 col-md-3 inline-block">
+            <mat-form-field id="matPhuongXaThuongTru" class="example-full-width">
+              <mat-label>Phường xã thường trú</mat-label>
+              <input id="idPhuongXaThuongTru" type="text" placeholder="gõ tên hoặc mã phường xã tạm trú" #text
+                aria-label="Number" [formControl]="txtPhuongXaThuongTru" matInput
+                [matAutocomplete]="autoPhuongXaThuongTru">
+              <mat-error *ngIf="formDangKy.controls['txtPhuongXaThuongTru'].hasError('required')">
+                Vui lòng nhập.
+              </mat-error>
+
+              <mat-error *ngIf="formDangKy.controls['txtPhuongXaThuongTru'].hasError('incorrect')">
+                Vui lòng chọn.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-autocomplete id="matautoPhuongXaThuongTru" #autoPhuongXaThuongTru="matAutocomplete"
+              [displayWith]="displayWith" showPanel="true" (optionsScroll)="onPhuongXaThuongTruScroll()">
+              <mat-option *ngFor="let option of phuongXaThuongTrus$ | async" [value]="option">
+                {{option.Ten}} - {{option.MaQuanLy==null?'':option.MaQuanLy }}
+              </mat-option>
+            </mat-autocomplete>
+          </div> -->
+          <!-- end Phường xã thường trú -->
+
+          <!-- #region Địa chỉ tạm trú -->
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field appearance="fill" fxFlex="100" class="w-100-p">
+              <mat-label><strong>Địa chỉ tạm trú:</strong> Số nhà, tên đường, tổ/xóm,khu phố/thôn, phường xã,
+                quận/huyện, tỉnh/TP</mat-label>
+              <input matInput placeholder="số nhà, tên đường, tổ/xóm,khu phố/thôn, phường xã, quận/huyện, tỉnh/TP"
+                [(ngModel)]="model.ThiSinh.DiaChiLienLacTamTru" [ngModelOptions]="{standalone: true}" required>
+              <mat-hint></mat-hint>
+
+            </mat-form-field>
+          </div>
+          <!-- #endregion -->
+
+
+          <!-- #region Địa chỉ liên lạc -->
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field appearance="fill" fxFlex="100" class="w-100-p">
+              <mat-label><strong>Địa chỉ liên lạc:</strong> Số nhà, tên đường, tổ/xóm,khu phố/thôn, phường xã,
+                quận/huyện, tỉnh/TP</mat-label>
+              <input matInput placeholder="số nhà, tên đường, tổ/xóm,khu phố/thôn, phường xã, quận/huyện, tỉnh/TP"
+                [(ngModel)]="model.ThiSinh.DiaChiLienLac" [ngModelOptions]="{standalone: true}" required>
+              <mat-hint></mat-hint>
+
+            </mat-form-field>
+          </div>
+          <!-- #endregion -->
+          <!-- #region Địa chỉ nhận giấy báo -->
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field appearance="fill" fxFlex="100" class="w-100-p">
+              <mat-label><strong>Địa chỉ nhận giấy báo:</strong> Số nhà, tên đường, tổ/xóm,khu phố/thôn, phường xã,
+                quận/huyện, tỉnh/TP</mat-label>
+              <input matInput placeholder="số nhà, tên đường, tổ/xóm,khu phố/thôn, phường xã, quận/huyện, tỉnh/TP"
+                required [(ngModel)]="model.ThiSinh.DiaChiNhanBaoTin" [ngModelOptions]="{standalone: true}">
+              <mat-hint></mat-hint>
+
+            </mat-form-field>
+          </div>
+          <!-- #endregion -->
+
+
+          <!-- #region Nơi làm việc -->
+          <h3 class="text-bold">1.1. Công việc hiện tại: <span class="mat-error" style="font-style: italic">&nbsp;&nbsp;(Bắt buộc đối với các CN:
+              Quản lý giáo dục, Quản lý kinh tế, Quản trị kinh doanh, không bắt buộc các chuyên ngành còn lại)
+            </span> </h3>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <mat-form-field appearance="fill" fxFlex="70" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Đơn vị công tác:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.DonViCongTac" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="70" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Chức vụ:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.ChucVu" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="70" class="plr-4 plr-4 col-md-4">
+              <mat-label><strong>Số năm công tác trong lĩnh vực đăng ký dự thi:</strong> </mat-label>
+              <input type="number" matInput [(ngModel)]="model.ThiSinh.SoNamCongTac"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="70" class="w-100-p">
+              <mat-label><strong>Địa chỉ nơi làm việc:</strong></mat-label>
+              <!-- <input matInput [(ngModel)]="model.ThiSinh.DiaChiNoiCongTac" [ngModelOptions]="{standalone: true}"> -->
+              <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" [(ngModel)]="model.ThiSinh.DiaChiNoiCongTac"
+                [ngModelOptions]="{standalone: true}"></textarea>
+            </mat-form-field>
+
+          </div>
+          <!-- #endregion  Nơi làm việc-->
+
+          <h3 class="text-bold">1.2. Thông tin văn bằng đại học thí sinh sử dụng để dự thi cao học: </h3>
+          <mat-hint style="font-style: italic">*Văn bằng đại học (được sử dụng để dự thi vào chuyên ngành cao học sẽ
+            đăng ký)*</mat-hint>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <div [ngClass]="{'error': model.ThiSinh.MaTruongCDDH == null && f.submitted}" appearance="outline"
+              fxFlex="33" class="mat-form-field w-70-p inline-block">
+              <app-select-dropdown name="MaTruongCDDH" [(ngModel)]="model.ThiSinh.MaTruongCDDH" [list]="truongCDDHs"
+                placeholder="Cơ sở đào tạo" required>
+              </app-select-dropdown>
+            </div>
+
+            <div [ngClass]="{'error': model.ThiSinh.LoaiHinhDaoTaoCDDH == null && f.submitted}" appearance="outline"
+              fxFlex="33" class="mat-form-field w-30-p inline-block">
+              <app-select-dropdown name="loaihinhdaotao" [(ngModel)]="model.ThiSinh.LoaiHinhDaoTaoCDDH"
+                [list]="heDaoTaos" placeholder="Hình thức đào tạo" required>
+              </app-select-dropdown>
+            </div>
+
+            <mat-form-field appearance="outline" fxFlex="33" class="mat-form-field plr-4 col-md-4 inline-block">
+              <mat-label>Xếp loại tốt nghiệp</mat-label>
+              <mat-select [(ngModel)]="model.ThiSinh.XepHangCDDH" [ngModelOptions]="{standalone: true}" required>
+                <mat-option *ngFor="let xepLoai of XepLoais" [value]="xepLoai.Id">
+                  {{ xepLoai.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Tháng/năm tốt nghiệp: mm/yyyy</mat-label>
+              <input matInput [textMask]="mmyyyyMask" [(ngModel)]="model.ThiSinh.ThangNamTotNghiepCDDH"
+                [ngModelOptions]="{standalone: true}" required>
+              <mat-error>Nhập tháng/năm tốt nghiệp</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Số hiệu bằng tốt nghiệp CDĐH</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.SoHieuBangTotNghiepCDDH" [ngModelOptions]="{standalone: true}"
+                required>
+              <mat-error>Nhập Số hiệu bằng tốt nghiệp CDĐH</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Ngành (Ghi trên bằng)</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.NganhDHCD" [ngModelOptions]="{standalone: true}" required>
+              <mat-error>Vui lòng nhập ngành</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Chuyên ngành (Ghi trên bảng điểm)</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.ChuyenNganhDHCD" [ngModelOptions]="{standalone: true}"
+                required>
+              <mat-error>Vui lòng nhập chuyên ngành</mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" fxFlex="33" class="mat-form-field plr-4 col-md-4 inline-block">
+              <mat-label>Ngành :</mat-label>
+              <mat-select name="nganhdaotaoDHCD" [(ngModel)]="model.ThiSinh.NganhDHCD" 
+              [ngModelOptions]="{standalone: true}" (selectionChange)="onChangeChuyenNganh($event.source.value)" required>
+                <mat-option *ngFor="let nganhDaoTao of dsNganhDaoTaos" [value]="nganhDaoTao.Id">
+                  {{ nganhDaoTao.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="40" class="plr-4 col-md-4 col-xs-80">
+              <mat-label>Chọn chuyên ngành:</mat-label>
+              <mat-select name="chuyennganhdaotaoDHCD" [(ngModel)]="model.ThiSinh.ChuyenNganhDHCD"
+                [ngModelOptions]="{standalone: true}" required>
+                <mat-option *ngFor="let chuyenNganhDaoTao of dsChuyenNganhs" [value]="chuyenNganhDaoTao.Id">
+                  {{ chuyenNganhDaoTao.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+          </div>
+
+          <h3 class="text-bold">1.3. Các văn bằng đại học, cao đẳng khác (đối với thí sinh tốt nghiệp đại học hệ liên
+            thông/chuyên tu/hoàn chỉnh kiến thức/từ xa, hoặc đại học văn bằng 2, đại học ngoại ngữ,...): </h3>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <div [ngClass]="{'error': model.ThiSinh.MaTruongCDDH2 == null && f.submitted}" appearance="outline"
+              fxFlex="33" class="mat-form-field w-70-p inline-block">
+              <app-select-dropdown name="MaTruongCDDH2" [(ngModel)]="model.ThiSinh.MaTruongCDDH2" [list]="truongCDDHs"
+                placeholder="Cơ sở đào tạo" required>
+              </app-select-dropdown>
+            </div>
+
+            <div [ngClass]="{'error': model.ThiSinh.LoaiHinhDaoTaoCDDH2 == null && f.submitted}" appearance="outline"
+              fxFlex="33" class="mat-form-field w-30-p inline-block">
+              <app-select-dropdown name="loaihinhdaotao2" [(ngModel)]="model.ThiSinh.LoaiHinhDaoTaoCDDH2"
+                [list]="heDaoTaos" placeholder="Hình thức đào tạo" required>
+              </app-select-dropdown>
+            </div>
+
+
+            <mat-form-field appearance="outline" fxFlex="33" class="mat-form-field plr-4 col-md-4 inline-block">
+              <mat-label>Xếp loại tốt nghiệp</mat-label>
+              <mat-select [(ngModel)]="model.ThiSinh.XepHangCDDH2" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let xepLoai of XepLoais" [value]="xepLoai.Id">
+                  {{ xepLoai.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Tháng/năm tốt nghiệp: mm/yyyy</mat-label>
+              <input matInput [textMask]="mmyyyyMask" [(ngModel)]="model.ThiSinh.ThangNamTotNghiepCDDH2"
+                [ngModelOptions]="{standalone: true}">
+              <mat-error>Nhập tháng/năm tốt nghiệp</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Số hiệu bằng tốt nghiệp CDĐH</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.SoHieuBangTotNghiepCDDH2"
+                [ngModelOptions]="{standalone: true}">
+              <mat-error>Nhập Số hiệu bằng tốt nghiệp CDĐH</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Ngành (Ghi trên bằng)</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.NganhDHCD2" [ngModelOptions]="{standalone: true}">
+              <mat-error>Vui lòng nhập ngành</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-4">
+              <mat-label>Chuyên ngành (Ghi trên bảng điểm)</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.ChuyenNganhDHCD2" [ngModelOptions]="{standalone: true}">
+              <mat-error>Vui lòng nhập chuyên ngành</mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" fxFlex="33" class="mat-form-field plr-4 col-md-4 inline-block">
+              <mat-label>Ngành :</mat-label>
+              <mat-select name="nganhdaotaoDHCD2" [(ngModel)]="model.ThiSinh.NganhDHCD2" 
+              [ngModelOptions]="{standalone: true}" (selectionChange)="onChangeChuyenNganh($event.source.value)" >
+                <mat-option *ngFor="let nganhDaoTao of dsNganhDaoTaos" [value]="nganhDaoTao.Id">
+                  {{ nganhDaoTao.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="40" class="plr-4 col-md-4 col-xs-80">
+              <mat-label>Chọn chuyên ngành:</mat-label>
+              <mat-select name="chuyennganhdaotaoDHCD2" [(ngModel)]="model.ThiSinh.ChuyenNganhDHCD2"
+                [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let chuyenNganhDaoTao of dsChuyenNganhs" [value]="chuyenNganhDaoTao.Id">
+                  {{ chuyenNganhDaoTao.Ten }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+          </div>
+          <h3 class="text-bold">1.4. Thông tin bằng cấp, chứng chỉ dùng để xét miễn thi Ngoại ngữ (hố sơ minh chứng kèm
+            theo)</h3>
+          <mat-hint style="font-style: italic">*Thí sinh đạt được một trong các năng lực ngoại ngữ trong danh sách này
+            được miễn môn ngoại
+            ngữ. Các chứng chỉ ngoại ngữ còn trong thời hạn 2 năm từ ngày cấp chứng chỉ đến ngày đăng
+            ký dự thi. Chứng chỉ ngoại ngữ theo Khung năng lực ngoại ngữ 6 bậc dùng cho Việt Nam.*</mat-hint>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <mat-form-field appearance="fill" fxFlex="70" class="w-70-p">
+              <mat-label><strong>Bằng cấp hoặc chứng chỉ:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.ChungChi.Ten" [ngModelOptions]="{standalone: true}">
+
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="70" class="w-30-p">
+              <mat-label><strong>Số hiệu:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.ChungChi.MaSoBang" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="70" class="w-70-p">
+              <mat-label><strong>Nơi cấp:</strong></mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.ChungChi.DonViCap" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex="70" class="w-30-p">
+              <mat-label><strong>Ngày cấp:</strong></mat-label>
+              <input matInput [textMask]="ddmmyyyyMask" [(ngModel)]="model.ThiSinh.ChungChi.NgayCap"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+          </div>
+        </div>
+        <!-- End Thí sinh -->
+        <!-- Nguyện vọng -->
+        <div class="mat-card p-20 pb-10">
+          <div class="header-child style-1">
+            <div class="stt"><span>2</span></div>
+            <div class="content-header">
+              <h2 class="header-title-child">THÔNG TIN ĐĂNG KÝ</h2>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div *ngFor="let item of model.NguyenVongs; let i = index" fxLayout="row" fxLayoutAlign="start center"
+              fxFlex="1 0 auto">
+              <mat-form-field appearance="outline" fxFlex="50" class="plr-4 col-md-1" style="display: none!important">
+                <mat-label>Thứ tự ngành</mat-label>
+                <input type="number" [ngModelOptions]="{standalone: true}" matInput placeholder="Thứ tự nguyện vọng"
+                  required [(ngModel)]="item.ThuTuNguyenVong" />
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline" fxFlex="40" class="plr-4 col-md-4 col-xs-80">
+                <mat-label>Chuyên ngành đăng ký dự thi:</mat-label>
+                <mat-select name="nganhdaotao{{i}}" [compareWith]="compareObjects" [(ngModel)]="item.NganhDaoTao"
+                  [ngModelOptions]="{standalone: true}" (selectionChange)="onChangeNguyenVong(i, $event.source.value)"
+                  required>
+                  <mat-option *ngFor="let nganhDaoTao of nganhDaoTaos" [value]="nganhDaoTao">
+                    {{ nganhDaoTao.Ten }}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+
+              <mat-form-field *ngIf="IsGiaoDienTrongAdmin" appearance="outline" fxFlex="40"
+                class="plr-4 col-md-3 col-xs-80">
+                <mat-label>Tổ hợp môn</mat-label>
+                <mat-select name="tohopcotdiem{{i}}" [(ngModel)]="item.ToHopCotDiemId"
+                  (selectionChange)="onChangeToHopCotDiem(i, $event.source.value)" required>
+                  <mat-option *ngFor="let item of model.NguyenVongs[i].TopHopCotDiems" [value]="item.Id">
+                    {{item.Ten}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Chọn Tổ hợp môn Xét tuyển</mat-error>
+              </mat-form-field>
+
+              <div class="col-md-4 inline-block col-xs-20">
+                <a *ngIf="this.model.NguyenVongs.length > 1" mat-button color="primary"
+                  (click)="onDeleteNguyenVongClick(i)">
+                  <mat-icon matSuffix class="secondary-text">close</mat-icon>
+                </a>
+              </div>
+
+              <!-- #endregion -->
+            </div>
+            <!-- <a rule *ngIf="this.model.NguyenVongs.length < _dotTuyenSinh.SoLuongNguyenVong"
+            class="float-right props pointer" variant="contained" color="green" fxFlex="33"
+            (click)="onAddNguyenVong()">
+            Thêm nguyện vọng
+          </a> -->
+            <button rule *ngIf="this.model.NguyenVongs.length < _dotTuyenSinh.SoLuongNguyenVong"
+              class="float-right props pointer mb-24 my-btn" variant="contained" color="accent" mat-raised-button
+              (click)="onAddNguyenVong()">
+              <mat-icon matSuffix class="mr-8">add</mat-icon><span>Thêm ngành đăng ký</span>
+            </button>
+          </div>
+          <!-- Cột điểm -->
+          <!-- <div *ngIf="model.CotDiems.length > 0 " class="mat-card mat-elevation-z20 p-20 mt-20">
+            <div class="form-group">
+              Các môn bạn sẽ dự thi:
+              <ul>
+                <li *ngFor="let item of model.CotDiems; let i = index">
+                  {{item.Ten}}
+                </li>
+              </ul>
+            </div>
+          </div> -->
+          <!-- End cột điểm -->
+
+          <div *ngIf="this.model.CotDiems.length > 0 && IsGiaoDienTrongAdmin" class="pb-20">
+            <table *ngIf="this.model.CotDiems.length > 0" mat-table [dataSource]="this.model.CotDiems"
+              class="tbl-Diem table-responsive table-bordered mb-20">
+
+              <ng-container matColumnDef="Ten">
+                <th mat-header-cell *matHeaderCellDef> Môn </th>
+                <td data-title="Môn" mat-cell *matCellDef="let element">{{element.Ten}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Diem">
+                <th mat-header-cell *matHeaderCellDef> Điểm </th>
+                <td data-title="Điểm" mat-cell *matCellDef="let element">
+                  <mat-form-field appearance="outline" class="plr-4 col-md-2">
+                    <input matInput placeholder="Điểm" type="number" [(ngModel)]="element.Diem"
+                      [ngModelOptions]="{standalone: true}" required>
+                    <mat-error>Nhâp điểm đúng và chính xác vd:8.08</mat-error>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+          </div>
+
+          <!-- <div *ngIf="this.model.CotDiems.length > 0 && _dotTuyenSinh.HinhThucXetTuyenId==34" class="pb-20">
+            <table *ngIf="this.model.CotDiems.length > 0" mat-table [dataSource]="this.model.CotDiems"
+              class="tbl-Diem table-responsive table-bordered mb-20">
+
+              <ng-container matColumnDef="Ten">
+                <th mat-header-cell *matHeaderCellDef> Môn </th>
+                <td data-title="Môn" mat-cell *matCellDef="let element">{{element.Ten}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Diem">
+                <th mat-header-cell *matHeaderCellDef> Điểm </th>
+                <td data-title="Điểm" mat-cell *matCellDef="let element">
+                  <mat-form-field appearance="outline" class="plr-4 col-md-2">
+                    <input matInput placeholder="Điểm" type="number" [(ngModel)]="element.Diem"
+                      [ngModelOptions]="{standalone: true}" required>
+                    <mat-error>Nhâp điểm đúng và chính xác vd:8.08</mat-error>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+
+          </div> -->
+          <!-- #endregion -->
+
+          <!-- thi năng khiếu -->
+          <div *ngIf="model.CotDiems.length > 0 && !IsGiaoDienTrongAdmin" class="mat-card mat-elevation-z20 p-20 mt-20">
+            <div class="form-group">
+              Các môn bạn sẽ dự thi:
+              <ul>
+                <li *ngFor="let item of model.CotDiems; let i = index">
+                  {{item.Ten}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- #region cột điểm không theo từng nguyện vọng -->
+          <h3 class="text-bold">Đăng ký ngoại ngữ dự thi: (nếu chưa có bằng cấp, chứng chỉ Ngoại ngữ ở mục 1.4)</h3>
+          <mat-hint class="mat-error" style="font-style: italic">*Thí sinh dự thi vào chuyên ngành Ngôn ngữ Anh chọn
+            Tiếng Pháp; thí sinh dự tuyển vào các chuyên ngành còn lại chọn Tiếng Anh.*</mat-hint>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <mat-form-field appearance="outline" fxFlex="33" class="mat-form-field plr-4 col-md-4 inline-block">
+              <mat-label>Ngoại ngữ dự thi :</mat-label>
+              <mat-select name="ngoaiNguDuThi" [(ngModel)]="model.ThiSinh.NgoaiNguDuThi"
+                [ngModelOptions]="{standalone: true}" required placeholder="Ngoại ngữ đăng ký thi">
+                <mat-option *ngFor="let ngoaiNguDuThi of ngoaiNguDuThis" [disabled]="(model.ThiSinh.ChungChi.Ten!=null && model.ThiSinh.ChungChi.Ten!='' ) || model.ThiSinh.ChungChi.MaSoBang!=null || 
+                model.ThiSinh.ChungChi.DonViCap!=null|| model.ThiSinh.ChungChi.NgayCap!=null"
+                  [value]="ngoaiNguDuThi.Ten">
+                  {{ ngoaiNguDuThi.Ten }}
+                </mat-option>
+                <mat-option *ngIf="(model.ThiSinh.ChungChi.Ten!=null && model.ThiSinh.ChungChi.Ten!='' ) || model.ThiSinh.ChungChi.MaSoBang!=null || 
+                model.ThiSinh.ChungChi.DonViCap!=null|| model.ThiSinh.ChungChi.NgayCap!=null" [value]="'Miễn thi'">
+                  Miễn dự thi
+                </mat-option>
+                <mat-option [value]="'Tiếng Trung'">
+                  Tiếng Trung
+                </mat-option>
+              </mat-select>
+              <!-- <mat-select name="ngoaiNguDuThi" [(ngModel)]="model.ThiSinh.NgoaiNguDuThi" [ngModelOptions]="{standalone: true}" 
+              required placeholder="Ngoại ngữ đăng ký thi" *ngIf="(model.ThiSinh.ChungChi.Ten!=null && model.ThiSinh.ChungChi.Ten!='' ) || model.ThiSinh.ChungChi.MaSoBang!=null || 
+              model.ThiSinh.ChungChi.DonViCap!=null|| model.ThiSinh.ChungChi.NgayCap!=null">
+                <mat-option #mienthi [value]="Miễn thi">
+                  Miễn dự thi
+                </mat-option>
+              </mat-select> -->
+            </mat-form-field>
+
+            <mat-form-field *ngIf="_hoSoXetTuyenIdRouter != 'null' && IsGiaoDienTrongAdmin" appearance="outline"
+              fxFlex="33" class="mat-form-field plr-4 col-md-4 inline-block">
+              <mat-label>Điểm thi ngoại ngữ</mat-label>
+              <input matInput [(ngModel)]="model.ThiSinh.DiemThiNgoaiNgu" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+          </div>
+
+
+        </div>
+        <!-- End Nguyện vọng -->
+
+        <!-- Thông tin khảo sát -->
+        <div class="mat-card p-20">
+          <div class="header-child style-1">
+            <div class="stt"><span>3</span></div>
+            <div class="content-header">
+              <h2 class="header-title-child">THÔNG TIN KHẢO SÁT</h2>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <div [ngClass]="{'error': model.KhaoSatId == null && f.submitted}" appearance="outline" fxFlex="33"
+              class="mat-form-field plr-4 w-100-p inline-block pb-0">
+              <app-select-dropdown name="khaosat" [(ngModel)]="model.KhaoSatId" [list]="khaoSats"
+                placeholder="Bạn biết thông tin trường qua đâu" required>
+              </app-select-dropdown>
+              <mat-error class="font-mini" *ngIf="model.KhaoSatId == null && f.submitted">Nhập thông tin khảo sát
+              </mat-error>
+            </div>
+          </div>
+
+          <!-- Danh mục upload file -->
+          <div class="giaytoyeucau-div" *ngIf="_dotTuyenSinh.ChoPhepUploadHoSo">
+            <div class="title" (click)="onCLickCheckGiayTo()">
+              <mat-icon>insert_drive_file</mat-icon> <span>Giấy tờ yêu cầu:</span>
+              <span *ngIf="model.GiayToYeuCaus.length==0"> Chưa có giấy tờ yêu cầu</span>
+            </div>
+            <div class="list">
+              <input type="file" #fileInput (change)="uploadFileDinhKem($event.target.files)" class="input-file" />
+              <div *ngFor="let file of model.GiayToYeuCaus" class="itemgiayto-div">
+                <div>
+                  <mat-checkbox *ngIf="IsGiaoDienTrongAdmin" class="accent-600-fg" name="giaytodanop{{file.Id}}"
+                    [(ngModel)]="file.DaNop"></mat-checkbox>
+                  {{file.Ten}} <span class="taifile-span" (click)="onClickDinhKemTapTin(file.Id,file)">Tải file lên định
+                    dạng {{file.Extension}}, dung lượng < {{file.DungLuong}}MB </span> <!-- , dung lượng <
+                      {{file.DungLuong}} -->
+                </div>
+                <div class="filedinhkem-div">
+                  <span *ngIf="file.FileDinhKem != null">
+                    <!-- <mat-icon>check_circle_outline</mat-icon> -->
+                    <span (click)="onClickFileURL(file.FileDinhKem)" class="downfile-span">
+                      {{file.FileDinhKem.Ten}}</span>
+                    <span (click)="onClickDeleteFileDinhKem(file.Id)" class="xoafile-span">Xóa</span>
+                  </span>
+                  <span *ngIf="file.FileDinhKem == null">
+                    <!-- <mat-icon>cancel</mat-icon> -->
+                    Chưa có đính kèm file</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <h4>Kính đề nghị Hội đồng tuyển sinh cho phép tôi được đăng ký tham dự kỳ thi tuyển sinh</h4>
+        <h4>Tôi xin cam đoan chấp hành nghiêm chỉnh các quy chế, quy định về thi tuyển và đào tạo trình độ thạc sĩ
+          của bộ Giáo dục và Đào tạo và của Trường
+        </h4>
+        <h4>Tôi xin cam đoan những lời khai trong đơn đăng ký xét tuyển này là đúng sự thật. Nếu sai tôi xin chịu xử
+          lý
+          theo quy chế Tuyển sinh của Bộ GD & ĐT.</h4>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button [disabled]='btnSaveDisable' *ngIf="_hoSoXetTuyenIdRouter == 'null'" class="mr-24" color="accent"
+            mat-raised-button (click)="onRegisterClick()">
+            <mat-icon matSuffix class="secondary-text">save</mat-icon>Đăng ký
+          </button>
+          <button [disabled]='btnSaveDisable' *ngIf="_hoSoXetTuyenIdRouter != 'null'" class="mr-24" color="accent"
+            mat-raised-button (click)="onSaveClick()">
+            <mat-icon matSuffix class="secondary-text">save</mat-icon>Lưu
+          </button>
+          <a target="_blank" *ngIf="_hoSoXetTuyenIdRouter != 'null'" href="{{model.UrlBienNhan}}" class="mr-24"
+            color="accent" mat-raised-button matStepperNext>
+            <mat-icon matSuffix class="secondary-text">print</mat-icon>In
+          </a>
+
+          <!-- <a mat-raised-button matStepperNext color="warn" (click)="onClearForm()">
+              <mat-icon matSuffix class="secondary-text">clear_all</mat-icon>Nhập mới
+            </a> -->
+        </div>
+      </div>
+      <!-- End Thông tin khảo sát -->
+    </div>
+
+  </div>
+  <!-- End Content -->
+
+</form>
+<!--End Page-layout -->

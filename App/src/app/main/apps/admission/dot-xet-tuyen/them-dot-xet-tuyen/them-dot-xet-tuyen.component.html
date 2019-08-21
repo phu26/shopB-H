@@ -1,0 +1,121 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/dot-xet-tuyen'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+
+
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{dotXetTuyen.Ten}}
+          </div>
+          <div class="h2" *ngIf="pageType ==='new'">
+            Đợt xét tuyển mới
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Thông tin Đợt xét tuyển</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <button mat-raised-button class="save-product-button" [disabled]="dotXetTuyenForm.invalid" *ngIf="pageType ==='new'"
+        (click)="addDotXetTuyen()">
+        <span>Thêm</span>
+      </button>
+
+      <button mat-raised-button class="save-product-button" [disabled]="dotXetTuyenForm.invalid || dotXetTuyenForm.pristine"
+        *ngIf="pageType ==='edit'" (click)="saveDotXetTuyen()">
+        <span>Lưu</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content p-24">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <form fxLayoutAlign="start" name="dotXetTuyenForm" [formGroup]="dotXetTuyenForm" class="product w-100-p"
+            fxLayout="column" fxFlex="1 0 auto">
+
+            <div class="h2 mb-24" *ngIf="pageType ==='new'">THÊM MỚI ĐỢT XÉT TUYỂN</div>
+            <div class="h2 mb-24" *ngIf="pageType ==='edit'">{{dotXetTuyen.Ten}}</div>
+
+            <div *ngIf="pageType ==='edit'" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" floatLabel="always" appearance="outline" class="w-100-p">
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="ID" readonly name="Id" formControlName="Id">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Tên Đợt xét tuyển</mat-label>
+                <input matInput placeholder="Tên Ngành đào tạo" name="Ten" formControlName="Ten" required>
+                <!-- thông báo lỗi -->
+                <mat-error>Tên là bắt buộc</mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Đợt tuyển sinh</mat-label>
+                <mat-select formControlName="DotTuyenSinhId">
+                  <mat-option [value]="null">
+                    -Không-
+                  </mat-option>
+                  <mat-option *ngFor="let dsDotTuyenSinh of dsdotTuyenSinhs" [value]="dsDotTuyenSinh.Id" required>
+                    {{dsDotTuyenSinh.Ten}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Kích hoạt</mat-label>
+                <input matInput placeholder="Kích hoạt" name="KichHoat" formControlName="KichHoat">
+              </mat-form-field>
+            </div> -->
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-checkbox [labelPosition]="'before'" name="KichHoat" formControlName="KichHoat" fxFlex="100"
+                appearance="outline" class="w-100-p" [(ngModel)]="dotXetTuyen.KichHoat">Kích hoạt</mat-checkbox>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Công thức tính điêm</mat-label>
+                <textarea matInput placeholder="Công thức tính điểm" name="CongThucTinhDiem" formControlName="CongThucTinhDiem"
+                  rows="5"></textarea>
+              </mat-form-field>
+            </div>
+            
+            <!-- Ngày sửa, ngày tạo, người sửa, người tạo => bổ sung sau -->
+          </form>
+        </div>
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

@@ -1,0 +1,77 @@
+// Import Fuse core library
+
+
+$fa-font-path: "https://netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts" !default;
+@import "~font-awesome/scss/font-awesome.scss";
+
+body{
+    overflow: scroll;
+    font: 400 14px/16px arial;
+
+}
+
+.ErrorSnackbar{
+    background-color:#dc3545 !important;
+    color: white !important;
+    .mat-simple-snackbar-action {
+        color: white !important;
+      }
+}
+.WarningSnackbar{
+    background-color: #ffc107 !important;
+    color: rgb(5, 5, 5) !important;
+    .mat-simple-snackbar-action {
+        color: rgb(5, 5, 5) !important;
+      }
+}
+.InfoSnackbar{
+    background-color: #007bff !important;
+    color: rgb(255, 255, 255) !important;
+    .mat-simple-snackbar-action {
+        color: rgb(255, 255, 255) !important;
+      }
+}
+.SuccessSnackbar{
+    background-color: #28a745 !important;
+    color: white !important;
+    .mat-simple-snackbar-action {
+        color: white !important;
+      }
+}
+.mat-form-field-infix {
+    padding: 0.6em 0 0.6em 0 !important;
+    border-top: .6em solid transparent !important;
+}
+
+.agEditor .fa {
+    font-size: 15px !important;
+    padding-top: 5px !important;
+}
+
+angular2-multiselect .c-btn  {
+    padding: 12.5px 12px !important;
+    //border: 1px solid #DDDDDD;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    color: #666666;
+  }
+
+  .angular2-multiselectError .c-btn {
+    border: 2px solid #f44336 !important;
+    color: #f44336;
+  }
+
+  body {
+      overflow-x: hidden;
+  }
+  .mat-row{
+    height: auto !important;
+    min-height: 50px !important;
+    line-height: 23px;
+}
+.mat-cell .mat-icon {
+    margin: auto;
+}
+html{
+    font-size: 100%;
+}

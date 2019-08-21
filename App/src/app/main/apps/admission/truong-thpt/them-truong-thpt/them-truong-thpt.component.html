@@ -1,0 +1,121 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/admission/truong'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+
+
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{truongthpt.Ten}}
+          </div>
+          <div class="h2" *ngIf="pageType ==='new'">
+            Trường mới
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Thông tin Trường</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <button mat-raised-button class="save-product-button" [disabled]="truongthptForm.invalid"
+        *ngIf="pageType ==='new'" (click)="addTruongTHPT()">
+        <span>Thêm</span>
+      </button>
+
+      <button mat-raised-button class="save-product-button"
+        [disabled]="truongthptForm.invalid || truongthptForm.pristine" *ngIf="pageType ==='edit'"
+        (click)="saveTruongTHPT()">
+        <span>Lưu</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content p-24">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <form fxLayoutAlign="start" name="truongthptForm" [formGroup]="truongthptForm" class="product w-100-p"
+            fxLayout="column" fxFlex="1 0 auto">
+
+            <div class="h2 mb-24">Tiêu đề</div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Tên Trường</mat-label>
+                <input matInput placeholder="Tên Trường THPT" name="Ten" formControlName="Ten" required>
+                <mat-error>Tên Trường là bắt buộc</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="50" appearance="outline" class="w-100-p" style="padding-right:10px">
+                <mat-label>Mã Trường</mat-label>
+                <input matInput placeholder="Mã Trường THPT" name="MaTruong" formControlName="MaTruong" required>
+                <mat-error>Mã Trường là bắt buộc</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex="50" appearance="outline" class="w-100-p">
+                <mat-label>Mã tỉnh</mat-label>
+                <input matInput placeholder="Mã tỉnh" name="MaTinh" formControlName="MaTinh" required>
+                <mat-error>Mã tỉnh là bắt buộc</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <mat-form-field fxFlex="100" appearance="outline" class="w-100-p">
+                <mat-label>Loại trường</mat-label>
+                <mat-select formControlName="Loai">
+                  <mat-option  [value]="'THPT'">
+                    THPT
+                  </mat-option>
+                  <mat-option  [value]="'CD'">
+                    Cao Đẳng
+                  </mat-option>
+                  <mat-option  [value]="'DH'">
+                    Đại Học
+                  </mat-option>
+                  <mat-option  [value]="'TC'">
+                    Trung Cấp
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+              <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                <mat-checkbox [labelPosition]="'before'" name="KichHoat" formControlName="KichHoat" fxFlex="100"
+                  appearance="outline" class="w-100-p">Kích hoạt</mat-checkbox>
+              </div>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                <mat-checkbox [labelPosition]="'before'" name="KichHoat" formControlName="KichHoat" fxFlex="100"
+                  appearance="outline" class="w-100-p" >Kích hoạt</mat-checkbox>
+              </div> -->
+
+            <!-- Ngày sửa, ngày tạo, người sửa, người tạo => bổ sung sau -->
+          </form>
+        </div>
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>
