@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
     _TruongLayout: string = 'shop';
     // Private
     private _unsubscribeAll: Subject<any>;
-
+    
     /**
      * Constructor
      *

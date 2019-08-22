@@ -8,6 +8,7 @@ import { FormXetTuyenModule } from '../admission/dang-ky/form-xet-tuyen/form-xet
 import { HoSoXetTuyenModule } from '../admission/ho-so-xet-tuyen/ho-so-xet-tuyen.module';
 import { ThiSinhModule } from '../admission/thi-sinh/thi-sinh.module';
 import { DanhSachDotTuyenSinhShowModule } from '../admission/dot-tuyen-sinh/danh-sach-dot-tuyen-sinh/danh-sach-dot-tuyen-sinh-show/danh-sach-dot-tuyen-sinh-show.module';
+
 import { DanhSachDotTuyenSinhModule } from '../admission/dot-tuyen-sinh/danh-sach-dot-tuyen-sinh/danh-sach-dot-tuyen-sinh.module';
 import { TraCuuModule } from '../admission/tra-cuu/tra-cuu.module';
 import { ThongBaoComponent } from '../admission/thong-bao/thong-bao.component';
@@ -20,6 +21,7 @@ import { ThongBaoModule } from '../admission/thong-bao/thong-bao.module';
     TuyenSinhRoutingModule,
     //DanhSachDotTuyenSinhModule,
     DanhSachDotTuyenSinhShowModule,
+
     HoSoXetTuyenModule,
     FormXetTuyenModule,
     ThiSinhModule,

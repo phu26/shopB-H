@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutThiSinhComponent, LayoutThiSinhHIUComponent, LayoutThiSinhSONAComponent, LayoutThiSinhYersinComponent, LayoutThiSinhNeuComponent, LayoutThiSinhQnuComponent, LayoutThiSinhLawComponent, LayoutThiSinhDnuComponent } from './layout-thi-sinh.component';
+import { LayoutThiSinhComponent, LayoutThiSinhHIUComponent, LayoutThiSinhSONAComponent, LayoutThiSinhYersinComponent, LayoutThiSinhNeuComponent, LayoutThiSinhQnuComponent, LayoutThiSinhLawComponent, LayoutThiSinhDnuComponent, LayoutShopComponent } from './layout-thi-sinh.component';
 //import { ContentModule } from '../components/content/content.module';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatSelectModule } from '@angular/material';
@@ -17,7 +17,7 @@ import { PipeHtmlCssPipe } from './pipe-html-css.pipe';
     ,LayoutThiSinhNeuComponent
     ,LayoutThiSinhQnuComponent
     ,LayoutThiSinhLawComponent
-    ,LayoutThiSinhDnuComponent, PipeHtmlCssPipe
+    ,LayoutThiSinhDnuComponent, PipeHtmlCssPipe,LayoutShopComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +39,7 @@ import { PipeHtmlCssPipe } from './pipe-html-css.pipe';
     ,LayoutThiSinhQnuComponent
     ,LayoutThiSinhLawComponent
     ,LayoutThiSinhDnuComponent
+    ,LayoutShopComponent
   ]
     
 })

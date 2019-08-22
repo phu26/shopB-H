@@ -8,6 +8,33 @@ import { ThongBao } from 'app/main/apps/admission/Models/ThongBao.model';
   templateUrl: './layout-shop.component.html',
   styleUrls: ['./layout-shop.component.scss','./layout-shop2.component.scss','./layout-shop3.component.scss']
 })
+export class LayoutShopComponent implements OnInit {
+  authData: any = null;
+  loggedIn: boolean = false;
+  constructor() { }
+
+  ngOnInit() {
+    this.authData = JSON.parse(localStorage.getItem('authorizationData'));
+    if (this.authData != null) {
+      this.loggedIn = true;
+    }
+  }
+  clickDangNhap() {
+    var redirect_url = encodeURIComponent(environment.urlApp + 'tuyen-sinh/');
+    window.open(environment.urlSSO + "#/login?redirect_url=" + redirect_url + "&clientId=tsadmission", '_self');
+  }
+
+  logOut() {
+    localStorage.removeItem('authorizationData');
+    var redirect_url = encodeURIComponent(environment.urlApp + 'tuyen-sinh/');
+    window.open(environment.urlSSO + "#/login?redirect_url=" + redirect_url + "&clientId=tsadmission&key=signout", '_self');
+  }
+}
+@Component({
+  selector: 'app-layout-thi-sinh',
+  templateUrl: './layout-thi-sinh.component.html',
+  styleUrls: ['./layout-thi-sinh.component.scss']
+})
 export class LayoutThiSinhComponent implements OnInit {
   authData: any = null;
   loggedIn: boolean = false;
@@ -39,13 +66,7 @@ export class LayoutThiSinhComponent implements OnInit {
 export class LayoutThiSinhHIUComponent extends LayoutThiSinhComponent {
 }
 
-@Component({
-  selector: 'app-layout-shop',
-  templateUrl: './layout-shop.component.html',
-  styleUrls: ['./layout-shop.component.scss','./layout-shop2.component.scss','./layout-shop3.component.scss']
-})
-export class LayoutShopComponent extends LayoutThiSinhComponent {
-}
+
 
 @Component({
   selector: 'app-layout-thi-sinh-sona',

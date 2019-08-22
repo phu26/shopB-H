@@ -3,16 +3,17 @@ import { RouterModule, Router, Routes } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { CommonModule } from '@angular/common';
-
+import {ShopComponent} from './shop/shop.component';
 
 
 const routes: Routes = [
     {
         path: '',
+       
         children: [
             {
                 path:'',
-                redirectTo: '/', pathMatch: 'full'
+                redirectTo: 'shop', pathMatch: 'full'
             },
             {
                 path        : 'tuyen-sinh',

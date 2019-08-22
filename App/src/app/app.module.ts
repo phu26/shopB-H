@@ -18,6 +18,7 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppConfigService } from './app-config-service.service';
+import { ShopComponent } from './main/apps/shop/shop.component';
 
 
 
